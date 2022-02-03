@@ -1,0 +1,108 @@
+#presentation {
+    height: 80vh;
+    margin-top: 20vh;
+}
+
+#presentation h1, #presentation h2 {
+    font-weight: 500;
+    font-size: xxx-large;
+    margin: 0 0 0 5%; /* margin left */
+}
+
+#presentation h1{
+    color: var(--text-color);
+}
+#presentation h2{
+    color: var(--snd-text-color);
+}
+
+#presentation div {
+    overflow: hidden;
+}
+#presentation #back-logo {
+    filter: var(--big-logo-filter);
+    -webkit-filter: var(--big-logo-filter);
+    -moz-filter: var(--big-logo-filter);
+    -o-filter: var(--big-logo-filter);
+    -ms-filter: var(--big-logo-filter);
+
+    height: auto;
+    width: auto;
+    max-width: 900px;
+    max-height: 900px;
+    position: absolute;
+    right: 10%;
+    bottom: 10%;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+@media screen and (max-width: 1440px) {
+
+    #presentation #back-logo {
+        max-width: 750px;
+        max-height: 750px;
+    }
+}
+
+@media screen and (max-width: 1280px) {
+
+    #presentation #back-logo {
+        max-width: 600px;
+        max-height: 600px;
+    }
+}
+
+@media screen and (max-width: 1024px) and (max-height: 600px){
+
+    #presentation #back-logo {
+        max-width: 500px;
+        max-height: 500px;
+    }
+}
+
+@media screen and (max-width: 768px) and (max-height: 1080px){
+
+    #presentation {
+        height: 70vh;
+        margin-top: 30vh;
+    }
+
+    #presentation h1, #presentation h2 {
+        font-size: xx-large;
+    }
+
+    #presentation #back-logo {
+        max-width: 500px;
+        max-height: 500px;
+        bottom: 20%;
+    }
+}
+
+@media screen and (max-width: 480px) and (max-height: 1080px){
+
+    #presentation {
+        height: 70vh;
+        margin-top: 30vh;
+    }
+
+    #presentation h1, #presentation h2 {
+        font-size: x-large;
+    }
+
+    #presentation #back-logo {
+        max-width: 300px;
+        max-height: 300px;
+        bottom: 25%;
+    }
+}
+
+@media screen and (max-width: 320px) {
+
+    #presentation #back-logo {
+        max-width: 250px;
+        max-height: 250px;
+        bottom: 15%;
+        right: 5%;
+    }
+}
