@@ -1,0 +1,47 @@
+footer {
+    margin-top: 10%;
+    padding: 20px;
+    background-color: var(--main-color);
+    color: black;
+    text-align: center;
+}
+
+footer a {
+    text-decoration: none;
+    color: black;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+footer ul {
+    list-style: none;
+    margin: 20px auto 0 auto;
+    padding: 0;
+    width: 300px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+footer li a {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+footer li a:hover {
+    color: white;
+    transition: all ease-in-out 500ms;
+}
+
+footer li a:focus {
+    outline: none;
+}
+
+@media screen and (max-width: 320px) {
+
+    footer ul {
+        width: auto;
+    }
+}

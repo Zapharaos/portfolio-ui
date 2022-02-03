@@ -1,0 +1,144 @@
+#contact {
+    padding-bottom: 5%;
+    background-color: var(--snd-bg-color);
+    font-weight: 300;
+}
+
+#contact form input, #contact form textarea {
+    font-family: "Open Sans", sans-serif;
+    background-color: transparent;
+    color: white;
+    border: solid 1px transparent;
+    border-bottom: solid 1px var(--contact-border-color);
+    padding: 1em;
+    resize: none;
+    margin: 2em 0 0 0;
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
+    border-radius:0;
+    transition: all ease-in-out 600ms;
+}
+
+#contact form input::placeholder, #contact form textarea::placeholder {
+    color: white;
+    font-family: "Open Sans", sans-serif;
+}
+
+#contact form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 50%;
+    margin: 0 auto;
+    border-radius: 5px;
+}
+
+#contact form div {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    width: 100%;
+}
+
+#contact form div input {
+    width: 40%;
+}
+
+#contact form button {
+    width: min-content;
+    margin: 0 auto;
+    margin-top: 3em;
+    padding: 0 5em 0 5em;
+}
+
+#contact form input:focus, #contact form textarea:focus {
+    outline: none;
+    border: solid 1px var(--contact-border-color);
+    border-radius: 5px;
+}
+
+#contact button {
+    color: var(--contact-border-color);
+    border-color: var(--contact-border-color);
+}
+
+#notification {
+    width: 100%;
+    position: fixed;
+    text-align: center;
+    color: var(--text-color);
+    bottom: 1%;
+    z-index: 100;
+}
+
+#notification div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+    width: 50%;
+    border-radius: 3px;
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    background-color: var(--overlay-color);
+    transform: translateY(150%);
+    transition: 0.5s;
+    padding: 0 3%;
+    position: relative;
+}
+
+#notification p {
+    padding: 0 3%;
+}
+
+#notification div i.fa-times:hover {
+    cursor: pointer;
+}
+
+.success div {
+    box-shadow: 0px 0px 2px #259c08;
+    transform: translateY(0%) !important;
+}
+.success div i:first-of-type {
+    color: #0ad406;
+}
+
+.error div {
+    box-shadow: 0px 0px 2px #ff0303;
+    transform: translateY(0%) !important;
+}
+.error div i:first-of-type {
+    color: #ff0303;
+}
+
+@media screen and (max-width: 1024px) {
+
+    #contact form div {
+        flex-direction: column;
+    }
+
+    #contact form div input {
+        width: auto;
+    }
+}
+
+@media screen and (max-width: 900px) {
+
+    #contact form, #notification div {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+    #contact form, #notification div {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+
+    #contact form, #notification div {
+        width: 85%;
+    }
+}
