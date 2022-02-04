@@ -50,7 +50,7 @@
                 <p>Currently, I'm an undergraduate student majoring computer science at Strasbourg University, France. Starting from September 2022, I'll continue my studies as a graduate student while working. Therefore, I'm now looking for a work-study contract.</p>
                 <p>I'm more into software developing, but I also enjoy building websites on my spare time.</p>
             </div>
-            <img id="pdp" src="img/pdp.png">
+            <img id="pdp" src="img/pp.png">
         </div>
         <div id="more">
             <p>Learn more about me by checking out my socials.</p>
@@ -129,7 +129,7 @@
                     <h4>Université de Strasbourg</h4>
                     <h5>Strasbourg, France</h5>
                     <p class="date">Since September 2018</p>
-                    <div><p>The first semester is in common with the university degree in mathematics, and it is at the end of this first semester that I had the opportunity to choose the "Computer Science" orientation. The whole program is available <a href="https://mathinfo.unistra.fr/formations/licence/informatique/#data-rof-tab-presentation">here</a>.</p></div>
+                    <div><p>The first semester is in common with the university degree in mathematics, and it is at the end of this first semester that I had the opportunity to choose the "Computer Science" orientation. The syllabus is available <a href="https://mathinfo.unistra.fr/formations/licence/informatique/#data-rof-tab-presentation">here</a>.</p></div>
                 </div>
                 <div id="panel-2" class="hidden" role="tabpanelF" tabindex="0" aria-labelledby="tab-2">
                     <h1>Baccalauréat Scientifique</h1>
@@ -163,7 +163,7 @@
                 <input type="email" id="email" name="email" placeholder="Email" tabindex="2" required>
             </div>
             <input type="text" id="subject" name="subject" placeholder="Subject" tabindex="3" required>
-            <textarea rows="5" id="message" name="message" placeholder="Message" tabindex="4"></textarea>
+            <textarea rows="5" id="message" name="message" placeholder="Message" tabindex="4" required></textarea>
             <button type="submit" name="submit" value="Submit">Submit</button>
             <input type="hidden" name="spam">
         </form>
@@ -186,16 +186,10 @@
             <i class="fas fa-times" onclick="toggleNotification(2,'')"></i>
         </div>
     </div>
-    <!--<div id="notifications" class="error">
-        <div>
-            <i class="fas fa-exclamation-circle fa-2x"></i>
-            <p>Sorry, something went wrong. Please try again later !</p>
-            <i class="fas fa-times"></i>
-        </div>
-    </div>-->
     <script type="text/javascript" src="JS/global.js"></script>
     <script type="text/javascript" src="JS/logo_parallax.js"></script>
     <script type="text/javascript" src="JS/tablists.js"></script>
+    <script type="text/javascript" src="JS/contact.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </body>
 </html>
