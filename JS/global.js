@@ -41,10 +41,10 @@ function switchTheme() {
 
 /* toggle the responsive navbar */
 const navbarToggle = () => {
-    const trigger = document.querySelectorAll('#overlay, #logo, .nav-links li a, .nav-links li i');
+    const trigger = document.querySelectorAll('#overlay, #logo, nav li a, nav li i');
     const bars = document.getElementById('bars');
     const overlay = document.getElementById('overlay');
-    const nav = document.querySelector('.nav-links');
+    const nav = document.querySelector('nav');
     const body = document.querySelector('body');
 
     bars.addEventListener("click", function() {
