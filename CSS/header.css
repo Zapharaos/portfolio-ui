@@ -23,12 +23,19 @@ header {
     filter: var(--logo-filter);
 }
 
-header ul {
+header nav, header ul {
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: space-between;
 }
+
+/*header ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+}*/
 
 header li {
     line-height: 100px;
@@ -146,7 +153,7 @@ header li i.fas.fa-moon:hover {
         transition: all 0.3s ease;
     }
 
-    header ul {
+    header nav {
         position: absolute;
         top: 0px;
         right: 0px;
@@ -154,11 +161,16 @@ header li i.fas.fa-moon:hover {
         height: 100vh;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
         margin: 0;
-        padding: 50% 0;
+        /*padding: 50% 0;*/
         transform: translateX(101%);
         transition: all 0.25s cubic-bezier(0.645,0.045,0.355,1);
         background-color: var(--bg-color);
+    }
+
+    header ul {
+        flex-direction: column;
     }
 
     header li {

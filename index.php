@@ -26,7 +26,7 @@
             </div>
         </div>
         <nav>
-            <ul class="nav-links">
+            <ul>
                 <li><a onclick="goToByScroll('aboutme', 'slow')">About me</a></li>
                 <li><a onclick="goToByScroll('experience', 'slow')">Experience</a></li>
                 <li><a onclick="goToByScroll('formation', 'slow')">Formation</a></li>
