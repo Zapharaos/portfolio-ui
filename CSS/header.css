@@ -4,15 +4,15 @@ header {
     z-index: 100;
     width: 100%;
     transition: all ease 300ms;
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(20px);
     background-color: var(--overlay-color); /* Black background with opacity */
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
 
-#logo {
+#nav-logo {
     float: left;
     width: auto;
     height: auto;
@@ -29,13 +29,6 @@ header nav, header ul {
     display: flex;
     justify-content: space-between;
 }
-
-/*header ul {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: space-around;
-}*/
 
 header li {
     line-height: 100px;
@@ -131,7 +124,7 @@ header li i.fas.fa-moon:hover {
         padding: 0 10px;
     }
 
-    #logo {
+    #nav-logo {
         max-width: 75px;
         max-height: 40px;
         margin: 10px 5%;

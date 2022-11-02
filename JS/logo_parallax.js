@@ -1,6 +1,6 @@
 
 let atScroll = false;
-let logo = document.querySelectorAll("#back-logo");
+let logo = document.querySelectorAll("#background-logo");
 
 const scrollProgress = () => {
     atScroll = true;

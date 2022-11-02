@@ -1,5 +1,3 @@
-/* tablists */
-
 .tabs {
     display: flex;
     flex-direction: row;
@@ -21,8 +19,15 @@
     padding-top: 3px;
     padding-bottom: 3px;
     transition: all ease-in-out 600ms;
+    overflow: hidden;
     white-space: nowrap;
+    text-overflow: ellipsis;
     background-color: var(--button-bg-color);
+    word-wrap: break-word;
+    word-break: break-all;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
 }
 
 .tablist button:hover {
@@ -85,52 +90,18 @@
     overflow: hidden;
 }
 
-/* experience */
-
-#experience #panel-11, #experience #panel-12, #experience #panel-13, #experience #panel-14 {
+.panel {
     margin-left: 5%;
     height: auto;
     opacity: 1;
     transition: opacity ease-in-out 500ms;
-}
-
-/* formation */
-
-#formation {
-    margin-bottom: 0;
-}
-
-#formation #panel-1, #formation #panel-2, #formation #panel-3 {
-    margin-left: 5%;
-    height: auto;
-    opacity: 1;
-    transition: opacity ease-in-out 500ms;
-}
-
-/* download curriculum */
-
-#download {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 3% 0 0 0;
-    margin: 0 auto;
-    color: var(--text-color);
-    width: 75%;
-}
-
-#download p {
-    text-align: center;
-}
-
-#download a {
-    text-decoration: none;
 }
 
 @media screen and (min-width: 769px) {
-
     .tablist button {
         border-left: solid 3px var(--button-bg-color);
+        max-width: 350px;
+        min-width: 250px;
     }
 }
 
@@ -149,6 +120,7 @@
     .tablist {
         margin-top: 10%;
         margin-bottom: 3%;
+        width: 100%;
     }
 
     .tablist button:hover {
@@ -172,15 +144,8 @@
         border-bottom-color: var(--main-color);
     }
 
-    /* experience */
-
-    #experience #panel-11, #experience #panel-12, #experience #panel-13, #experience #panel-14 {
+    .panel {
         margin-left: 0%;
     }
 
-    /* formation */
-
-    #formation #panel-1, #formation #panel-2, #formation #panel-3 {
-        margin-left: 0%;
-    }
 }
