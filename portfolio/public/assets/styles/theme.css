@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:500');
+
+/* theme */
+
+:root {
+    --main-color: #FF4C29;
+    --bg-color: #082032;
+    --snd-bg-color: #2C394B;
+    --title-color: #465262;
+    --text-color: white;
+    --snd-text-color: #667580;
+    --button-bg-color: #1E2431;
+    --button-hover-color: #BC402B;
+    --button-scd-hover-color: #4B2C30;
+    --contact-border-color: #FF4C29;
+    --logo-filter: none;
+    --big-logo-filter: blur(10px) brightness(0.75);
+    --main-scroll-button-color: rgba(255,255,255, .25);
+    --overlay-color: rgba(0,0,0,0.5);
+}
+
+[theme="light"] {
+    --main-color: #FF7D63;
+    --bg-color: white;
+    --snd-bg-color: #A2ABB2;
+    --text-color: black;
+    --button-bg-color: #FFEFEC;
+    --button-hover-color: #FF5C3C;
+    --button-scd-hover-color: #FFCEC5;
+    --contact-border-color: #E84525;
+    --logo-filter: brightness(1) invert(1);
+    --big-logo-filter: blur(10px) brightness(0.75) invert(1);
+    --main-scroll-button-color: rgba(0,0,0, .35);
+    --overlay-color: rgba(0,0,0,0.1);
+}
