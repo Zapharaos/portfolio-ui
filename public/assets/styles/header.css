@@ -136,6 +136,7 @@ header li i.fas.fa-moon:hover {
     #bars {
         display: block;
         z-index: 101;
+        cursor: pointer;
     }
 
     #bars div {

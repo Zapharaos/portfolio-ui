@@ -1,55 +1,76 @@
-const success = "Thanks for contacting us, we will be in touch with you shortly !";
-const error = "Sorry, something went wrong. Please try again later !";
-let form = document.getElementById('form');
+const idFormContact = 'form-contact'
+const idCloseNotifications = "close-notifications"
+const selectorNotification = '#notification'
+const selectorMessage = '#notification p'
+const selectorIcon = '#notification i.fa-2x'
 
-function toggleNotification(status, content) {
-    const notification = document.querySelector('#notification');
-    const message = document.querySelector('#notification p');
-    const icon = document.querySelector('#notification i.fa-2x');
+const classNotificationSuccess = 'success'
+const classNotificationError = 'error'
+const classIconSuccess = 'fa-check-circle'
+const classIconError = 'fa-exclamation-circle'
+const messageSuccess = "Thanks for contacting us, we will be in touch with you shortly !"
+const messageError = "Sorry, something went wrong. Please try again later !"
 
-    if(status === 0)
-    {
-        notification.classList.remove('success');
-        notification.classList.add('error');
-        icon.classList.remove('fa-check-circle');
-        icon.classList.add('fa-exclamation-circle');
-        message.innerHTML = content;
-    } else if (status === 1) {
-        notification.classList.remove('error');
-        notification.classList.add('success');
-        icon.classList.remove('fa-exclamation-circle');
-        icon.classList.add('fa-check-circle');
-        message.innerHTML = content;
-    } else {
-        notification.classList.remove('success');
-        notification.classList.remove('error');
-        icon.classList.remove('fa-check-circle');
-        icon.classList.remove('fa-exclamation-circle');
-        message.innerHTML = "";
-    }
-}
+// declared variables but initialized later
+let notification;
+let message;
+let icon;
 
-form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    $.ajax({
+$(document).ready( function() {
+
+    notification = document.querySelector(selectorNotification)
+    message = document.querySelector(selectorMessage)
+    icon = document.querySelector(selectorIcon)
+
+    document.getElementById(idFormContact).addEventListener('submit', function(e) {
+        sendMessage(e)
+    })
+
+    let closeNotifications = document.getElementById(idCloseNotifications)
+    closeNotifications.addEventListener('click', disableNotifications)
+})
+
+function sendMessage(e) {
+    e.preventDefault()
+    /*$.ajax({
         type: 'post',
-        url: 'PHP/contact.php',
-        data: $('form').serialize(),
+        url: 'contact.php',
+        data: $('form-contact').serialize(),
         success: function (result) {
-            if (result == 1){
-                toggleNotification(1, success);
-                setTimeout(function(){
-                    toggleNotification(2,'');
-                }, 5000);
+            if (result === 1){
+                toggleNotificationSuccess()
+                setTimeout(disableNotifications,5000)
             } else {
-                toggleNotification(0, error);
-                setTimeout(function(){
-                    toggleNotification(2,'');
-                }, 5000);
+                toggleNotificationError()
+                setTimeout(disableNotifications,5000)
             }
-            form.reset();
-            var url= document.location.href;
+            contact.reset();
+            let url = document.location.href;
             window.history.pushState({}, "", url.split("?")[0]);
         }
-    });
-});
+    });*/
+}
+
+function disableNotifications() {
+    notification.classList.remove(classNotificationSuccess)
+    notification.classList.remove(classNotificationError)
+    icon.classList.remove(classIconSuccess)
+    icon.classList.remove(classIconError)
+    message.innerHTML = ""
+}
+
+function toggleNotificationError() {
+    notification.classList.remove(classNotificationSuccess)
+    notification.classList.add(classNotificationError)
+    icon.classList.remove(classIconSuccess)
+    icon.classList.add(classIconError)
+    message.innerHTML = messageError
+}
+
+function toggleNotificationSuccess() {
+    notification.classList.add(classNotificationSuccess)
+    notification.classList.remove(classNotificationError)
+    icon.classList.add(classIconSuccess)
+    icon.classList.remove(classIconError)
+    message.innerHTML = messageSuccess
+}
