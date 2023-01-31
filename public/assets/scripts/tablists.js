@@ -1,23 +1,30 @@
+const labelExperience = 'experience'
+const selectorExperiencePanels = '[data-head="' + labelExperience + '"]'
+const labelFormation = 'formation'
+const selectorFormationPanels = '[data-head="' + labelFormation + '"]'
+const labelProject = 'project'
+const selectorProjectPanels = '[data-head="' + labelProject + '"]'
+
 window.addEventListener("DOMContentLoaded", () => {
 
-    const experiencePanels = document.querySelectorAll('[data-head="experience"]');
+    const experiencePanels = document.querySelectorAll(selectorExperiencePanels)
     experiencePanels.forEach(panel => {
         panel.addEventListener("click", function(e) {
-            changeActivePanel(e, "experience")
+            changeActivePanel(e, labelExperience)
         });
-    });
+    })
 
-    const formationPanels = document.querySelectorAll('[data-head="formation"]');
+    const formationPanels = document.querySelectorAll(selectorFormationPanels);
     formationPanels.forEach(panel => {
         panel.addEventListener("click", function(e) {
-            changeActivePanel(e, "formation")
+            changeActivePanel(e, labelFormation)
         });
     });
 
-    const projectPanels = document.querySelectorAll('[data-head="project"]');
+    const projectPanels = document.querySelectorAll(selectorProjectPanels);
     projectPanels.forEach(panel => {
         panel.addEventListener("click", function(e) {
-            changeActivePanel(e, "project")
+            changeActivePanel(e, labelProject)
         });
     });
 });

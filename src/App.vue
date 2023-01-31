@@ -1,7 +1,7 @@
 <template>
   <header>
     <div id="menu">
-      <a onclick="goToByScroll('header', 'slow')">
+      <a id="header-logo">
         <img id="nav-logo" src="./assets/logo.png" alt="Logo">
       </a>
       <div id="bars">
@@ -12,20 +12,19 @@
     </div>
     <nav>
       <ul>
-        <li><a onclick="goToByScroll('aboutme', 'slow')">About me</a></li>
-        <li><a onclick="goToByScroll('experience', 'slow')">Experience</a></li>
-        <li><a onclick="goToByScroll('formation', 'slow')">Formation</a></li>
-        <li><a onclick="goToByScroll('project', 'slow')">Project</a></li>
-        <li><a onclick="goToByScroll('contact', 'slow')">Contact</a></li>
-        <li onclick="switchTheme()"><i class="fas fa-moon"></i></li>
+        <li><a id="header-aboutme">About me</a></li>
+        <li><a id="header-experience">Experience</a></li>
+        <li><a id="header-formation">Formation</a></li>
+        <li><a id="header-project">Project</a></li>
+        <li><a id="header-contact">Contact</a></li>
+        <li id="theme-switcher"><i class="fas fa-moon"></i></li>
       </ul>
     </nav>
   </header>
 
   <section id="section-presentation">
     <h1>Hi, I'm Matthieu Freitag.</h1>
-    <h2>Nice to meet you.</h2>
-    <h2>Please, take a look around!</h2>
+    <h2>Nice to meet you.<br>Please, take a look around!</h2>
     <img id="background-logo" src="./assets/background-logo.png" alt="">
   </section>
   <section id="section-aboutme">
@@ -47,7 +46,7 @@
     </div>
   </section>
 
-  <section>
+  <section id="section-experience">
     <h3>Experience</h3>
     <div class="tabs">
       <div role="tablist" class="tablist" aria-label="Experience Tabs">
@@ -106,7 +105,7 @@
       </div>
     </div>
   </section>
-  <section>
+  <section id="section-formation">
     <h3>Formation</h3>
     <div class="tabs">
       <div role="tablist" class="tablist" aria-label="Formation Tabs">
@@ -157,7 +156,7 @@
       </div>
     </div>
   </section>
-  <section>
+  <section id="section-project">
     <h3>Project</h3>
     <div class="tabs">
       <div role="tablist" class="tablist" aria-label="Project Tabs">
@@ -214,13 +213,13 @@
 
   <div id="curriculum">
     <p>For your reference, here is my curriculum.</p>
-    <form action="download/curriculum.pdf" target="_blank">
+    <form action="curriculum.pdf" target="_blank">
       <button><i class="fa fa-download"></i>Download</button>
     </form>
   </div>
-  <section id="contact">
+  <section id="section-contact">
     <h3>Contact</h3>
-    <form id="form">
+    <form id="form-contact">
       <div>
         <input type="text" id="name" name="name" placeholder="Name" tabindex="1" required>
         <input type="email" id="email" name="email" placeholder="Email" tabindex="2" required>
@@ -240,15 +239,13 @@
     </ul>
   </footer>
 
-  <div id="top">
-    <a onclick="goToByScroll('header', 'fast')"><i class="fas fa-angle-up"></i></a>
-  </div>
+  <div id="top"><a><i class="fas fa-angle-up"></i></a></div>
   <div id="overlay"></div>
   <div id="notification">
     <div>
       <i class="fas fa-2x"></i>
       <p></p>
-      <i class="fas fa-times" onclick="toggleNotification(2,'')"></i>
+      <i id="close-notifications" class="fas fa-times"></i>
     </div>
   </div>
 </template>
