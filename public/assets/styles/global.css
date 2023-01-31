@@ -119,6 +119,7 @@ button:focus {
     bottom: 20px;
     right: 20px;
     z-index: 98;
+    cursor: pointer;
 }
 
 #top a {
@@ -134,7 +135,6 @@ button:focus {
     color: var(--text-color);
     font-size: 25px;
     line-height: 39px;
-    cursor: pointer;
 }
 
 @media screen and (max-width: 1024px) {

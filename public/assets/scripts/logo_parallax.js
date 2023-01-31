@@ -1,37 +1,37 @@
+const selectorBackgroundLogo = '#background-logo'
+const yValueTranslateLogo = (-1/12)
 
-let atScroll = false;
-let logo = document.querySelectorAll("#background-logo");
+let atScroll = false
+const scrollProgress = () => { atScroll = true };
 
-const scrollProgress = () => {
-    atScroll = true;
-};
+$(document).ready( function() {
 
-const raf = () => {
-    if (atScroll) {
+    $(window).scroll(scrollProgress)
+    const logo = document.querySelectorAll(selectorBackgroundLogo)
 
-        logo.forEach((element, index) => {
+    const raf = () => {
+        if (atScroll) {
 
-            let transform = "translateZ(0) translateY(" + window.scrollY *-1 / 12 + "%)";
+            logo.forEach((element, index) => {
 
-            element.style.backfaceVisibility = "hidden";
-            element.style.mozBackfaceVisibility = "hidden";
-            element.style.oBackfaceVisibility = "hidden";
-            element.style.msBackfaceVisibility = "hidden";
-            element.style['-webkit-backface-visibility'] = "hidden";
+                let transform = "translateZ(0) translateY(" + window.scrollY * yValueTranslateLogo + "%)"
 
-            element.style.transform = transform;
-            element.style.mozTransform = transform;
-            element.style.oTransform = transform;
-            element.style.msTransform = transform;
-            element.style['-webkit-transform'] = transform + "scale(1.0, 1.0)";
+                element.style.backfaceVisibility = "hidden"
+                element.style.mozBackfaceVisibility = "hidden"
+                element.style.oBackfaceVisibility = "hidden"
+                element.style.msBackfaceVisibility = "hidden"
+                element.style['-webkit-backface-visibility'] = "hidden"
 
-            element.style['-webkit-overflow-scrolling'] = "touch";
-        });
-
-        atScroll = false;
-    }
-    requestAnimationFrame(raf);
-};
-
-requestAnimationFrame(raf);
-window.addEventListener("scroll", scrollProgress);
+                element.style.transform = transform
+                element.style.mozTransform = transform
+                element.style.oTransform = transform
+                element.style.msTransform = transform
+                element.style['-webkit-transform'] = transform + "scale(1.0, 1.0)"
+                element.style['-webkit-overflow-scrolling'] = "touch"
+            });
+            atScroll = false
+        }
+        requestAnimationFrame(raf)
+    };
+    requestAnimationFrame(raf)
+})
