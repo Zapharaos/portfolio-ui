@@ -213,7 +213,8 @@
 
   <div id="curriculum">
     <p>For your reference, here is my curriculum.</p>
-    <form action="curriculum.pdf" target="_blank">
+    <pdf src="file1.pdf"></pdf>
+    <form action="./assets/files/curriculum.pdf" target="_blank">
       <button><i class="fa fa-download"></i>Download</button>
     </form>
   </div>

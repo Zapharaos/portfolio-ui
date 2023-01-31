@@ -12,6 +12,7 @@ const messageSuccess = "Thanks for contacting us, we will be in touch with you s
 const messageError = "Sorry, something went wrong. Please try again later !"
 
 // declared variables but initialized later
+let contact;
 let notification;
 let message;
 let icon;
@@ -22,7 +23,8 @@ $(document).ready( function() {
     message = document.querySelector(selectorMessage)
     icon = document.querySelector(selectorIcon)
 
-    document.getElementById(idFormContact).addEventListener('submit', function(e) {
+    contact = document.getElementById(idFormContact)
+    contact.addEventListener('submit', function(e) {
         sendMessage(e)
     })
 
@@ -34,7 +36,7 @@ function sendMessage(e) {
     e.preventDefault()
     /*$.ajax({
         type: 'post',
-        url: 'contact.php',
+        url: './assets/php/contact.php',
         data: $('form-contact').serialize(),
         success: function (result) {
             if (result === 1){
