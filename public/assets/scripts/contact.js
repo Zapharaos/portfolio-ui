@@ -36,7 +36,7 @@ function sendMessage(e) {
     e.preventDefault()
     /*$.ajax({
         type: 'post',
-        url: './assets/php/contact.php',
+        url: 'contact.php',
         data: $('form-contact').serialize(),
         success: function (result) {
             if (result === 1){
