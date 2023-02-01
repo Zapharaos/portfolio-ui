@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+
+  db:
+    image: postgres:13
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - "POSTGRES_HOST_AUTH_METHOD=trust"
+
+  django:
+    build: ./backend
+    container_name: django
+    ports:
+      - "8000:8000"
+    command: python manage.py runserver 0.0.0.0:8000
+    depends_on:
+      - db
+
+  vue:
+    build: ./frontend
+    container_name: vue
+    ports:
+      - "8080:80"
+    depends_on:
+      - django
+
+volumes:
+  postgres_data:
