@@ -14,12 +14,12 @@
 </template>
 
 <script>
-import SectionPresentation from './SectionPresentation.vue'
-import SectionAboutme from './SectionAboutme.vue'
-import SectionExperience from './SectionExperience.vue'
-import SectionFormation from './SectionFormation.vue'
-import SectionProject from './SectionProject.vue'
-import SectionContact from './SectionContact.vue'
+import SectionPresentation from '@/components/SectionPresentation.vue'
+import SectionAboutme from '@/components/SectionAboutme.vue'
+import SectionExperience from '@/components/SectionExperience.vue'
+import SectionFormation from '@/components/SectionFormation.vue'
+import SectionProject from '@/components/SectionProject.vue'
+import SectionContact from '@/components/SectionContact.vue'
 
 export default {
   name: 'AppDashboard',
