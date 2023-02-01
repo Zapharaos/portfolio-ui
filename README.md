@@ -6,13 +6,13 @@ Link : www.matthieu-freitag.com/
 
 ## Project setup
 
-### Build
-```
-docker build . -t <name>
-```
-
 ### Run
 ```
-docker run -d -p 8080:80 <name>
+docker compose up -d
+```
+
+### Stop
+```
+docker compose down
 ```
 
