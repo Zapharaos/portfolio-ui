@@ -63,6 +63,10 @@
     border-color: var(--contact-border-color);
 }
 
+#section-contact button:focus {
+    background-color: var(--button-scd-hover-color);
+}
+
 #notification {
     width: 100%;
     position: fixed;

@@ -1,33 +1,18 @@
-const labelExperience = 'experience'
-const selectorExperiencePanels = '[data-head="' + labelExperience + '"]'
-const labelFormation = 'formation'
-const selectorFormationPanels = '[data-head="' + labelFormation + '"]'
-const labelProject = 'project'
-const selectorProjectPanels = '[data-head="' + labelProject + '"]'
-
-window.addEventListener("DOMContentLoaded", () => {
-
-    const experiencePanels = document.querySelectorAll(selectorExperiencePanels)
-    experiencePanels.forEach(panel => {
-        panel.addEventListener("click", function(e) {
-            changeActivePanel(e, labelExperience)
-        });
-    })
-
-    const formationPanels = document.querySelectorAll(selectorFormationPanels);
-    formationPanels.forEach(panel => {
-        panel.addEventListener("click", function(e) {
-            changeActivePanel(e, labelFormation)
-        });
-    });
-
-    const projectPanels = document.querySelectorAll(selectorProjectPanels);
-    projectPanels.forEach(panel => {
-        panel.addEventListener("click", function(e) {
-            changeActivePanel(e, labelProject)
-        });
-    });
+$(document).ready( () => {
+    enableListChanges(['experience', 'formation', 'project'])
 });
+
+function enableListChanges(listsLabels) {
+    listsLabels.forEach(label => {
+        let selector = '[data-head="' + label + '"]'
+        let panels = document.querySelectorAll(selector)
+        panels.forEach(panel => {
+            panel.addEventListener('click', (e) => {
+                changeActivePanel(e, label)
+            })
+        })
+    })
+}
 
 function changeActivePanel(e, name) {
     const target = e.target;

@@ -6,7 +6,7 @@ const idTop = 'top'
 
 const headerLabel = 'header-'
 const sectionLabel = 'section-'
-const sectionNames = ['aboutme', 'experience', 'formation', 'project', 'contact']
+const defaultSectionNames = ['aboutme', 'contact']
 
 $(document).ready( function() {
 
@@ -21,11 +21,7 @@ $(document).ready( function() {
         goToByScroll(selectorHeader, speed[1])
     })
 
-    sectionNames.forEach(function(name) {
-        document.getElementById(headerLabel + name).addEventListener('click', function () {
-            goToByScroll(sectionLabel + name, speed[0])
-        })
-    })
+    enableGoToSections(defaultSectionNames.concat(['experience', 'formation', 'project']))
 
     /* toggle the "scroll to top" button & the header */
     window.addEventListener("scroll", function () {
@@ -45,6 +41,15 @@ $(document).ready( function() {
         last = current <= 0 ? 0 : current; // For Mobile or negative scrolling
     }, false);
 })
+
+function enableGoToSections(sectionLabels) {
+    console.log(sectionLabels)
+    sectionLabels.forEach(function(name) {
+        document.getElementById(headerLabel + name).addEventListener('click', function () {
+            goToByScroll(sectionLabel + name, speed[0])
+        })
+    })
+}
 
 /* nav between sections to avoid having "#id" in the url */
 function goToByScroll(id, speed){
