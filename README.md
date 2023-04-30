@@ -1,18 +1,18 @@
-# portfolio
+# Portfolio
 
 Repository related to my own portfolio.
 
 Link : www.matthieu-freitag.com/
 
-## Project setup
+## Setup
+
+Copy the .env.example file into a new .env file and update the variables you want to change.
+
+## Docker
 
 ### Build
 ```
-docker build . -t <name>
-```
-
-### Run
-```
-docker run -d -p 8080:80 <name>
+docker build
+docker run -d
 ```
 
