@@ -2,27 +2,35 @@ version: '3.9'
 
 services:
 
-  db:
-    image: postgres:13
+  mongodb:
+    image: mongo:latest
+    restart: always
+    env_file:
+      .env
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
-    environment:
-      - "POSTGRES_HOST_AUTH_METHOD=trust"
+      - ./backend/data-db:/data/db
+    ports:
+      - "${MONGO_INITDB_PORT}:${MONGO_INITDB_PORT}"
 
   django:
+    image: django
     build: ./backend
-    container_name: django
+    restart: always
+    env_file:
+      .env
+    volumes:
+      - ./backend:/django
     ports:
-      - "8000:8000"
-    command: python manage.py runserver 0.0.0.0:8000
+      - "${DJANGO_PORT}:${DJANGO_PORT}"
     depends_on:
-      - db
+      - mongodb
 
-  vue:
+  vuejs:
+    image: vuejs
     build: ./frontend
-    container_name: vue
+    restart: always
     ports:
-      - "8080:80"
+      - "${VUEJS_PORT}:${NGINX_PORT}"
     depends_on:
       - django
 

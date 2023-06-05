@@ -1,10 +1,11 @@
-.idea
 .DS_Store
 node_modules
 /dist
+/backend/static
+/backend/data-db/
 
-
-# local env files
+# env files
+.env
 .env.local
 .env.*.local
 
