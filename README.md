@@ -1,18 +1,18 @@
-# portfolio
+# Portfolio
 
 Repository related to my own portfolio.
 
 Link : www.matthieu-freitag.com/
 
-## Project setup
+## Setup
 
-### Run
-```
-docker compose up -d
-```
+Copy the .env.example file into a new .env file and update the variables you want to change.
 
-### Stop
+## Docker
+
+### Build
 ```
-docker compose down
+docker build
+docker run -d
 ```
 
