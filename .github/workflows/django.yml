@@ -34,14 +34,15 @@ jobs:
         run: |
           # stop the build if there are Python syntax errors or undefined names
           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-      - name: Apply database migrations
+      - name: Apply database migrations and run
         env:
           MONGO_INITDB_DATABASE: ${{ secrets.MONGO_INITDB_DATABASE }}
           MONGO_INITDB_ROOT_USERNAME: ${{ secrets.MONGO_INITDB_ROOT_USERNAME }}
           MONGO_INITDB_ROOT_PASSWORD: ${{ secrets.MONGO_INITDB_ROOT_PASSWORD }}
           MONGO_INITDB_PORT: ${{ secrets.MONGO_INITDB_PORT }}
+          DJANGO_DEBUG_MODE: ${{ secrets.DJANGO_DEBUG_MODE }}
+          DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+          DJANGO_STATIC_ROOT: ${{ secrets.DJANGO_STATIC_ROOT }}
         run: |
-           python manage.py migrate
-      - name: Run
-        run: |
+          python manage.py migrate
           python manage.py test
