@@ -10,6 +10,7 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    environment: portfolio
 
     defaults:
       run:
@@ -37,7 +38,5 @@ jobs:
         run: |
            python manage.py migrate
       - name: Run
-        env:
-          DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
         run: |
           python manage.py test
