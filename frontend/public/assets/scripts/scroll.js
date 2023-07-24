@@ -1,57 +1,73 @@
-const speed = ['slow', 'fast']
+/* Authorized duration for the .animate() function :
+https://api.jquery.com/animate/#:~:text=The%20default%20duration%20is%20400,200%20and%20600%20milliseconds%2C%20respectively.
+ */
+const AnimateDuration = {
+    SLOW: 200,
+    DEFAULT: 400,
+    FAST: 600
+};
 
-const selectorHeader = 'header'
+// DOM elements
+const tagHeader = 'header'
 const idHeaderLogo = 'header-logo'
-const idTop = 'top'
+const idButtonPageTop = 'toPageTop'
+const defaultSectionNames = ['aboutme', 'contact', 'experience', 'formation', 'project'] // TODO : link to DB
 
-const headerLabel = 'header-'
-const sectionLabel = 'section-'
-const defaultSectionNames = ['aboutme', 'contact']
+// CSS class labels
+const classHeaderHidden = 'hidden'
+const classButtonPageToTopActive = 'active'
+
+// Variables
+let lastPosition = 0
+let upScrolling = false
 
 $(document).ready( function() {
 
-    let last = 0
-    let top = document.getElementById(idTop)
-    let header = document.getElementsByTagName(selectorHeader)[0]
+    let buttonToPageTop = document.getElementById(idButtonPageTop)
+    let header = document.getElementsByTagName(tagHeader)[0]
 
-    top.addEventListener('click', function () {
-        goToByScroll(selectorHeader, speed[1])
+    /* buttons heading to the top of the page */
+    buttonToPageTop.addEventListener('click', function () {
+        goToIdByAutoScroll(tagHeader, AnimateDuration.FAST)
     })
     document.getElementById(idHeaderLogo).addEventListener('click', function () {
-        goToByScroll(selectorHeader, speed[1])
+        goToIdByAutoScroll(tagHeader, AnimateDuration.FAST)
     })
 
-    enableGoToSections(defaultSectionNames.concat(['experience', 'formation', 'project']))
-
-    /* toggle the "scroll to top" button & the header */
+    /* toggle the "scroll to the top of the page" button & the sticky header */
     window.addEventListener("scroll", function () {
-        let current = document.documentElement.scrollTop; // Credits: "https://github.com/qeremy/so/blob/master/so.dom.js#L426"
-        if (current > last) { // downscroll code
-            header.style.top = "-150px";
-            top.style.display = "none";
-        } else { // upscroll code
-            header.style.top = "0px";
-            header.style.boxShadow = "0px 3px 10px 0px #111";
-            top.style.display = "flex";
+        let currentPosition = document.documentElement.scrollTop
+        if (currentPosition === 0) // START
+        {
+            header.classList.remove(classHeaderHidden)
+            buttonToPageTop.classList.remove(classButtonPageToTopActive)
         }
-        if (current === 0) {
-            header.style.boxShadow = "none";
-            top.style.display = "none";
+        else if (currentPosition > lastPosition && upScrolling) // DOWN SCROLLING
+        {
+            upScrolling = false
+            header.classList.add(classHeaderHidden)
+            buttonToPageTop.classList.remove(classButtonPageToTopActive)
+        } else if (currentPosition <= lastPosition && !upScrolling) // UP SCROLLING
+        {
+            upScrolling = true
+            header.classList.remove(classHeaderHidden)
+            buttonToPageTop.classList.add(classButtonPageToTopActive)
         }
-        last = current <= 0 ? 0 : current; // For Mobile or negative scrolling
-    }, false);
-})
+        lastPosition = currentPosition <= 0 ? 0 : currentPosition // For Mobile or negative scrolling
+    }, false)
 
-function enableGoToSections(sectionLabels) {
-    console.log(sectionLabels)
-    sectionLabels.forEach(function(name) {
-        document.getElementById(headerLabel + name).addEventListener('click', function () {
-            goToByScroll(sectionLabel + name, speed[0])
+    /* enables a smooth scrolling animation from the menu to the sections */
+    defaultSectionNames.forEach(function(sectionName) {
+        document.getElementById('nav-' + sectionName).addEventListener('click', function () {
+            goToIdByAutoScroll('section-' + sectionName, AnimateDuration.SLOW)
         })
     })
-}
+})
 
-/* nav between sections to avoid having "#id" in the url */
-function goToByScroll(id, speed){
-    $('html,body').animate({scrollTop: $("#"+id).offset().top},speed);
+/* navigates smoothly to an element (avoids having "#id" in the url) */
+function goToIdByAutoScroll(id, duration){
+    if(document.getElementById(id))
+    {
+        $('html,body').animate({scrollTop: $("#"+id).offset().top}, duration)
+    }
 }

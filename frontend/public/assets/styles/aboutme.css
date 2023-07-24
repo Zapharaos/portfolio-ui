@@ -56,14 +56,14 @@
 }
 
 #socials li a {
-    color: var(--button-hover-color);
+    color: var(--main-color);
     text-decoration: none;
     text-transform: uppercase;
     font-weight: bold;
 }
 
 #socials li a:hover {
-    color: var(--main-color);
+    color: var(--button-scd-bg-hover-color);
     transition: all ease-in-out 500ms;
 }
 

@@ -12,24 +12,30 @@
     --button-bg-color: #1E2431;
     --button-hover-color: #BC402B;
     --button-scd-hover-color: #4B2C30;
-    --contact-border-color: #FF4C29;
+    --button-active-scd-hover-color: #4B2C30;
+    --button-scd-bg-hover-color: #AB4437;
     --logo-filter: none;
     --big-logo-filter: blur(10px) brightness(0.75);
-    --main-scroll-button-color: rgba(255,255,255, .25);
+    --main-scroll-button-color: rgba(255,255,255,.25);
     --overlay-color: rgba(0,0,0,0.5);
+    --footer-color: black;
+    --footer-hover-color: #661E10;
 }
 
 [theme="light"] {
-    --main-color: #FF7D63;
+    --main-color: #FF6000;
     --bg-color: white;
-    --snd-bg-color: #A2ABB2;
-    --text-color: black;
+    --snd-bg-color: #FFE6C7;
+    --title-color: #454545;
+    --text-color: #454545;
     --button-bg-color: #FFEFEC;
-    --button-hover-color: #FF5C3C;
-    --button-scd-hover-color: #FFCEC5;
-    --contact-border-color: #E84525;
+    --button-hover-color: #FFCEC5;
+    --button-scd-hover-color: #FFDAB5;
+    --button-active-scd-hover-color: #FFCEC5;
+    --button-scd-bg-hover-color: #FF883C;
     --logo-filter: brightness(1) invert(1);
     --big-logo-filter: blur(10px) brightness(0.75) invert(1);
-    --main-scroll-button-color: rgba(0,0,0, .35);
-    --overlay-color: rgba(0,0,0,0.1);
+    --main-scroll-button-color: rgba(0,0,0,.35);
+    --overlay-color: rgba(255,165,89,0.25);
+    --footer-hover-color: #803000;
 }

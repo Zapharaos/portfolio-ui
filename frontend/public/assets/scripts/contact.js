@@ -6,6 +6,8 @@ const selectorIcon = '#notification i.fa-2x'
 
 const classNotificationSuccess = 'success'
 const classNotificationError = 'error'
+
+// TODO: get from DB
 const classIconSuccess = 'fa-check-circle'
 const classIconError = 'fa-exclamation-circle'
 const messageSuccess = "Thanks for contacting us, we will be in touch with you shortly !"
