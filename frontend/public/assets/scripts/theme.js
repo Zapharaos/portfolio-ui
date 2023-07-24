@@ -1,21 +1,33 @@
-const idThemeSwicther = "theme-switcher"
-const attributeTheme = "theme"
+// DOM Elements
+const idButtonThemeSwitcher = "theme-switcher"
+const attributeThemeLabel = "theme"
+
+// Themes : TODO : get from DB
+const themes = [
+    {
+        "id": "dark",
+        "next": "light"
+    },
+    {
+        "id": "light",
+        "next": "dark"
+    }]
 
 $(document).ready( function() {
-    enableSwitchTheme(["dark", "light"])
-})
-
-function enableSwitchTheme(themes) {
-    let themeSwitcher = document.getElementById(idThemeSwicther)
-    themeSwitcher.addEventListener('click',  () => {
+    document.getElementById(idButtonThemeSwitcher).addEventListener('click',  () => {
         switchTheme(themes)
     })
-}
+})
 
 /* switches the theme */
 function switchTheme(themes) {
-    if(themes[0] === document.body.getAttribute(attributeTheme))
-        document.body.setAttribute(attributeTheme, themes[1])
-    else
-        document.body.setAttribute(attributeTheme, themes[0])
+    let currentTheme = document.body.getAttribute(attributeThemeLabel)
+    for(let i = 0; i < themes.length; i++)
+    {
+        if(currentTheme === themes[i].id) // find current theme
+        {
+            document.body.setAttribute(attributeThemeLabel, themes[i].next) // switch to the next theme
+            return
+        }
+    }
 }

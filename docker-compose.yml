@@ -31,6 +31,8 @@ services:
     restart: always
     ports:
       - "${VUEJS_PORT}:${NGINX_PORT}"
+    volumes:
+      - ./frontend:/vuejs
     depends_on:
       - django
 

@@ -11,7 +11,7 @@ html {
 body {
     margin: 0;
     background-color: var(--bg-color);
-    color: white;
+    color: var(--text-color);
     font-family: "Open Sans", sans-serif;
     font-weight: 300;
 }
@@ -78,63 +78,16 @@ button {
     transition: all ease-in-out 300ms;
 }
 
-button i {
-    margin-right: 5px;
-}
-
 button:hover {
-    background-color: var(--button-scd-hover-color);
+    background-color: var(--button-bg-color);
 }
 
 button:focus {
     outline: 0;
 }
 
-/* curriculum */
-
-#curriculum {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 3% 0 0 0;
-    margin: 0 auto;
-    margin-top: 0 !important;
-    color: var(--text-color);
-    width: 75%;
-}
-
-#curriculum p {
-    text-align: center;
-}
-
-#curriculum a {
-    text-decoration: none;
-}
-
-/* scroll-to-top */
-
-#top {
-    display: none;
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 98;
-    cursor: pointer;
-}
-
-#top a {
-    height: 39px;
-    width: 37px;
-    text-align: center;
-    background: var(--main-scroll-button-color);
-    display: block;
-    border-radius: 3px;
-}
-
-#top a i{
-    color: var(--text-color);
-    font-size: 25px;
-    line-height: 39px;
+button i {
+    margin-right: 5px;
 }
 
 @media screen and (max-width: 1024px) {

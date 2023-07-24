@@ -34,29 +34,43 @@
     </form>
   </div>
 
-  <section id="section-contact">
-    <h3>Contact</h3>
-    <form id="form-contact">
-      <div>
-        <input type="text" id="name" name="name" placeholder="Name" tabindex="1" required>
-        <input type="email" id="email" name="email" placeholder="Email" tabindex="2" required>
-      </div>
-      <input type="text" id="subject" name="subject" placeholder="Subject" tabindex="3" required>
-      <textarea rows="5" id="message" name="message" placeholder="Message" tabindex="4" required></textarea>
-      <button type="submit" name="submit" value="Submit" tabindex="5">Submit</button>
-      <input type="hidden" name="spam">
-    </form>
-  </section>
+  <form-contact/>
 
 </template>
 
 <script>
+import FormContact from '@/components/FormContact.vue'
 import ListComponent from '@/components/ListComponent.vue'
 
 export default {
   name: 'AppDashboard',
   components: {
+    FormContact,
     ListComponent
   }
 }
 </script>
+
+<style>
+/* curriculum */
+
+#curriculum {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3% 0 0 0;
+  margin: 0 auto;
+  margin-top: 0 !important;
+  color: var(--text-color);
+  width: 75%;
+}
+
+#curriculum p {
+  text-align: center;
+}
+
+#curriculum a {
+  text-decoration: none;
+}
+</style>
+

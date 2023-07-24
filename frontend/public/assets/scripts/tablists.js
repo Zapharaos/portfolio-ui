@@ -1,5 +1,5 @@
 $(document).ready( () => {
-    enableListChanges(['experience', 'formation', 'project'])
+    enableListChanges(['experience', 'formation', 'project']) // TODO : link to DB
 });
 
 function enableListChanges(listsLabels) {
