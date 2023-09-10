@@ -1,40 +1,31 @@
 <template>
-  <div ref="notification" id="notification">
-    <div>
-      <i class="fas fa-2x"></i>
-      <p ref="message">{{ message }}</p>
-      <i ref="icon" @click="closeNotification" id="close-notifications" class="fas fa-times"></i>
-    </div>
-  </div>
+  <ul v-if="notifications.length > 0" id="notification">
+    <li v-for="(notification, index) in notifications" :key="index" :class="notification.classItem">
+        <i :class="['fas fa-2x', notification.classIcon]"></i>
+        <p>{{ notification.message }}</p>
+        <i @click="removeNotification(index)" class="fas fa-times"></i>
+    </li>
+  </ul>
 </template>
 
 <script>
   import '@/../public/assets/scripts/variables.js';
+  import {useNotificationsStore} from "@/store/notifications";
 
   export default {
     name: 'AppNotification',
-    methods: {
-      closeNotification() {
-        this.$refs.notification.classList.remove(this.classNotificationSuccess)
-        this.$refs.notification.classList.remove(this.classNotificationError)
-        this.$refs.icon.classList.remove(this.classIconSuccess)
-        this.$refs.icon.classList.remove(this.classIconError)
-        this.$refs.message.innerHTML = ""
-      },
-      showNotificationError() {
-        this.$refs.notification.classList.remove(this.classNotificationSuccess)
-        this.$refs.notification.classList.add(this.classNotificationError)
-        this.$refs.icon.classList.remove(this.classIconSuccess)
-        this.$refs.icon.classList.add(this.classIconError)
-        this.$refs.message.innerHTML = this.messageError
-      },
-      showNotificationSuccess() {
-        this.$refs.notification.classList.add(this.classNotificationSuccess)
-        this.$refs.notification.classList.remove(this.classNotificationError)
-        this.$refs.icon.classList.add(this.classIconSuccess)
-        this.$refs.icon.classList.remove(this.classIconError)
-        this.$refs.message.innerHTML = this.messageSuccess
-      }
+    setup() {
+      const notificationsStore = useNotificationsStore();
+      const notifications = notificationsStore.notifications;
+
+      const removeNotification = (index) => {
+        notificationsStore.removeNotification(index);
+      };
+
+      return {
+        notifications,
+        removeNotification
+      };
     }
   }
 </script>
@@ -43,12 +34,12 @@
 #notification {
   width: 100%;
   position: fixed;
+  bottom: 1%;
   text-align: center;
   color: var(--text-color);
-  bottom: 1%;
 }
 
-#notification div {
+#notification li {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -64,48 +55,52 @@
   position: relative;
 }
 
+#notification li+li {
+  margin-top: 2%;
+}
+
 #notification p {
   padding: 0 3%;
 }
 
-#notification div i.fa-times:hover {
+#notification li i.fa-times:hover {
   cursor: pointer;
 }
 
-.success div {
+li.success {
   box-shadow: 0 0 2px #259c08;
   transform: translateY(0%) !important;
   z-index: 100;
 }
-.success div i:first-of-type {
+li.success i:first-of-type {
   color: #0ad406;
 }
 
-.error div {
+li.error {
   box-shadow: 0 0 2px #ff0303;
   transform: translateY(0%) !important;
 }
-.error div i:first-of-type {
+li.error i:first-of-type {
   color: #ff0303;
 }
 
 @media screen and (max-width: 900px) {
 
-  #notification div {
+  #notification li {
     width: 60%;
   }
 }
 
 @media screen and (max-width: 768px) {
 
-  #notification div {
+  #notification li {
     width: 70%;
   }
 }
 
 @media screen and (max-width: 480px) {
 
-  #notification div {
+  #notification li {
     width: 85%;
   }
 }

@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import {NotificationType} from "@/utils/enum";
 
 export const useNotificationsStore = defineStore({
     id: 'notifications',
@@ -6,10 +7,11 @@ export const useNotificationsStore = defineStore({
         notifications: [],
     }),
     actions: {
-        addNotification(message, type) {
-            console.log("test2")
-            this.notifications.push({ message, type });
-            console.log("test3")
+        addNotificationSuccess() {
+            this.notifications.push(NotificationType.SUCCESS);
+        },
+        addNotificationError() {
+            this.notifications.push(NotificationType.ERROR);
         },
         removeNotification(index) {
             this.notifications.splice(index, 1);

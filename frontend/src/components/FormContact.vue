@@ -11,60 +11,34 @@
       <button @click="sendMessageRequest" type="submit" name="submit" value="Submit" tabindex="5">Submit</button>
       <input type="hidden" name="spam">
     </form>
-    {{ notifications }}
   </section>
 </template>
 
 <script>
-/* eslint-disable */
-import { useNotificationsStore } from '@/store/notifications'; // Import the notifications store
-export default {
-  setup() {
-    const notificationsStore = useNotificationsStore(); // Access the notifications store instance
+import { useNotificationsStore } from '@/store/notifications';
+import { onMounted } from 'vue';
 
+export default {
+  name: 'FormContact',
+  setup() {
+    const notificationsStore = useNotificationsStore();
     const notifications = notificationsStore.notifications;
 
-    const showNotification = (e) => {
-      e.preventDefault()
-      console.log("test1")
-      notificationsStore.addNotification('New message', 'info'); // 'info' is the type
+    const sendMessageRequest = (e) => {
+      e.preventDefault();
+      // TODO : send e-mail
+      notificationsStore.addNotificationSuccess();
     };
+
+    onMounted(() => {
+      notificationsStore.addNotificationSuccess();
+      notificationsStore.addNotificationError();
+    });
 
     return {
       notifications,
-      showNotification
+      sendMessageRequest
     };
-  },
-  name: 'FormContact',
-  methods: {
-    sendMessageRequest(e) {
-      e.preventDefault()
-
-      //showNotification()
-
-      /*this.$store.commit('notification/showMessage', {
-        message: 'This is a notification message!',
-        type: 'info', // You can change the type as needed (info, success, error, etc.)
-      });*/
-
-      /*$.ajax({
-          type: 'post',
-          url: 'contact.php',
-          data: $('form-contact').serialize(),
-          success: function (result) {
-              if (result === 1){
-                  toggleNotificationSuccess()
-                  setTimeout(disableNotifications, 5000)
-              } else {
-                  toggleNotificationError()
-                  setTimeout(disableNotifications, 5000)
-              }
-              contact.reset();
-              let url = document.location.href;
-              window.history.pushState({}, "", url.split("?")[0]);
-          }
-      });*/
-    }
   }
 }
 </script>
