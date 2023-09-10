@@ -18,6 +18,9 @@
       const notificationsStore = useNotificationsStore();
       const notifications = notificationsStore.notifications;
 
+      /**
+       * @see notificationsStore#removeNotification
+       */
       const removeNotification = (index) => {
         notificationsStore.removeNotification(index);
       };
