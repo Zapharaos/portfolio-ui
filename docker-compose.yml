@@ -27,12 +27,15 @@ services:
 
   vuejs:
     image: vuejs
-    build: ./frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
     restart: always
     ports:
-      - "${VUEJS_PORT}:${NGINX_PORT}"
+      - "${VUEJS_PORT}:${VUEJS_PORT}"
     volumes:
       - ./frontend:/vuejs
+      - /vuejs/node_modules
     depends_on:
       - django
 

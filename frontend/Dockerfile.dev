@@ -1,0 +1,14 @@
+# build stage
+FROM node:lts-alpine as build-stage
+WORKDIR /vuejs
+COPY package*.json ./
+RUN npm install
+COPY . .
+
+# port
+ARG VUEJS_PORT
+ENV PORT=$VUEJS_PORT
+EXPOSE $PORT
+
+# development stage
+CMD ["npm", "run", "serve"]
