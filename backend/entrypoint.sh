@@ -20,13 +20,15 @@ python manage.py migrate --fake-initial
 if [ -z "$(ls -A $DJANGO_STATIC_ROOT)" ]
 then
   # Collect static files
+  echo "Collecting static files."
   python manage.py collectstatic
 fi
 
 # Create a default superuser if none exists
 if [ "$DJANGO_SUPERUSER_USERNAME" ]
 then
-    python manage.py shell -c "\
+  echo "Creating default superuser."
+  python manage.py shell -c "\
 from django.contrib.auth.models import User; \
 User.objects.create_superuser('$DJANGO_SUPERUSER_USERNAME', '$DJANGO_SUPERUSER_EMAIL', '$DJANGO_SUPERUSER_PASSWORD') \
 if not User.objects.filter(username='$DJANGO_SUPERUSER_USERNAME').exists() \
