@@ -8,15 +8,32 @@
       </div>
       <input type="text" id="subject" name="subject" placeholder="Subject" tabindex="3" required>
       <textarea rows="5" id="message" name="message" placeholder="Message" tabindex="4" required></textarea>
-      <button type="submit" name="submit" value="Submit" tabindex="5">Submit</button>
+      <button @click="sendMessageRequest" type="submit" name="submit" value="Submit" tabindex="5">Submit</button>
       <input type="hidden" name="spam">
     </form>
   </section>
 </template>
 
 <script>
+import { useNotificationsStore } from '@/store/notifications';
+
 export default {
-  name: 'FormContact'
+  name: 'FormContact',
+  setup() {
+    const notificationsStore = useNotificationsStore();
+    const notifications = notificationsStore.notifications;
+
+    const sendMessageRequest = (e) => {
+      e.preventDefault();
+      // TODO : send e-mail
+      notificationsStore.addNotificationSuccess();
+    };
+
+    return {
+      notifications,
+      sendMessageRequest
+    };
+  }
 }
 </script>
 
