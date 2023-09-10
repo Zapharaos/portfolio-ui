@@ -1,12 +1,43 @@
 <template>
-  <div id="notification">
+  <div ref="notification" id="notification">
     <div>
       <i class="fas fa-2x"></i>
-      <p></p>
-      <i id="close-notifications" class="fas fa-times"></i>
+      <p ref="message">{{ message }}</p>
+      <i ref="icon" @click="closeNotification" id="close-notifications" class="fas fa-times"></i>
     </div>
   </div>
 </template>
+
+<script>
+  import '@/../public/assets/scripts/variables.js';
+
+  export default {
+    name: 'AppNotification',
+    methods: {
+      closeNotification() {
+        this.$refs.notification.classList.remove(this.classNotificationSuccess)
+        this.$refs.notification.classList.remove(this.classNotificationError)
+        this.$refs.icon.classList.remove(this.classIconSuccess)
+        this.$refs.icon.classList.remove(this.classIconError)
+        this.$refs.message.innerHTML = ""
+      },
+      showNotificationError() {
+        this.$refs.notification.classList.remove(this.classNotificationSuccess)
+        this.$refs.notification.classList.add(this.classNotificationError)
+        this.$refs.icon.classList.remove(this.classIconSuccess)
+        this.$refs.icon.classList.add(this.classIconError)
+        this.$refs.message.innerHTML = this.messageError
+      },
+      showNotificationSuccess() {
+        this.$refs.notification.classList.add(this.classNotificationSuccess)
+        this.$refs.notification.classList.remove(this.classNotificationError)
+        this.$refs.icon.classList.add(this.classIconSuccess)
+        this.$refs.icon.classList.remove(this.classIconError)
+        this.$refs.message.innerHTML = this.messageSuccess
+      }
+    }
+  }
+</script>
 
 <style>
 #notification {
