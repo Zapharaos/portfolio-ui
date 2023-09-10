@@ -1,11 +1,20 @@
 <template>
-  <ul v-if="notifications.length > 0" id="notification">
-    <li v-for="(notification, index) in notifications" :key="index" :class="notification.classItem">
-        <i :class="['fas fa-2x', notification.classIcon]"></i>
-        <p>{{ notification.message }}</p>
+  <section id="notifications">
+    <TransitionGroup
+        v-if="notifications.length"
+        name="notification" tag="ul" appear
+    >
+      <li
+          v-for="(notification, index) in notifications"
+          :key="notification.id"
+          :class="notification.type.classItem"
+      >
+        <i :class="['fas fa-2x', notification.type.classIcon]"></i>
+        <p>{{ notification.type.message }}</p>
         <i @click="removeNotification(index)" class="fas fa-times"></i>
-    </li>
-  </ul>
+      </li>
+    </TransitionGroup>
+  </section>
 </template>
 
 <script>
@@ -34,46 +43,75 @@
 </script>
 
 <style>
-#notification {
-  width: 100%;
-  position: fixed;
-  bottom: 1%;
-  text-align: center;
-  color: var(--text-color);
+
+/* Transitions */
+
+.notification-enter-active,
+.notification-leave-active {
+  transition: all 1s ease;
+}
+.notification-leave-active {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+.notification-move {
+  transition: all 0.5s ease;
+}
+.notification-enter-from,
+.notification-leave-to {
+  opacity: 0;
+  transform: scale(0.6);
+}
+.notification-enter-to,
+.notification-leave-from {
+  opacity: 1;
+  transform: scale(1);
 }
 
-#notification li {
+/* Elements */
+
+#notifications {
+  position: fixed;
+  bottom: 1%;
+  width: 100%;
+}
+
+#notifications ul {
+  position: relative;
+}
+
+#notifications li {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  margin: 0 auto;
+  align-items: center;
   width: 50%;
+  margin: 0 auto;
+  padding: 0 3%;
   border-radius: 3px;
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
   background-color: var(--overlay-color);
-  transform: translateY(150%);
-  transition: 0.5s;
+}
+
+#notifications li+li {
+  margin-top: 1%;
+}
+
+#notifications p {
   padding: 0 3%;
-  position: relative;
+  user-select: none;
+  text-align: center;
 }
 
-#notification li+li {
-  margin-top: 2%;
-}
-
-#notification p {
-  padding: 0 3%;
-}
-
-#notification li i.fa-times:hover {
+#notifications li i.fa-times:hover {
   cursor: pointer;
 }
 
 li.success {
   box-shadow: 0 0 2px #259c08;
-  transform: translateY(0%) !important;
-  z-index: 100;
 }
 li.success i:first-of-type {
   color: #0ad406;
@@ -81,7 +119,6 @@ li.success i:first-of-type {
 
 li.error {
   box-shadow: 0 0 2px #ff0303;
-  transform: translateY(0%) !important;
 }
 li.error i:first-of-type {
   color: #ff0303;
@@ -89,21 +126,21 @@ li.error i:first-of-type {
 
 @media screen and (max-width: 900px) {
 
-  #notification li {
+  #notifications li {
     width: 60%;
   }
 }
 
 @media screen and (max-width: 768px) {
 
-  #notification li {
+  #notifications li {
     width: 70%;
   }
 }
 
 @media screen and (max-width: 480px) {
 
-  #notification li {
+  #notifications li {
     width: 85%;
   }
 }

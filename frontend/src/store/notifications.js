@@ -5,6 +5,7 @@ export const useNotificationsStore = defineStore({
     id: 'notifications',
     state: () => ({
         notifications: [],
+        idCounter: 1,
     }),
     actions: {
         /**
@@ -24,7 +25,9 @@ export const useNotificationsStore = defineStore({
          * @param {NotificationType} type - The type of the notification.
          */
         _addNotification(type) {
-            this.notifications.push(type);
+            const id = this.idCounter++;
+            const notification = {id, type}
+            this.notifications.push(notification);
             setTimeout(() => {
                 this.removeNotification(0);
             }, 5000);

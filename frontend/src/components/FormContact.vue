@@ -16,7 +16,6 @@
 
 <script>
 import { useNotificationsStore } from '@/store/notifications';
-import { onMounted } from 'vue';
 
 export default {
   name: 'FormContact',
@@ -29,11 +28,6 @@ export default {
       // TODO : send e-mail
       notificationsStore.addNotificationSuccess();
     };
-
-    onMounted(() => {
-      notificationsStore.addNotificationSuccess();
-      notificationsStore.addNotificationError();
-    });
 
     return {
       notifications,
