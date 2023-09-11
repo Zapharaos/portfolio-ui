@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'djongo',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -49,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'portfolio.urls'
@@ -134,3 +136,21 @@ STATIC_ROOT = os.environ['DJANGO_STATIC_ROOT']
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Cors
+
+CORS_ALLOW_ALL_ORIGINS = False
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8080",  # Replace with your frontend URL
+    "http://vuejs:8080",  # If your frontend is running in another Docker container
+]
+
+# Emails
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = os.environ['CONTACT_EMAIL_HOST']
+EMAIL_PORT = os.environ['CONTACT_EMAIL_PORT']
+EMAIL_HOST_USER = os.environ['CONTACT_EMAIL_USER']
+EMAIL_HOST_PASSWORD = os.environ['CONTACT_EMAIL_PASSWORD']

@@ -1,45 +1,58 @@
 <template>
   <section id="section-contact">
     <h3>Contact</h3>
-    <form id="form-contact">
+    <form id="form-contact" @submit.prevent="sendEmail">
       <div>
-        <input type="text" id="name" name="name" placeholder="Name" tabindex="1" required>
-        <input type="email" id="email" name="email" placeholder="Email" tabindex="2" required>
+        <input v-model="dataFormContact.name" type="text" id="name" name="name" placeholder="Name" tabindex="1" required>
+        <input v-model="dataFormContact.email" type="email" id="email" name="email" placeholder="Email" tabindex="2" required>
       </div>
-      <input type="text" id="subject" name="subject" placeholder="Subject" tabindex="3" required>
-      <textarea rows="5" id="message" name="message" placeholder="Message" tabindex="4" required></textarea>
-      <button @click="sendEmail" type="submit" name="submit" value="Submit" tabindex="5">Submit</button>
+      <input v-model="dataFormContact.subject" type="text" id="subject" name="subject" placeholder="Subject" tabindex="3" required>
+      <textarea v-model="dataFormContact.message" rows="5" id="message" name="message" placeholder="Message" tabindex="4" required></textarea>
+      <button type="submit" name="submit" value="Submit" tabindex="5">Submit</button>
       <input type="hidden" name="spam">
     </form>
   </section>
 </template>
 
 <script>
-//import axios from 'axios';
+import {ref} from "vue";
 import { useNotificationsStore } from '@/store/notifications';
+import axios from '@/axios.config';
 
 export default {
   name: 'FormContact',
   setup() {
+
+    const dataFormContact = ref({
+      name: '',
+      email: '',
+      subject: '',
+      message: '',
+    });
+
     const notificationsStore = useNotificationsStore();
     const notifications = notificationsStore.notifications;
 
     const sendEmail = (e) => {
       e.preventDefault();
-      notificationsStore.addNotificationError();
-      // TODO : send e-mail
-      /*axios.post('/contact/')
+      axios.post('/send_email/', dataFormContact.value)
           .then(response => {
-            console.log(response.data.message);
-            notificationsStore.addNotificationSuccess();
+            if (response && response.data) {
+              console.log(response.data.message);
+              notificationsStore.addNotificationSuccess();
+            } else {
+              console.error("Empty response from server.");
+              notificationsStore.addNotificationError();
+            }
           })
           .catch(error => {
-            console.error(error.response.data.error);
+            console.error(error.response ? error.response.data.error : "An error occurred.");
             notificationsStore.addNotificationError();
-          });*/
+          });
     };
 
     return {
+      dataFormContact,
       notifications,
       sendEmail
     };
