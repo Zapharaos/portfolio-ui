@@ -6,28 +6,34 @@ export const useNotificationsStore = defineStore({
     state: () => ({
         notifications: [],
         idCounter: 1,
+        empty: true,
+        promise: null,
     }),
     actions: {
         /**
          * Add a notification as success - with auto remove.
          */
-        addNotificationSuccess() {
-            this._addNotification(NotificationType.SUCCESS);
+        async addNotificationSuccess() {
+            await this._addNotification(NotificationType.SUCCESS);
         },
         /**
          * Add a notification as error - with auto remove.
          */
-        addNotificationError() {
-            this._addNotification(NotificationType.ERROR);
+        async addNotificationError() {
+            await this._addNotification(NotificationType.ERROR);
         },
         /**
          * @private Internal method for adding a notification with automatic removal.
          * @param {NotificationType} type - The type of the notification.
          */
-        _addNotification(type) {
+        async _addNotification(type) {
+            await this._acquirePromise();
             const id = this.idCounter++;
             const notification = {id, type}
+            this.empty = false;
             this.notifications.push(notification);
+            this._releasePromise();
+
             setTimeout(() => {
                 this.removeNotification(0);
             }, 5000);
@@ -36,8 +42,36 @@ export const useNotificationsStore = defineStore({
          * Remove a notification.
          * @param {number} index - The index of the notification to remove.
          */
-        removeNotification(index) {
+        async removeNotification(index) {
+            await this._acquirePromise();
             this.notifications.splice(index, 1);
+            this._releasePromise();
+            setTimeout(async () => {
+                await this._acquirePromise();
+                if(this.notifications.length === 0) {
+                    this.empty = true;
+                }
+                this._releasePromise();
+            }, 1000); // Let enough time for the last notification to execute its animation
+        },
+        /**
+         * @private Internal method to access the promise.
+         * @returns {Promise<void>}
+         */
+        async _acquirePromise() {
+            while (this.promise) {
+                await this.promise;
+            }
+
+            this.promise = new Promise((resolve) => {
+                resolve();
+            });
+        },
+        /**
+         * @private Internal method to release the promise.
+         */
+        _releasePromise() {
+            this.promise = null;
         },
     },
 });

@@ -1,9 +1,6 @@
 <template>
   <section id="notifications">
-    <TransitionGroup
-        v-if="notifications.length"
-        name="notification" tag="ul" appear
-    >
+    <TransitionGroup name="notification" tag="ul" appear>
       <li
           v-for="(notification, index) in notifications"
           :key="notification.id"
@@ -18,7 +15,7 @@
 </template>
 
 <script>
-  import '@/../public/assets/scripts/variables.js';
+  import {computed} from "vue";
   import {useNotificationsStore} from "@/store/notifications";
 
   export default {
@@ -26,6 +23,7 @@
     setup() {
       const notificationsStore = useNotificationsStore();
       const notifications = notificationsStore.notifications;
+      const isEmpty = computed(() => notificationsStore.empty);
 
       /**
        * @see notificationsStore#removeNotification
@@ -36,6 +34,7 @@
 
       return {
         notifications,
+        isEmpty,
         removeNotification
       };
     }

@@ -8,13 +8,14 @@
       </div>
       <input type="text" id="subject" name="subject" placeholder="Subject" tabindex="3" required>
       <textarea rows="5" id="message" name="message" placeholder="Message" tabindex="4" required></textarea>
-      <button @click="sendMessageRequest" type="submit" name="submit" value="Submit" tabindex="5">Submit</button>
+      <button @click="sendEmail" type="submit" name="submit" value="Submit" tabindex="5">Submit</button>
       <input type="hidden" name="spam">
     </form>
   </section>
 </template>
 
 <script>
+//import axios from 'axios';
 import { useNotificationsStore } from '@/store/notifications';
 
 export default {
@@ -23,15 +24,24 @@ export default {
     const notificationsStore = useNotificationsStore();
     const notifications = notificationsStore.notifications;
 
-    const sendMessageRequest = (e) => {
+    const sendEmail = (e) => {
       e.preventDefault();
+      notificationsStore.addNotificationError();
       // TODO : send e-mail
-      notificationsStore.addNotificationSuccess();
+      /*axios.post('/contact/')
+          .then(response => {
+            console.log(response.data.message);
+            notificationsStore.addNotificationSuccess();
+          })
+          .catch(error => {
+            console.error(error.response.data.error);
+            notificationsStore.addNotificationError();
+          });*/
     };
 
     return {
       notifications,
-      sendMessageRequest
+      sendEmail
     };
   }
 }
