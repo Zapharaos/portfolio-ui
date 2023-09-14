@@ -46,6 +46,7 @@ export const useNotificationsStore = defineStore({
             await this._acquirePromise();
             this.notifications.splice(index, 1);
             this._releasePromise();
+          
             setTimeout(async () => {
                 await this._acquirePromise();
                 if(this.notifications.length === 0) {
