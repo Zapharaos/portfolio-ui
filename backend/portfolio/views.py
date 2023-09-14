@@ -7,7 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 import os
 import json
 
-@csrf_exempt  # Use this decorator to disable CSRF protection for this endpoint in development. Ensure proper CSRF protection in production.
+@csrf_exempt
 def send_email(request):
     if request.method == 'POST':
         data = json.loads(request.body.decode('utf-8'))

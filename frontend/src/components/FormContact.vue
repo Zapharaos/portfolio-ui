@@ -9,6 +9,7 @@
               @change="formValidateField('name')"
               placeholder="Name"
               type="text"
+              :required="true"
           />
           <span v-if="dataFormContact.name.error">
             <font-awesome-icon :icon="['fas', 'circle-exclamation']" />
@@ -21,6 +22,7 @@
               @change="formValidateField('email')"
               placeholder="Email"
               type="email"
+              :required="true"
           />
           <span v-if="dataFormContact.email.error">
             <font-awesome-icon :icon="['fas', 'circle-exclamation']" />
@@ -34,6 +36,7 @@
             @change="formValidateField('subject')"
             placeholder="Subject"
             type="text"
+            :required="true"
         />
         <span v-if="dataFormContact.subject.error">
           <font-awesome-icon :icon="['fas', 'circle-exclamation']" />
@@ -46,6 +49,7 @@
             @change="formValidateField('message')"
             placeholder="Message"
             rows="5"
+            :required="true"
         />
         <span v-if="dataFormContact.message.error">
           <font-awesome-icon :icon="['fas', 'circle-exclamation']" />
@@ -58,7 +62,6 @@
 </template>
 
 <script>
-// TODO : CSRF
 import { ref } from "vue";
 import { useNotificationsStore } from '@/store/notifications';
 import axios from '@/axios.config';
