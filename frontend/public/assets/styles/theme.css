@@ -3,7 +3,7 @@
 /* theme */
 
 :root {
-    --main-color: #FF4C29;
+    --main-color: #D95C4B;
     --bg-color: #082032;
     --snd-bg-color: #2C394B;
     --title-color: #465262;
@@ -20,6 +20,7 @@
     --overlay-color: rgba(0,0,0,0.5);
     --footer-color: black;
     --footer-hover-color: #661E10;
+    --error-color: red;
 }
 
 [theme="light"] {

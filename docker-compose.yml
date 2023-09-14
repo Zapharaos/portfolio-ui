@@ -31,6 +31,8 @@ services:
       context: ./frontend
       dockerfile: Dockerfile.dev
     restart: always
+    env_file:
+      .env
     ports:
       - "${VUEJS_PORT}:${VUEJS_PORT}"
     volumes:

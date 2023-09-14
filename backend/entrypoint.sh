@@ -14,7 +14,7 @@ echo "MongoDB started successfully."
 
 # Apply database migrations
 python manage.py makemigrations
-python manage.py migrate --fake-initial
+python manage.py migrate
 
 # Check if static files have already been collected
 if [ -z "$(ls -A $DJANGO_STATIC_ROOT)" ]
