@@ -1,9 +1,8 @@
 # build stage
 FROM node:lts-alpine as build-stage
+COPY . /vuejs/
 WORKDIR /vuejs
-COPY package*.json ./
 RUN npm install
-COPY . .
 
 # port
 ARG VUEJS_PORT
