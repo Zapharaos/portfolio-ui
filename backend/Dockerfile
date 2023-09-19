@@ -7,14 +7,13 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 # Set work directory
+COPY . /django
 WORKDIR /django
-COPY requirements.txt requirements.txt
 
 # Install dependencies
 RUN pip install -r requirements.txt
 RUN apt-get update && apt-get install -y netcat
 
 # Run the command to start the Django development server
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
+RUN chmod +x entrypoint.sh
+ENTRYPOINT ["./entrypoint.sh"]
