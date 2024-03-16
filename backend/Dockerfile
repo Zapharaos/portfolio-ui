@@ -1,20 +1,19 @@
 # Pull base image
-FROM python:3.10.2-slim-bullseye
+FROM python:latest
+
+# Set working directory
+WORKDIR /usr/src/app
+COPY . /usr/src/app/
 
 # Set environment variables
 ENV PIP_DISABLE_PIP_VERSION_CHECK 1
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-# Set work directory
-WORKDIR /django
-COPY requirements.txt requirements.txt
-COPY entrypoint.sh entrypoint.sh
-
 # Install dependencies
-RUN pip install -r requirements.txt
-RUN apt-get update && apt-get install -y netcat
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt --no-cache-dir
 
 # Run the command to start the Django development server
-RUN chmod +x entrypoint.sh
-ENTRYPOINT ["./entrypoint.sh"]
+RUN chmod +x /usr/src/app/entrypoint.sh
+ENTRYPOINT ["/usr/src/app/entrypoint.sh"]

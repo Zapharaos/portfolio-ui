@@ -24,3 +24,12 @@ pnpm-debug.log*
 *.sln
 *.sw?
 
+# Virtual env
+venv/
+.venv/
+
+# MySQL
+mysql_data
+dump.sql
+backup.sql
+
