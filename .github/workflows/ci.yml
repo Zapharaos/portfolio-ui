@@ -24,7 +24,7 @@ jobs:
           node-version: 20
           cache: 'npm'
       - run: npm install
-      - run: npm lint
-      - run: npm test:unit
-      - run: npm build
-      - run: npm test:e2e
+      - run: npm run lint
+      - run: npm run test:unit
+      - run: npm run build
+      - run: npm run test:e2e
