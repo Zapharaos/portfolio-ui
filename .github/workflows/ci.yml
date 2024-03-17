@@ -3,7 +3,6 @@ name: CI
 on:
   push:
     branches:
-      - 36-actions
       - main
       - develop
   pull_request:
