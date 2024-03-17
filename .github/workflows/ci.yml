@@ -21,10 +21,10 @@ jobs:
           version: 8
       - uses: actions/setup-node@v4
         with:
-          node-version: 18
-          cache: 'pnpm'
-      - run: pnpm install
-      - run: pnpm lint
-      - run: pnpm test:unit
-      - run: pnpm build
-      - run: pnpm test:e2e
+          node-version: 20
+          cache: 'npm'
+      - run: npm install
+      - run: npm lint
+      - run: npm test:unit
+      - run: npm build
+      - run: npm test:e2e
