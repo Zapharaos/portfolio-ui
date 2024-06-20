@@ -11,58 +11,28 @@
 </template>
 
 <script lang="ts">
-import {onMounted, ref} from 'vue';
-import {getUserData} from './services/user';
-import type {User} from "./types/models";
+import { onMounted, ref } from 'vue'
+import { getUserData } from './services/user'
+import type { User } from './types/models'
 
 export default {
-  name: 'User',
+  name: 'PortfolioUser',
   setup() {
-    const user = ref<User | null>(null);
-    const loading = ref(true);
-    const error = ref<string | null>(null);
+    const user = ref<User | null>(null)
+    const loading = ref(true)
+    const error = ref<string | null>(null)
 
     onMounted(async () => {
       try {
-        user.value = await getUserData();
-        console.log(user.value)
+        user.value = await getUserData()
       } catch (err) {
-        error.value = (err as Error).message;
+        error.value = (err as Error).message
       } finally {
-        loading.value = false;
+        loading.value = false
       }
-    });
+    })
 
-    return { user, loading, error };
-  },
-};
+    return { user, loading, error }
+  }
+}
 </script>
-
-<style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>
