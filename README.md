@@ -1,5 +1,7 @@
 # portfolio-ui
 
+[![codecov](https://codecov.io/gh/Zapharaos/portfolio-ui/graph/badge.svg?token=7UIR1GPUEJ)](https://codecov.io/gh/Zapharaos/portfolio-ui)
+
 Repository related to the UI my own portfolio.
 
 Link : www.matthieu-freitag.com/
