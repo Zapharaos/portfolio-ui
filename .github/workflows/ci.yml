@@ -36,7 +36,7 @@ jobs:
         run: npm run lint
 
       - name: Run unit tests with Vitest
-        run: npm run test:unit:cov
+        run: npm run test:unit
 
       - name: Upload coverage report to Codecov (optional)
         uses: codecov/codecov-action@v4.0.1
