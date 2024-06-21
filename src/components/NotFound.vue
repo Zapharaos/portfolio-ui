@@ -1,9 +1,11 @@
 <template>
   <div class="not-found">
     <h1>The page you are looking for does not exist.</h1>
-    <button>GO BACK HOME</button>
-    <p>Solve the puzzle or click on the above button to return to homepage!</p>
-    <p class="puzzle-score">{{ correctlyPlacedCount }}/{{ totalPieces }}</p>
+    <button @click="$router.push('/user')">GO BACK HOME</button>
+    <div class="puzzle-description">
+      <p>Solve the puzzle or click on the above button to return to homepage!</p>
+      <p class="puzzle-score">{{ correctlyPlacedCount }}/{{ totalPieces }}</p>
+    </div>
     <div
       class="puzzle-container"
       :style="puzzleContainerStyle"
@@ -94,6 +96,13 @@
 
           // Update counter after drop
           this.correctlyPlacedCount = this.puzzlePieces.filter((piece, i) => piece.correctIndex === i).length;
+
+          // Check for completion and redirect if completed
+          if (this.correctlyPlacedCount === this.totalPieces) {
+            setTimeout(() => {
+              this.$router.push('/user'); // Redirect to user route on completion after timeout
+            }, 750); // Timeout of 750ms before redirect
+          }
         }
       },
     },
@@ -107,17 +116,19 @@
 .not-found {
   text-align: center;
 }
+.puzzle-description {
+  margin: 7% auto;
+}
+.puzzle-score {
+  color: orange;
+}
 .puzzle-container {
   display: grid;
   gap: 1px;
   margin: 0 auto;
 }
-
 .puzzle-piece {
   box-sizing: border-box;
-}
-.puzzle-score {
-  color: orange;
 }
 </style>
 
