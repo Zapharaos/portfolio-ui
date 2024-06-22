@@ -1,14 +1,15 @@
-import { createMemoryHistory, createRouter } from 'vue-router'
+import { createWebHistory, createRouter } from 'vue-router'
 
 import UserProfile from '@/components/UserProfile.vue'
-import NotFound from '@/components/NotFound.vue'
 
 const routes = [
-  { path: '/user', component: UserProfile },
-  { path: '/:pathMatch(.*)', name: 'not-found', component: NotFound },  // Add the 404 route
+  { path: '/', name: 'Home', component: UserProfile },
+  { path: '/:pathMatch(.*)*', name: 'NotFound', component: () => import( '@/views/NotFound.vue') },
 ]
 
-export const router = createRouter({
-  history: createMemoryHistory(),
+const router = createRouter({
+  history: createWebHistory(),
   routes,
 })
+
+export default router

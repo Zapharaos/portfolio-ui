@@ -1,7 +1,7 @@
 <template>
   <div class="not-found">
     <h1>The page you are looking for does not exist.</h1>
-    <button @click="$router.push('/user')">GO BACK HOME</button>
+    <button @click="$router.push({ name: 'Home' })">GO BACK HOME</button>
     <div class="puzzle-description">
       <p>Solve the puzzle or click on the above button to return to homepage!</p>
       <p class="puzzle-score">{{ correctlyPlacedCount }}/{{ totalPieces }}</p>
@@ -100,7 +100,7 @@
           // Check for completion and redirect if completed
           if (this.correctlyPlacedCount === this.totalPieces) {
             setTimeout(() => {
-              this.$router.push('/user'); // Redirect to user route on completion after timeout
+              this.$router.push({ name: 'Home' }); // Redirect to user route on completion after timeout
             }, 750); // Timeout of 750ms before redirect
           }
         }
