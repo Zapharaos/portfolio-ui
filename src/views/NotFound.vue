@@ -1,7 +1,7 @@
 <template>
   <div class="not-found">
     <h1>The page you are looking for does not exist.</h1>
-    <button @click="$router.push({ name: 'Home' })">GO BACK HOME</button>
+    <button @click="redirect">GO BACK HOME</button>
     <div class="puzzle-description">
       <p>Solve the puzzle or click on the above button to return to homepage!</p>
       <p class="puzzle-score">{{ correctlyPlacedCount }}/{{ totalPieces }}</p>
@@ -29,18 +29,19 @@
   const gridWidth = 5; // Number of puzzle pieces per row
   const gridHeight = 3; // Number of puzzle rows
 
+  // Interface for a Puzzle Piece
   interface PuzzlePiece {
-    style: Record<string, string>;
-    correctIndex: number;
+    style: Record<string, string>; // Style properties for the puzzle piece
+    correctIndex: number; // The correct index of the piece in the puzzle
   }
 
   export default {
     data() {
       return {
-        puzzlePieces: [] as PuzzlePiece[],
-        dragIndex: null as number | null,
-        correctlyPlacedCount: 0,
-        totalPieces: gridWidth * gridHeight,
+        puzzlePieces: [] as PuzzlePiece[], // Array of puzzle pieces
+        dragIndex: null as number | null, // Index of the currently dragged piece
+        correctlyPlacedCount: 0, // Number of correctly placed pieces
+        totalPieces: gridWidth * gridHeight, // Total number of puzzle pieces
       };
     },
     computed: {
@@ -52,9 +53,19 @@
       },
     },
     methods: {
+      /**
+       Redirect to home page
+       */
+      redirect(){
+        this.$router.push({ name: 'Home' });
+      },
+      /**
+       * Creates an array of puzzle pieces with their styles and correct positions.
+       */
       createPuzzlePieces() {
         let pieces: PuzzlePiece[] = [];
 
+        // Since a square piece is required, calculate the smallest size based on the window dimensions.
         const pieceSize = Math.min(window.innerWidth / (gridWidth + 2), window.innerHeight / (gridHeight + 2));
 
         for (let row = 0; row < gridHeight; row++) {
@@ -76,12 +87,30 @@
         this.totalPieces = pieces.length;
         this.puzzlePieces = this.shuffleArray(pieces);
       },
+      /**
+       * Shuffles an array using the Fisher-Yates shuffle algorithm.
+       * @param array The array to shuffle.
+       * @returns The shuffled array.
+       */
       shuffleArray(array: PuzzlePiece[]) {
-        return array.sort(() => Math.random() - 0.5);
+        do {
+          array.sort(() => Math.random() - 0.5);
+        } while (array.every((piece, index) => piece.correctIndex === index));
+        return array;
       },
+      /**
+       * Captures the index of the piece being dragged.
+       * @param index The index of the piece in the puzzlePieces array.
+       */
       dragStart(index: number) {
         this.dragIndex = index;
       },
+      /**
+       * Handles dropping a piece onto another piece.
+       * Swaps the positions of the dragged and dropped pieces,
+       * updates the correctly placed count, and checks for completion.
+       * @param index The index of the drop target piece.
+       */
       drop(index: number) {
         if (this.dragIndex !== null) {
           const draggedPiece = this.puzzlePieces[this.dragIndex];
@@ -99,9 +128,7 @@
 
           // Check for completion and redirect if completed
           if (this.correctlyPlacedCount === this.totalPieces) {
-            setTimeout(() => {
-              this.$router.push({ name: 'Home' }); // Redirect to user route on completion after timeout
-            }, 750); // Timeout of 750ms before redirect
+            setTimeout(() => this.redirect(), 750); // Timeout of 750ms before redirect
           }
         }
       },
