@@ -1,29 +1,10 @@
 @import 'base.css';
 
 #app {
-  margin: 0 auto;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
-  align-items: center;
-}
-
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
-}
-
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
-}
-
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
+  flex-direction: column;
+  place-items: center;
+  place-content: center;
+  margin: 0 auto;
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="not-found">
+  <section class="not-found">
     <h1>The page you are looking for does not exist.</h1>
     <button @click="redirect">GO BACK HOME</button>
     <div class="puzzle-description">
@@ -21,7 +21,7 @@
         @drop="drop(index)"
       ></div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script lang="ts">
