@@ -17,3 +17,10 @@
 .animate-1s-blink {
   animation: blink 1s steps(2, start) infinite;
 }
+
+.grey-container {
+  background-color: var(--color-text);
+}
+.grey-text {
+  color: var(--color-text);
+}
