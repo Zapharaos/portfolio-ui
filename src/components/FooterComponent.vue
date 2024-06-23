@@ -23,9 +23,9 @@ export default {
               '</svg>',
           }
         ],
-        currentTimeHours: '',
-        currentTimeMinutes: '',
-        currentTimeSeconds: '',
+        currentTimeHours: '00',
+        currentTimeMinutes: '00',
+        currentTimeSeconds: '00',
         hasCopiedEmail: false,
       }
   },
@@ -59,14 +59,9 @@ export default {
 
 <template>
   <footer>
-    <h1>Interested in working together?</h1>
-    <div class="contact">
-      <div class="email-container grey-text" @click="copyEmail">
-        <span v-if="!hasCopiedEmail">Click to copy</span>
-        <span v-else-if="hasCopiedEmail" class="copied">Copied!</span>
-        <p class="email">{{ email }}</p>
-        <div class="email-underline grey-container"></div>
-      </div>
+    <div>
+      <h1>Interested in working together?</h1>
+      <h2 class="grey-text">Let's build something impactful!</h2>
     </div>
     <div class="location">
       <p>{{ location }}</p>
@@ -78,6 +73,14 @@ export default {
         <p>{{ currentTimeSeconds }}</p>
       </div>
     </div>
+    <div class="contact">
+      <div class="email-container grey-text" @click="copyEmail">
+        <span v-if="!hasCopiedEmail">Click to copy</span>
+        <span v-else-if="hasCopiedEmail" class="copied">Copied!</span>
+        <p class="email">{{ email }}</p>
+        <div class="email-underline grey-container"></div>
+      </div>
+    </div>
     <ul class="links">
       <li>
         <a href="mailto:{{ email }}">
@@ -87,7 +90,7 @@ export default {
       </li>
       <li>
         <a href="#" target="_blank">
-          <p>See resume</p>
+          <p>My resume</p>
           <svg fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 50 50" width="50px" height="50px"><path d="M 30.398438 2 L 7 2 L 7 48 L 43 48 L 43 14.601563 Z M 15 28 L 31 28 L 31 30 L 15 30 Z M 35 36 L 15 36 L 15 34 L 35 34 Z M 35 24 L 15 24 L 15 22 L 35 22 Z M 30 15 L 30 4.398438 L 40.601563 15 Z"/></svg>
         </a>
       </li>
@@ -124,6 +127,10 @@ footer {
 h1 {
   font-size: 4.5rem;
 }
+h2 {
+  font-size: 3rem;
+  line-height: 100%;
+}
 
 .email-container {
   position: relative;
@@ -137,7 +144,7 @@ h1 {
   text-transform: uppercase;
 }
 .email {
-  font-size: 1.75rem;
+  font-size: 2rem;
   text-decoration: none;
   line-height: 110%;
 }
@@ -222,7 +229,58 @@ h1 {
   font-size: 14px;
   font-weight: 200;
 }
-@media (max-width: 769px) {
+
+@media (max-width: 1200px) {
+  h1 {
+    font-size: 3.5rem;
+    line-height: 120%;
+  }
+}
+
+@media (max-width: 991px) {
+  footer {
+    padding: 20px 2rem;
+  }
+  h1 {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  footer {
+    row-gap: 2rem;
+    text-align: center;
+  }
+  h1 {
+    line-height: 100%;
+  }
+  h2 {
+    font-size: 2rem;
+  }
+  h1+h2 {
+    margin-top: 1.5rem;
+  }
+  .location {
+    font-size: 1.125rem;
+  }
+  .location div {
+    justify-content: center;
+  }
+  .email {
+    font-size: 1.25rem;
+  }
+  .email-container span {
+    font-size: 10px;
+  }
+  .links {
+    flex-direction: column;
+  }
+  .links p {
+    font-size: 1rem;
+  }
+  .links a:hover {
+    border-radius: 0;
+  }
   .copyright {
     flex-direction: column;
   }
