@@ -8,3 +8,12 @@
   place-content: center;
   margin: 0 auto;
 }
+
+@keyframes blink {
+  to {
+    visibility: hidden
+  }
+}
+.animate-1s-blink {
+  animation: blink 1s steps(2, start) infinite;
+}
