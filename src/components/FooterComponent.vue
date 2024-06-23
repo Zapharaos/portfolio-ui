@@ -98,6 +98,7 @@ export default {
         <a :href="social.url" target="_blank">
           <div>
             <p>{{ social.name }}</p>
+            <span v-if="social.pseudo" class="grey-text">@{{ social.pseudo }}</span>
           </div>
           <span v-html="social.svg" class="social-icon"></span>
         </a>
@@ -174,17 +175,13 @@ h1 {
 .links {
   display: flex;
   flex-direction: row;
+  column-gap: 5%;
   justify-content: space-between;
   list-style: none;
   padding: 0;
 }
 .links li {
   flex: 1; /* Makes each link item take up equal space */
-  border-top: solid 1px white;
-  padding: 0.5rem 0;
-}
-.links li:not(:last-child) {
-  margin-right: 5%;
 }
 .links li a {
   display: flex;
@@ -193,10 +190,26 @@ h1 {
   align-items: center;
   text-decoration: none;
   color: white;
+  padding: 0.5rem 0;
+  transition: all 0.3s ease-in-out;
+  border: solid 1px transparent;
+  border-top-color: white;
+}
+.links a:hover {
+  padding: 0.5rem;
+  background-color: gray;
+  border-color: gray;
+  border-radius: 0.5rem;
+}
+.links p {
+  font-size: 1.2rem;
+}
+.links .social-icon {
+  display: flex;
 }
 .links svg, .links :deep(svg) {
-  width: 1rem;
-  height: 1rem;
+  width: 2rem;
+  height: 2rem;
 }
 
 .copyright {
