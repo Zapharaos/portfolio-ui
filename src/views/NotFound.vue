@@ -1,5 +1,5 @@
 <template>
-  <div class="not-found">
+  <section class="not-found">
     <h1>The page you are looking for does not exist.</h1>
     <button @click="redirect">GO BACK HOME</button>
     <div class="puzzle-description">
@@ -21,13 +21,16 @@
         @drop="drop(index)"
       ></div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script lang="ts">
 
   const gridWidth = 5; // Number of puzzle pieces per row
   const gridHeight = 3; // Number of puzzle rows
+
+  // Since a square piece is required, calculate the smallest size based on the window dimensions.
+  const pieceSize = Math.min(window.innerWidth / (gridWidth + 2), window.innerHeight / (gridHeight + 2));
 
   // Interface for a Puzzle Piece
   interface PuzzlePiece {
@@ -47,8 +50,8 @@
     computed: {
       puzzleContainerStyle() {
         return {
-          gridTemplateColumns: `repeat(${gridWidth}, 1fr)`,
-          gridTemplateRows: `repeat(${gridHeight}, 1fr)`,
+          gridTemplateColumns: `repeat(${gridWidth}, ${pieceSize}px)`,
+          gridTemplateRows: `repeat(${gridHeight}, ${pieceSize}px)`,
         };
       },
     },
@@ -64,9 +67,6 @@
        */
       createPuzzlePieces() {
         let pieces: PuzzlePiece[] = [];
-
-        // Since a square piece is required, calculate the smallest size based on the window dimensions.
-        const pieceSize = Math.min(window.innerWidth / (gridWidth + 2), window.innerHeight / (gridHeight + 2));
 
         for (let row = 0; row < gridHeight; row++) {
           for (let col = 0; col < gridWidth; col++) {
@@ -151,6 +151,7 @@
 }
 .puzzle-container {
   display: grid;
+  justify-content: center;
   gap: 1px;
   margin: 0 auto;
 }
