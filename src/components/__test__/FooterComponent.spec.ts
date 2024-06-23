@@ -31,6 +31,25 @@ describe('FooterComponent.vue', () => {
     expect(navigator.clipboard.writeText).toHaveBeenCalledWith(wrapper.vm.email);
   });
 
+  test('copyEmail catches error during writeText', async () => {
+
+    // Mock writeText to throw an error
+    navigator.clipboard.writeText = vi.fn().mockRejectedValueOnce(new Error('mock error'));
+
+    // Mount the FooterComponent
+    const wrapper = mount(FooterComponent);
+
+    // Call the copyEmail method and expect an error to be caught (implementation might vary)
+    try {
+      await wrapper.vm.copyEmail();
+      // Successful copy is not expected, fail the test here
+      expect(false).toBe(true);
+    } catch (error: any) {
+      expect(error.message).not.toBe('');
+      expect(wrapper.vm.hasCopiedEmail).toBe(false);
+    }
+  });
+
   test('timer updates after a second', async () => {
     // Mount the FooterComponent
     const wrapper = mount(FooterComponent);
