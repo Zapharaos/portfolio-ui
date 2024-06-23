@@ -1,6 +1,6 @@
 import { createWebHistory, createRouter } from 'vue-router'
 
-import UserProfile from '@/components/UserProfile.vue'
+import UserProfile from '@/views/HomeView.vue'
 
 const routes = [
   { path: '/', name: 'Home', component: UserProfile },
