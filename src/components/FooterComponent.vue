@@ -275,6 +275,9 @@ h2 {
   .links {
     flex-direction: column;
   }
+  .links div {
+    text-align: left;
+  }
   .links p {
     font-size: 1rem;
   }

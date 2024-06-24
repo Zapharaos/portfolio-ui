@@ -1,10 +1,12 @@
 <script lang="ts">
+let lastScrollTop = 0;
 export default {
   mounted() {
     const headerLinks = document.querySelectorAll('header a');
     headerLinks.forEach(link => {
       link.addEventListener('click', this.scrollToSection);
     });
+    window.addEventListener('scroll', this.handleScroll);
   },
   methods: {
     scrollToSection(event: any) {
@@ -14,6 +16,20 @@ export default {
       if (section) {
         section.scrollIntoView({ behavior: 'smooth' });
       }
+    },
+    handleScroll() {
+      const header = document.querySelector('header');
+      const st = document.documentElement.scrollTop; // Credits: "https://github.com/qeremy/so/blob/master/so.dom.js#L426"
+      if (!header) {
+        return;
+      } else if (st > lastScrollTop) {
+        header.style.opacity = "0";
+        header.style.visibility = "hidden";
+      } else if (st < lastScrollTop) {
+        header.style.opacity = "1";
+        header.style.visibility = "visible";
+      } // else was horizontal scroll
+      lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
     }
   },
 };
@@ -22,7 +38,7 @@ export default {
 <template>
   <header id="header">
     <nav>
-      <a data-target="header">
+      <a class="logo">
         <img src="https://matthieu-freitag.com/img/nav-logo.png" alt="Logo"/>
       </a>
       <ul>
@@ -48,14 +64,17 @@ export default {
 
 <style scoped>
 header {
-  margin-bottom: 5svh;
+  margin-bottom: 10svh;
+  color: white;
+  font-size: 1.5rem;
+  width: 100%;
+  transition: all .9s cubic-bezier(.215,.61,.355,1);
 }
 nav {
-  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 20px;
+  padding: 1rem 3rem;
   position: fixed;
   z-index: 9999;
   top: 0;
@@ -63,8 +82,12 @@ nav {
   left: 0;
   right: 0;
 }
-img {
-  width: 25px;
+.logo {
+  display: flex;
+  align-items: center;
+}
+.logo img {
+  height: 1.5rem;
 }
 ul {
   list-style-type: none;
@@ -74,6 +97,37 @@ ul {
   padding: 0;
 }
 li:not(:first-child) {
-  margin-left: 10px;
+  margin-left: 2rem;
+}
+li a {
+  transition: opacity .9s cubic-bezier(.215,.61,.355,1);
+}
+li a:hover {
+  opacity: 0.4;
+}
+a:hover {
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  header {
+    font-size: 1.25rem;
+  }
+  nav {
+    padding: 1rem 2rem;
+  }
+  li:not(:first-child) {
+    margin-left: 1.5rem;
+  }
+}
+@media (max-width: 576px) {
+  header {
+    font-size: 1.125rem;
+  }
+  nav {
+    padding: 1rem 1.5rem;
+  }
+  li:not(:first-child) {
+    margin-left: 1.25rem;
+  }
 }
 </style>
