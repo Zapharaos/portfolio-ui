@@ -58,7 +58,7 @@ export default {
 </script>
 
 <template>
-  <footer>
+  <footer id="footer">
     <div>
       <h1>Interested in working together?</h1>
       <h2 class="grey-text">Let's build something impactful!</h2>
