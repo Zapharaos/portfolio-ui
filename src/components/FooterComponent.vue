@@ -49,14 +49,13 @@ export default {
      * Copy the owner's email to the user's clipboard.
      */
     async copyEmail() {
-      navigator.clipboard.writeText(this.email)
-        .then(() => {
-          this.hasCopiedEmail = true;
-          setTimeout(() => (this.hasCopiedEmail = false), 1000); // Change state for 1 second
-        })
-        .catch((error) => {
-          console.error('Failed to copy email:', error);
-        });
+      try {
+        await navigator.clipboard.writeText(this.email);
+        this.hasCopiedEmail = true;
+        setTimeout(() => (this.hasCopiedEmail = false), 1000); // Reset after 1s
+      } catch (error) {
+        console.error('Failed to copy email:', error);
+      }
     },
   }
 };
