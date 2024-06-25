@@ -9,33 +9,22 @@ export default {
   mounted() {
     // Add event listener for scroll events
     window.addEventListener('scroll', this.handleScroll);
-
-    // Add click event listeners to all header links
-    document.querySelectorAll('header a').forEach(link => {
-      link.addEventListener('click', this.scrollToSection);
-    });
   },
   methods: {
     /**
      * Prevents default link behavior and scrolls to the target section smoothly.
      * Also closes the responsive menu if it's open.
      *
-     * @param event The click event object triggered on a link.
+     * @param id The element's id to head to.
      */
-    scrollToSection(event: any) {
-      // Prevent default link behavior
-      event.preventDefault();
-
+    scrollToSection(id: string) {
       // Close responsive menu if it's open
       if (this.showResponsiveMenu) {
         this.toggleResponsiveMenu();
       }
 
-      // Get the target section ID from the data attribute
-      const targetId = event.target.dataset.target;
-
       // Scroll to the target section smoothly
-      document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' });
+      document.getElementById(id as string)?.scrollIntoView({ behavior: 'smooth' });
     },
     /**
      * Handles scroll events to show/hide the header based on scroll direction.
@@ -89,7 +78,7 @@ export default {
 </script>
 
 <template>
-  <header id="header">
+  <header>
     <nav>
       <a class="logo">
         <img src="https://matthieu-freitag.com/img/nav-logo.png" alt="Logo"/>
@@ -100,17 +89,17 @@ export default {
       </button>
       <ul>
         <li>
-          <a data-target="work">
+          <a class="nav-item-link" @click="scrollToSection('work')">
             Work
           </a>
         </li>
         <li>
-          <a data-target="about">
+          <a class="nav-item-link" @click="scrollToSection('about')">
             About
           </a>
         </li>
         <li>
-          <a data-target="footer">
+          <a class="nav-item-link" @click="scrollToSection('footer')">
             Contact
           </a>
         </li>
