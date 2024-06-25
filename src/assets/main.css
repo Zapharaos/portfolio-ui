@@ -24,3 +24,7 @@
 .grey-text {
   color: var(--color-text);
 }
+
+body.responsive-menu {
+  overflow: hidden;
+}

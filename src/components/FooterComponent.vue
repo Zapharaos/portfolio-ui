@@ -23,10 +23,10 @@ export default {
               '</svg>',
           }
         ],
-        currentTimeHours: '00',
-        currentTimeMinutes: '00',
-        currentTimeSeconds: '00',
-        hasCopiedEmail: false,
+        currentTimeHours: '00', // Tracks the current time : hours
+        currentTimeMinutes: '00', // Tracks the current time : minutes
+        currentTimeSeconds: '00', // Tracks the current time : seconds
+        hasCopiedEmail: false, // Flag to indicate if the email has been copied
       }
   },
   setup() {
@@ -35,15 +35,19 @@ export default {
     };
   },
   mounted() {
+    // Starts an interval to update the current time every second.
     setInterval(() => {
-      const now = new Date().toLocaleTimeString(this.locale, { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-      const timeParts = now.split(':');
-      this.currentTimeHours = timeParts[0];
-      this.currentTimeMinutes = timeParts[1];
-      this.currentTimeSeconds = timeParts[2].split(' ')[0]; // Split to remove AM/PM if present
+      const now = new Date().toLocaleTimeString(this.locale, { hour: '2-digit', minute: '2-digit', second: '2-digit' }).split(':');
+      // Update time with leading zeros for formatting
+      this.currentTimeHours = now[0];
+      this.currentTimeMinutes = now[1];
+      this.currentTimeSeconds = now[2].split(' ')[0]; // Split to remove AM/PM if present
     }, 1000); // Update every second
   },
   methods: {
+    /**
+     * Copy the owner's email to the user's clipboard.
+     */
     async copyEmail() {
       try {
         await navigator.clipboard.writeText(this.email);
@@ -58,7 +62,7 @@ export default {
 </script>
 
 <template>
-  <footer>
+  <footer id="footer">
     <div>
       <h1>Interested in working together?</h1>
       <h2 class="grey-text">Let's build something impactful!</h2>
@@ -158,7 +162,7 @@ h2 {
 }
 
 .copied {
-  animation: copied-animation 1s ease-in-out; /* Add animation */
+  animation: copied-animation 1s ease-in-out;
 }
 @keyframes copied-animation {
   from {
@@ -188,7 +192,7 @@ h2 {
   padding: 0;
 }
 .links li {
-  flex: 1; /* Makes each link item take up equal space */
+  flex: 1;
 }
 .links li a {
   display: flex;
@@ -274,6 +278,9 @@ h2 {
   }
   .links {
     flex-direction: column;
+  }
+  .links div {
+    text-align: left;
   }
   .links p {
     font-size: 1rem;
