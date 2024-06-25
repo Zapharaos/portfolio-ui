@@ -25,7 +25,7 @@ describe('NotFound.vue', () => {
     // Assert that the mocked router push function was called
     // once and with the expected arguments for navigating to Home
     expect(mockRouter.push).toHaveBeenCalledTimes(1)
-    expect(mockRouter.push).toHaveBeenCalledWith({ name: 'Home' });
+    expect(mockRouter.push).toHaveBeenCalledWith({ name: 'HomeView' });
   });
 
   test('createPuzzlePieces creates pieces with same background size and varying positions', () => {
@@ -150,6 +150,6 @@ describe('NotFound.vue', () => {
     // Assert that the mocked router push function was called once
     // and with the expected arguments for navigating to Home
     expect(mockRouter.push).toHaveBeenCalledTimes(1)
-    expect(mockRouter.push).toHaveBeenCalledWith({ name: 'Home' });
+    expect(mockRouter.push).toHaveBeenCalledWith({ name: 'HomeView' });
   });
 });

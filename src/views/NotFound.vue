@@ -60,7 +60,7 @@
        Redirect to home page
        */
       redirect(){
-        this.$router.push({ name: 'Home' });
+        this.$router.push({ name: 'HomeView' });
       },
       /**
        * Creates an array of puzzle pieces with their styles and correct positions.
