@@ -24,18 +24,15 @@ const tagline = "I'm a <span style='color: orange;font-weight: bold'>software en
 section {
   min-height: 100svh;
   width: 100%;
-  padding: 10%;
+  padding: 10% 10% 0;
   background: rgb(0,0,0);
   background: linear-gradient(150deg, rgba(0,0,0,1) 0%, rgba(72,72,72,1) 100%);
   clip-path: inset(0);
-
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   gap: 5rem;
-
-  padding-bottom: 0;
 }
 
 .hero-body {
@@ -87,11 +84,9 @@ svg {
 img {
   z-index: 0;
   filter: drop-shadow(0px 0px 20px orange);
-  border-radius: 50%;
   width: auto;
   height: max-content;
   align-self: flex-end;
-
   border-radius: 0;
   min-width: 30rem;
 }
