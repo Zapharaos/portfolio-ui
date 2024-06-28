@@ -110,11 +110,11 @@ export default {
 
 <style scoped>
 header {
-  margin-bottom: 10svh;
   color: white;
   font-size: 1.5rem;
   width: 100%;
   transition: all .9s cubic-bezier(.215,.61,.355,1);
+  background-color: transparent;
 }
 nav {
   display: flex;
