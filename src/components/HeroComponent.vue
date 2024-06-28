@@ -16,7 +16,7 @@ const tagline = "I'm a <span style='color: orange;font-weight: bold'>software en
         </svg>
       </a>
     </div>
-    <img src="/src/assets/resize.png" alt="Logo" />
+    <img src="" alt="Logo" />
   </section>
 </template>
 
