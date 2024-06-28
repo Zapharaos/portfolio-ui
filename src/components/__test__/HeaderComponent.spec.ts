@@ -1,4 +1,4 @@
-import {expect, describe, test, vi, beforeEach, afterEach} from 'vitest';
+import {expect, describe, test, vi, afterEach} from 'vitest';
 import {enableAutoUnmount, mount} from '@vue/test-utils';
 import HeaderComponent from '@/components/HeaderComponent.vue';
 
