@@ -1,11 +1,13 @@
 <script lang="ts">
 import HeroComponent from "@/components/HeroComponent.vue";
+import ProjectsComponent from "@/components/ProjectsComponent.vue";
+
 import { onMounted, ref } from 'vue'
 import { getUserData } from '@/services/user'
 import type { User } from '@/types/models'
 
 export default {
-  components: {HeroComponent},
+  components: { ProjectsComponent, HeroComponent},
   setup() {
     const user = ref<User | null>(null)
     const loading = ref(true)
@@ -28,6 +30,7 @@ export default {
 
 <template>
   <HeroComponent/>
+  <ProjectsComponent/>
   <section>
     <h1>User Profile</h1>
     <div v-if="loading">Loading...</div>
