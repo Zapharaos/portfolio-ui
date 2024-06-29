@@ -28,3 +28,7 @@
 body.responsive-menu {
   overflow: hidden;
 }
+
+.clickable:hover {
+  cursor: pointer;
+}
