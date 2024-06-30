@@ -11,7 +11,7 @@ const props = defineProps<{
 <template>
   <section id="work">
     <h2>Work</h2>
-    <ul class="">
+    <ul class="grid-container">
       <WorkItem v-for="work in props.works" :key="work.title" :work="work" />
     </ul>
   </section>
@@ -23,11 +23,7 @@ section {
   flex-direction: column;
   gap: 3rem
 }
-ul {
-  max-width: 1500px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(1, minmax(0, calc(1000px + 2rem)));
-  justify-content: center;
+.grid-container {
+  grid-template-columns: 1fr;
 }
 </style>
