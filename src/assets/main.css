@@ -105,6 +105,7 @@ ul {
 
 .grid-container {
   margin: 0 auto;
+  width: 100%;
   max-width: 1024px;
   gap: 2rem;
   display: grid;

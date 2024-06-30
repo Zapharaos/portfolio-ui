@@ -58,7 +58,18 @@ const works: Work[] = [
     location: "Noisy-le-Grand, France",
     url: "",
     logo: ""
-  }
+  },
+  {
+    title: "Test",
+    company: "Group",
+    period: "2018-2022",
+    order: 1,
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sit amet auctor neque. Integer ac nibh dignissim, dapibus ligula non, porta sem. Duis at consequat nisl, at bibendum sapien. Curabitur finibus turpis nibh, in hendrerit ligula consectetur eget. Integer iaculis augue vitae orci congue efficitur. Sed blandit lorem sed lacus.",
+    technologies: ['Reacty'],
+    location: "Remote",
+    url: "",
+    logo: ""
+  },
 ]
 
 // Function to fetch user data and handle errors

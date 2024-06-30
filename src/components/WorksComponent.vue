@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import WorkItem from '@/components/WorkItem.vue'
 import type { Work } from '@/types/models'
 
@@ -6,13 +7,21 @@ import type { Work } from '@/types/models'
 const props = defineProps<{
   works: Work[]
 }>()
+
+// TODO: sort by order
+
+let activeIndex = ref(0);
+
+function activateItem(itemOrder: number) {
+  activeIndex.value = itemOrder
+}
 </script>
 
 <template>
   <section id="work">
     <h2>Work</h2>
     <ul class="grid-container">
-      <WorkItem v-for="work in props.works" :key="work.title" :work="work" />
+      <WorkItem v-for="work in props.works" :key="work.title" :work="work" :isActive="activeIndex === work.order" @click="activateItem(work.order)"/>
     </ul>
   </section>
 </template>
