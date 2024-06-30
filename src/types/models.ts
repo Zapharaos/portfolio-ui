@@ -15,6 +15,7 @@ export interface User {
   theme_dark?: Theme
   socials: Social[]
   lists: List[]
+  projects: Project[]
 }
 
 export interface Social {
@@ -39,4 +40,13 @@ export interface ListItem {
   period?: string
   description?: string
   hidden: boolean
+}
+
+export interface Project {
+  title: string
+  description: string
+  url: string
+  image: string
+  order: number
+  technologies: string[]
 }
