@@ -68,7 +68,7 @@ ul {
 .projects {
   margin-top: 3rem;
   display: grid;
-  grid-template-columns: repeat(2, minmax(auto, 750px));
+  grid-template-columns: repeat(2, minmax(0, 750px));
   justify-content: center;
   gap: 2rem;
 }
