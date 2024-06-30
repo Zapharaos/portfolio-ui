@@ -2,14 +2,29 @@
 import ProjectCard from '@/components/ProjectCard.vue'
 import { computed } from 'vue'
 import type { Project } from '@/types/models'
+
+// Define the props for the component
 const props = defineProps<{
   projects: Project[] | undefined
 }>()
 
+/**
+  * This computed property returns a sorted copy of the 'projects' prop.
+  * Sorts the projects based on their 'order' property in ascending order.
+  * If 'props.projects' is undefined, it returns an empty array.
+  *
+  * @returns {Project[]} A sorted copy of the projects or an empty array.
+*/
 const sortedProjects = computed(() => {
   return props.projects?.slice().sort((a: Project, b: Project) => a.order - b.order) || [];
 });
 
+/**
+ * This computed property splits the sorted projects into even and odd groups.
+ * Uses the index of the project in the sorted list to determine even/odd position.
+ *
+ * @returns {{ even: Project[], odd: Project[] }} An object containing even and odd project groups.
+ */
 const splitProjects = computed(() => {
   return {
     even: sortedProjects.value.filter((_: Project, index: any) => index % 2 === 0),

@@ -7,7 +7,7 @@ const props = defineProps<{
 
 <template>
   <li>
-    <a :href="props.project.url" target="_blank" class="project-card {{ props.project.url ? 'clickable' : '' }}">
+    <a :href="props.project.url" target="_blank" class="project-card"  :class="{ 'clickable': props.project.url }">
       <h3>
         {{ props.project.title }}
         <span v-if="props.project.url">

@@ -8,16 +8,11 @@ describe('ProjectsComponent.vue', () => {
 
   test('should render the same number of project cards in responsive mode as the sum of list1 and list2', () => {
     // Mount the ProjectsComponent
-    const project1: Project = {
-      title: "", order: 0, description: "", url: "", image: "", technologies: []
-    }
-    const project2: Project = {
-      title: "", order: 0, description: "", url: "", image: "", technologies: []
-    }
-    const project3: Project = {
-      title: "", order: 0, description: "", url: "", image: "", technologies: []
-    }
-    const projects: Project[] = [project1, project2, project3]
+    const projects: Project[] = [
+      { title: "", order: 0, description: "", url: "", image: "", technologies: [] },
+      { title: "", order: 0, description: "", url: "", image: "", technologies: [] },
+      { title: "", order: 0, description: "", url: "", image: "", technologies: [] },
+    ];
     const wrapper = mount(ProjectsComponent, {
       propsData: {
         projects: projects
