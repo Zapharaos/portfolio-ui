@@ -1,5 +1,8 @@
 <script setup lang="ts">
-const props = defineProps(['project'])
+import type { Project } from '@/types/models'
+const props = defineProps<{
+  project: Project
+}>()
 </script>
 
 <template>
