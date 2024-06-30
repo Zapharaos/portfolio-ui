@@ -7,9 +7,9 @@ import { getUserData } from '@/services/user'
 import type { Project, User } from '@/types/models'
 
 // Define reactive variables for component state
-const user = ref<User | null>(null)
-const loading = ref(true)
-const error = ref<string | null>(null)
+let user = ref<User | null>(null)
+let loading = ref(true)
+let error = ref<string | null>(null)
 
 // TODO : Temp values until API returns it
 const projects: Project[] = [
@@ -60,6 +60,11 @@ async function fetchData() {
 
 // Call fetchData on component mount
 onMounted(fetchData)
+
+defineExpose({
+  loading,
+  error
+})
 </script>
 
 <template>
