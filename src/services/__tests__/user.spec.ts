@@ -22,7 +22,8 @@ describe('User Service', () => {
         theme_light: undefined,
         theme_dark: undefined,
         socials: [],
-        lists: []
+        lists: [],
+        projects: []
       };
 
       // Set up the mock implementation for apiClient.get
