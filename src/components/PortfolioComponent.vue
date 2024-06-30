@@ -4,7 +4,8 @@ import ProjectsComponent from "@/components/ProjectsComponent.vue";
 
 import { onMounted, ref } from 'vue'
 import { getUserData } from '@/services/user'
-import type { Project, User } from '@/types/models'
+import type { Project, User, Work } from '@/types/models'
+import WorksComponent from '@/components/WorksComponent.vue'
 
 // Define reactive variables for component state
 let user = ref<User | null>(null)
@@ -46,6 +47,19 @@ const projects: Project[] = [
     order: 4,
   },
 ];
+const works: Work[] = [
+  {
+    title: "Work",
+    company: "Company",
+    period: "Since 2022",
+    order: 0,
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sit amet auctor neque. Integer ac nibh dignissim, dapibus ligula non, porta sem. Duis at consequat nisl, at bibendum sapien. Curabitur finibus turpis nibh, in hendrerit ligula consectetur eget. Integer iaculis augue vitae orci congue efficitur. Sed blandit lorem sed lacus.",
+    technologies: ['HTML', 'CSS', 'Javascript'],
+    location: "Noisy-le-Grand, France",
+    url: "",
+    logo: ""
+  }
+]
 
 // Function to fetch user data and handle errors
 async function fetchData() {
@@ -69,6 +83,7 @@ defineExpose({
 
 <template>
   <HeroComponent/>
+  <WorksComponent :works="works"/>
   <ProjectsComponent :projects="projects"/>
   <section>
     <h1>User Profile</h1>

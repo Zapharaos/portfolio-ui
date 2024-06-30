@@ -51,24 +51,10 @@ const splitProjects = computed(() => {
 </template>
 
 <style scoped>
-section {
-  padding: 5rem;
-  width: 100%;
-}
-h2 {
-  font-size: 4rem;
-  color: white;
-  text-align: center;
-}
-ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
 .projects {
   margin-top: 3rem;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 750px));
+  grid-template-columns: repeat(2, minmax(0, 500px));
   justify-content: center;
   gap: 2rem;
 }
@@ -82,12 +68,6 @@ ul {
 }
 
 @media (max-width: 768px) {
-  section {
-    padding: 2rem;
-  }
-  h2 {
-    text-align: center;
-  }
   .projects {
     grid-template-columns: 1fr;
   }
@@ -100,9 +80,6 @@ ul {
 }
 
 @media (max-width: 400px) {
-  section {
-    padding: 1rem;
-  }
   .projects {
     gap: 1rem;
   }
