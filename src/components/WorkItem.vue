@@ -7,7 +7,6 @@ const props = defineProps<{
   work: Work
   isActive: boolean
 }>()
-
 </script>
 
 <template>
