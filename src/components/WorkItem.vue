@@ -7,11 +7,28 @@ const props = defineProps<{
   work: Work
   isActive: boolean
 }>()
+
+// Define emits options for custom events
+const emit = defineEmits(['activate', 'collapse'])
+
+/**
+ * Handles the click event on the collapse button.
+ *
+ * @param event - The click event object.
+ * @emits collapse - Emits the 'collapse' event if the content is currently expanded.
+ */
+function collapse(event: Event): void {
+  if (props.isActive) {
+    event.preventDefault()
+    event.stopPropagation()
+    emit('collapse');
+  }
+}
 </script>
 
 <template>
   <li class="item" :class="{ 'active': isActive }">
-    <div class="item-header">
+    <div class="item-header" @click="$emit('activate')">
       <div class="item-title">
         <h3>
           {{ work.title }}
@@ -21,6 +38,11 @@ const props = defineProps<{
           <span v-html="work.logo"/>
         </p>
       </div>
+      <button @click="collapse">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
     </div>
     <div class="item-content">
       <div class="wrapper">
@@ -84,6 +106,16 @@ const props = defineProps<{
   font-size: 1.25rem;
   font-weight: 500;
 }
+.item-header button {
+  color: orange;
+  background-color: transparent;
+  border: none;
+  border-radius: 5px;
+  transition: all 0.25s linear;
+}
+.item-header button:hover {
+  cursor: pointer;
+}
 
 /* Content */
 
@@ -115,7 +147,10 @@ const props = defineProps<{
 /* Animations */
 
 .item {
-  transition: gap 0.5s ease;
+  transition: gap 0.5s ease, padding 0.5s ease;
+}
+.item-header svg {
+  transition: transform .5s ease;
 }
 .item-content {
   transition: grid-template-rows 0.5s ease, padding 0.5s ease;
@@ -137,6 +172,12 @@ const props = defineProps<{
 .item:not(.active):hover {
   cursor: pointer;
 }
+.active .item-header button:hover {
+  background-color: #5D3F11;
+}
+.active .item-header svg {
+  transform: rotate(calc(360deg + 180deg));
+}
 .item.active .item-content {
   grid-template-rows: 1fr;
 }
@@ -145,7 +186,7 @@ const props = defineProps<{
 }
 .item.active .animate-opacity {
   opacity: 1;
-  transition: opacity 2s ease;
+  transition: opacity 1.25s ease-in;
 }
 
 /* Responsive */

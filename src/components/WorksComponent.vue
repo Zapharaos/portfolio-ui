@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import WorkItem from '@/components/WorkItem.vue'
 import type { Work } from '@/types/models'
 
@@ -35,10 +35,17 @@ const isActive = (work: Work): boolean => {
 /**
  * Updates the 'activeIndex' state to the provided item order, effectively making it the active work item.
  *
- * @param {number} itemOrder The order of the work item to activate.
+ * @param {Work} work The work item to activate.
  */
-function activateItem(itemOrder: number) {
-  activeIndex.value = itemOrder
+function activate(work: Work) {
+  activeIndex.value = work.order
+}
+
+/**
+ * Resets the 'activeIndex' state to -1, effectively collapsing all work items.
+ */
+const collapse = () => {
+  activeIndex.value = -1
 }
 </script>
 
@@ -46,7 +53,14 @@ function activateItem(itemOrder: number) {
   <section id="work">
     <h2>Work</h2>
     <ul class="grid-container">
-      <WorkItem v-for="work in sortedWorks" :key="work.title" :work="work" :isActive="isActive(work)" @click="activateItem(work.order)"/>
+      <WorkItem
+        v-for="work in sortedWorks"
+        :key="work.title"
+        :work="work"
+        :isActive="isActive(work)"
+        @activate="activate(work)"
+        @collapse="collapse"
+      />
     </ul>
   </section>
 </template>
