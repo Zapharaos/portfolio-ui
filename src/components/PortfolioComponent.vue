@@ -56,7 +56,8 @@ const works: Work[] = [
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sit amet auctor neque. Integer ac nibh dignissim, dapibus ligula non, porta sem. Duis at consequat nisl, at bibendum sapien. Curabitur finibus turpis nibh, in hendrerit ligula consectetur eget. Integer iaculis augue vitae orci congue efficitur. Sed blandit lorem sed lacus.",
     technologies: ['Java 8/11', 'Spring', 'Jakarta Server Pages'],
     location: "Noisy-le-Grand, France",
-    url: "cgi.com",
+    url: "https://www.cgi.com/en",
+    shortUrl: "cgi.com",
     logo: ""
   },
   {

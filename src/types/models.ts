@@ -60,6 +60,7 @@ export interface Work {
   technologies: Technologies
   location: string
   url: string
+  shortUrl?: string
   logo: string
 }
 
