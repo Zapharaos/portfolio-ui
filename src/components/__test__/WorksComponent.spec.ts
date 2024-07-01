@@ -30,7 +30,7 @@ describe('WorksComponent.vue', () => {
 
   });
 
-  test('correctly identifies active work', async () => {
+  test('correctly active/collapse', async () => {
     // Mount the WorksComponent
     const wrapper = mount(WorksComponent, {
       propsData: {
@@ -41,14 +41,23 @@ describe('WorksComponent.vue', () => {
     // Getting items back
     const items = wrapper.findAllComponents(WorkItem);
     const firstItem = items.at(0);
+    const secondItem = items.at(1);
 
     // Assert that first item is active
     expect(firstItem?.props('isActive')).toBe(true);
 
-    // Trigger click to activate the second item
-    await items?.at(1)?.trigger('click');
+    // Trigger click to collapse the first item
+    await firstItem?.find('button').trigger('click')
 
     // Assert that second item is now active
+    expect(firstItem?.emitted('collapse'))
+    expect(items.at(1)?.props('isActive')).toBe(false);
+
+    // Trigger click to activate the second item
+    await secondItem?.find('.item-header').trigger('click')
+
+    // Assert that second item is now active
+    expect(secondItem?.emitted('activate'))
     expect(items.at(1)?.props('isActive')).toBe(true);
   });
 });
