@@ -49,14 +49,14 @@ const projects: Project[] = [
 ];
 const works: Work[] = [
   {
-    title: "Work",
-    company: "Company",
+    title: "Software developer",
+    company: "Mind7 Consulting",
     period: "Since 2022",
     order: 0,
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sit amet auctor neque. Integer ac nibh dignissim, dapibus ligula non, porta sem. Duis at consequat nisl, at bibendum sapien. Curabitur finibus turpis nibh, in hendrerit ligula consectetur eget. Integer iaculis augue vitae orci congue efficitur. Sed blandit lorem sed lacus.",
-    technologies: ['HTML', 'CSS', 'Javascript'],
+    technologies: ['Java 8/11', 'Spring', 'Jakarta Server Pages'],
     location: "Noisy-le-Grand, France",
-    url: "",
+    url: "cgi.com",
     logo: ""
   },
   {
@@ -65,7 +65,7 @@ const works: Work[] = [
     period: "2018-2022",
     order: 1,
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sit amet auctor neque. Integer ac nibh dignissim, dapibus ligula non, porta sem. Duis at consequat nisl, at bibendum sapien. Curabitur finibus turpis nibh, in hendrerit ligula consectetur eget. Integer iaculis augue vitae orci congue efficitur. Sed blandit lorem sed lacus.",
-    technologies: ['Reacty'],
+    technologies: [],
     location: "Remote",
     url: "",
     logo: ""
