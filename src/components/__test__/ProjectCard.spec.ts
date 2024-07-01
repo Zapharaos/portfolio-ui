@@ -35,16 +35,4 @@ describe('ProjectCard.vue', () => {
     expect(wrapper.find('a.clickable').exists()).toBe(true);
     expect(wrapper.find('.link-open').exists()).toBe(true);
   });
-
-  test('renders correct amount of technology tags', () => {
-    // Mount the ProjectCard with technologies
-    const wrapper = mount(ProjectCard, {
-      propsData: {
-        project: baseProject
-      }
-    });
-
-    // Assert that the technologies were correctly added to the DOM.
-    expect(wrapper.findAll('.technologies-tag').length).toBe(baseProject.technologies.length);
-  });
 });

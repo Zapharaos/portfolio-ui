@@ -1,10 +1,10 @@
 import { expect, describe, test } from 'vitest';
 import { mount } from '@vue/test-utils';
-import ProjectsComponent from '@/components/ProjectsComponent.vue'
-import type { Project } from '@/types/models'
+import ProjectContainer from '@/components/ProjectContainer.vue'
 import ProjectCard from '@/components/ProjectCard.vue'
+import type { Project } from '@/types/models'
 
-describe('ProjectsComponent.vue', () => {
+describe('ProjectContainer.vue', () => {
 
   test('should render the same number of project cards in responsive mode as the sum of list1 and list2', () => {
     // Mount the ProjectsComponent
@@ -13,7 +13,7 @@ describe('ProjectsComponent.vue', () => {
       { title: "", order: 0, description: "", url: "", image: "", technologies: [] },
       { title: "", order: 0, description: "", url: "", image: "", technologies: [] },
     ];
-    const wrapper = mount(ProjectsComponent, {
+    const wrapper = mount(ProjectContainer, {
       propsData: {
         projects: projects
       }

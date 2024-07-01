@@ -36,7 +36,7 @@ const splitProjects = computed(() => {
 <template>
   <section id="projects">
     <h2>Projects</h2>
-    <div class="projects">
+    <div class="grid-container">
       <ul class="projects-list responsive">
         <ProjectCard v-for="project in sortedProjects" :key="project.title" :project="project" />
       </ul>
@@ -51,26 +51,9 @@ const splitProjects = computed(() => {
 </template>
 
 <style scoped>
-section {
-  padding: 5rem;
-  width: 100%;
-}
-h2 {
-  font-size: 4rem;
-  color: white;
-  text-align: center;
-}
-ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.projects {
+.grid-container {
   margin-top: 3rem;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 750px));
-  justify-content: center;
-  gap: 2rem;
+  grid-template-columns: repeat(2, 1fr);
 }
 .projects-list{
   display: flex;
@@ -82,13 +65,7 @@ ul {
 }
 
 @media (max-width: 768px) {
-  section {
-    padding: 2rem;
-  }
-  h2 {
-    text-align: center;
-  }
-  .projects {
+  .grid-container {
     grid-template-columns: 1fr;
   }
   .projects-list.responsive {
@@ -100,12 +77,6 @@ ul {
 }
 
 @media (max-width: 400px) {
-  section {
-    padding: 1rem;
-  }
-  .projects {
-    gap: 1rem;
-  }
   .projects-list {
     gap: 1rem;
   }
