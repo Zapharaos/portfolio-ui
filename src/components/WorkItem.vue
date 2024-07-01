@@ -132,7 +132,7 @@ function collapse(event: Event): void {
 .infos {
   align-items: center;
 }
-.infos p, a {
+.infos p, .infos a {
   display: flex;
 }
 .infos svg {
@@ -208,7 +208,7 @@ function collapse(event: Event): void {
     gap: 0.5rem;
     flex-direction: column;
   }
-  .infos p {
+  .infos p, .infos a {
     width: 100%;
   }
 }
