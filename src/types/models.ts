@@ -48,5 +48,20 @@ export interface Project {
   url: string
   image: string
   order: number
-  technologies: string[]
+  technologies: Technologies
 }
+
+export interface Experience {
+  title: string
+  company: string
+  period: string
+  order: number
+  description: string
+  technologies: Technologies
+  location: string
+  url: string
+  shortUrl?: string
+  logo: string
+}
+
+export type Technologies = string[]
