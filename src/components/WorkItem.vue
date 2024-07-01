@@ -47,7 +47,7 @@ const props = defineProps<{
             </p>
           </div>
           <p>{{ work.description }}</p>
-          <TechnologiesList :technologies="work.technologies" />
+          <TechnologiesList :technologies="work.technologies" class="animate-opacity"/>
         </div>
       </div>
     </div>
@@ -55,13 +55,19 @@ const props = defineProps<{
 </template>
 
 <style scoped>
+/* Containers */
+
 .item, .item-content .inner {
   display: flex;
   flex-direction: column;
+  gap: 0;
 }
 .item {
   padding: 0.5rem 2rem;
 }
+
+/* Header */
+
 .item-header {
   width: 100%;
   display: flex;
@@ -78,10 +84,12 @@ const props = defineProps<{
   font-size: 1.25rem;
   font-weight: 500;
 }
+
+/* Content */
+
 .item-content {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows 0.5s ease;
 }
 .item-content * {
   overflow: hidden;
@@ -104,11 +112,24 @@ const props = defineProps<{
   margin-right: 10px;
 }
 
+/* Animations */
+
+.item {
+  transition: gap 0.5s ease;
+}
+.item-content {
+  transition: grid-template-rows 0.5s ease, padding 0.5s ease;
+}
+.item .inner {
+  transition: gap 0.5s ease;
+}
+.animate-opacity {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
 /* Active related style */
 
-.item.active .inner {
-  gap: 1rem;
-}
 .item.active {
   gap: 1rem;
   padding: 1rem 2rem;
@@ -118,6 +139,13 @@ const props = defineProps<{
 }
 .item.active .item-content {
   grid-template-rows: 1fr;
+}
+.item.active .inner {
+  gap: 1rem;
+}
+.item.active .animate-opacity {
+  opacity: 1;
+  transition: opacity 2s ease;
 }
 
 /* Responsive */
