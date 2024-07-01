@@ -1,0 +1,78 @@
+<script setup lang="ts">
+import { computed, ref } from 'vue'
+import type { Experience } from '@/types/models'
+import ExperienceCard from '@/components/ExperienceCard.vue'
+
+// Define the props for the component
+const props = defineProps<{
+  title: string,
+  experiences: Experience[]
+}>()
+
+// Reactive state variable to store the currently active experience index
+let activeIndex = ref(0);
+
+/**
+ * This computed property returns a sorted copy of the 'experiences' prop.
+ * Sorts the experiences based on their 'order' property in ascending order.
+ * If 'props.experiences' is undefined, it returns an empty array.
+ *
+ * @returns {Experience[]} A sorted copy of the experiences or an empty array.
+ */
+const sortedExperiences = computed(() => {
+  return props.experiences?.slice().sort((a: Experience, b: Experience) => a.order - b.order) || [];
+});
+
+/**
+ * Checks if the provided experience item is currently active based on the 'activeIndex' state.
+ *
+ * @param {Experience} experience The experience item to check for active state.
+ * @returns {boolean} True if the experience item is active, false otherwise.
+ */
+const isActive = (experience: Experience): boolean => {
+  return activeIndex.value === experience.order
+};
+
+/**
+ * Updates the 'activeIndex' state to the provided item order, effectively making it the active experience item.
+ *
+ * @param {Experience} experience The experience item to activate.
+ */
+function activate(experience: Experience) {
+  activeIndex.value = experience.order
+}
+
+/**
+ * Resets the 'activeIndex' state to -1, effectively collapsing all experience items.
+ */
+const collapse = () => {
+  activeIndex.value = -1
+}
+</script>
+
+<template>
+  <section id="{{ title }}">
+    <h2>{{ title }}</h2>
+    <ul class="grid-container">
+      <ExperienceCard
+        v-for="experience in sortedExperiences"
+        :key="experience.title"
+        :experience="experience"
+        :isActive="isActive(experience)"
+        @activate="activate(experience)"
+        @collapse="collapse"
+      />
+    </ul>
+  </section>
+</template>
+
+<style scoped>
+section {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem
+}
+.grid-container {
+  grid-template-columns: 1fr;
+}
+</style>

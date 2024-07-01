@@ -1,20 +1,20 @@
 import { expect, describe, test } from 'vitest';
 import { mount } from '@vue/test-utils'
-import WorkItem from '@/components/WorkItem.vue'
-import type { Work } from '@/types/models'
+import ExperienceCard from '@/components/ExperienceCard.vue'
+import type { Experience } from '@/types/models'
 
-describe('WorkItem.vue', () => {
+describe('ExperienceCard.vue', () => {
 
   // Define a reusable items for easier test data setup
-  const baseWork: Work = {
+  const baseExperience: Experience = {
     title: "", company: "", period: "", order: 0, description: "", technologies: [], location: "", url: "", logo: ""
   };
 
   test('does not apply active class element when not active', () => {
-    // Mount the WorkItem as not active
-    const wrapper = mount(WorkItem, {
+    // Mount the ExperienceCard as not active
+    const wrapper = mount(ExperienceCard, {
       propsData: {
-        work: baseWork,
+        experience: baseExperience,
         isActive: false
       }
     });
@@ -24,10 +24,10 @@ describe('WorkItem.vue', () => {
   });
 
   test('apply active class element when active', () => {
-    // Mount the WorkItem as active
-    const wrapper = mount(WorkItem, {
+    // Mount the ExperienceCard as active
+    const wrapper = mount(ExperienceCard, {
       propsData: {
-        work: baseWork,
+        experience: baseExperience,
         isActive: true
       }
     });

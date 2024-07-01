@@ -51,7 +51,7 @@ export interface Project {
   technologies: Technologies
 }
 
-export interface Work {
+export interface Experience {
   title: string
   company: string
   period: string
