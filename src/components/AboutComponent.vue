@@ -9,7 +9,7 @@ const props = defineProps<{
   <section id="about">
     <h2>About</h2>
     <div class="grid-container">
-      <img src="/src/assets/file.png" alt="about image"/>
+      <img src="https://fiverr-res.cloudinary.com/images/t_smartwm/t_main1,q_auto,f_auto,q_auto,f_auto/v1/attachments/delivery/asset/3fe7179168b3c54c5dd0df0242cc768e-1715191693/29743EA8-4F38-43BB-9330-2392FB07F086/draw-you-in-the-jujutsu-kaisen-manga-artstyle.png" alt="about image"/>
       <p>
         {{ text }}
       </p>
