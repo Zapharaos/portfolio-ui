@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import HeroComponent from "@/components/HeroComponent.vue";
+import AboutComponent from "@/components/AboutComponent.vue";
 import ExperienceContainer from '@/components/ExperienceContainer.vue'
 import ProjectContainer from "@/components/ProjectContainer.vue";
 
@@ -13,6 +14,7 @@ let loading = ref(true)
 let error = ref<string | null>(null)
 
 // TODO : Temp values until API returns it
+const aboutme = "I'm a French/German software engineer driven by a love for creation and a desire to craft meaningful solutions that solve real-world challenges. Whether it's building innovative tools or developing user-centric systems, I actively participate in the product to directly contribute to something impactful. Outside of work, I enjoy sports and exploring Asian culture, especially Korean and Japanese, whose emphasis on innovation and design aligns perfectly with my development philosophy."
 const projects: Project[] = [
   {
     title: "To-Do List App",
@@ -120,6 +122,9 @@ defineExpose({
 
 <template>
   <HeroComponent/>
+  <AboutComponent
+      :text="aboutme"
+  />
   <ExperienceContainer
     title="Work"
     :experiences="experiences"

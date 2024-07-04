@@ -51,7 +51,7 @@ const collapse = () => {
 </script>
 
 <template>
-  <section id="{{ title }}">
+  <section :id="title">
     <h2>{{ title }}</h2>
     <ul class="grid-container">
       <ExperienceCard
