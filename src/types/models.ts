@@ -5,9 +5,14 @@ export interface Theme {
 
 export interface User {
   id: number
+  name: string
+  email: string
+  location: string
+  locale: string
+  footer: Footer
+
   hero: string
   description: string
-  email: string
   logo: string
   photo?: string
   curriculum?: string
@@ -20,7 +25,9 @@ export interface User {
 
 export interface Social {
   name: string
+  pseudo: string
   url: string
+  svg: Svg
   hidden: boolean
 }
 
@@ -65,3 +72,17 @@ export interface Experience {
 }
 
 export type Technologies = string[]
+
+export interface Svg {
+  name: string
+  file: string
+}
+
+export interface Footer {
+  title: string
+  subTitle: string
+  showLocation: boolean
+  showSocials: boolean
+  showEmail: boolean
+  showResume: boolean
+}
