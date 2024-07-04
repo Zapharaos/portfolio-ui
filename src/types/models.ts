@@ -9,11 +9,10 @@ export interface User {
   email: string
   location: string
   locale: string
+  hero: Hero
   about: About
   footer: Footer
 
-  hero: string
-  description: string
   logo: string
   photo?: string
   curriculum?: string
@@ -77,6 +76,13 @@ export type Technologies = string[]
 export interface Image {
   name: string
   file: string
+}
+
+export interface Hero {
+  title: string
+  tagline: string
+  callToActionContent: string
+  backgroundImage: Image
 }
 
 export interface About {

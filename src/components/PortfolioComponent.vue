@@ -101,7 +101,9 @@ const education: Experience[] = [
 
 <template>
   <HeaderComponent/>
-  <HeroComponent/>
+  <HeroComponent
+      :hero="user.hero"
+  />
   <AboutComponent
       :about="user.about"
   />
