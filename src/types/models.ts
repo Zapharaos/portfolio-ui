@@ -9,6 +9,7 @@ export interface User {
   email: string
   location: string
   locale: string
+  about: About
   footer: Footer
 
   hero: string
@@ -27,7 +28,7 @@ export interface Social {
   name: string
   pseudo: string
   url: string
-  svg: Svg
+  image: Image
   hidden: boolean
 }
 
@@ -73,9 +74,15 @@ export interface Experience {
 
 export type Technologies = string[]
 
-export interface Svg {
+export interface Image {
   name: string
   file: string
+}
+
+export interface About {
+  image: Image
+  imageResponsive: Image
+  description: string
 }
 
 export interface Footer {

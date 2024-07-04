@@ -104,7 +104,7 @@ const education: Experience[] = [
   <HeaderComponent/>
   <HeroComponent/>
   <AboutComponent
-      :text="aboutme"
+      :about="user.about"
   />
   <ExperienceContainer
       title="Work"

@@ -97,7 +97,7 @@ async function copyEmail() {
             <p>{{ social.name }}</p>
             <span v-if="social.pseudo" class="grey-text">@{{ social.pseudo }}</span>
           </div>
-          <img :src="social.svg.file" :alt="social.svg.name" class="social-icon"/>
+          <img :src="social.image.file" :alt="social.image.name" class="social-icon"/>
         </a>
       </li>
     </ul>
