@@ -7,9 +7,9 @@ const props = defineProps<{
 
 <template>
   <section id="about">
-    <h2>About me</h2>
+    <h2>About</h2>
     <div class="grid-container">
-      <img class="manga" src="/src/assets/file.png" alt="manga"/>
+      <img src="/src/assets/file.png" alt="about image"/>
       <p>
         {{ text }}
       </p>
@@ -27,7 +27,7 @@ section {
   grid-template-columns: 1fr 2fr;
   gap: 5rem;
 }
-.manga {
+img {
   border: solid 0.25rem white;
   border-radius: 1rem;
   width: inherit;
@@ -37,5 +37,17 @@ p {
   font-size: 1.125rem;
   text-align: justify;
   align-self: center;
+}
+@media (max-width: 992px) {
+  .grid-container {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 2rem;
+    align-items: center;
+  }
+  img {
+    width: auto;
+    max-width: 350px;
+  }
 }
 </style>
