@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref, onMounted, reactive } from 'vue';
 import type {User} from "@/types/models";
+import {onMounted, ref} from "vue";
 
 // Define the props for the component
 const props = defineProps<{
@@ -25,16 +25,18 @@ const hasCopiedEmail = ref(false);
 const year = ref(new Date().getFullYear());
 
 onMounted(() => {
-  // Starts an interval to update the current time every second.
-  setInterval(() => {
-    const now = new Date().toLocaleTimeString(props.user.locale, { hour: '2-digit', minute: '2-digit', second: '2-digit' }).split(':');
-    // Update time with leading zeros for formatting
-    currentTime.value = {
-      hours: now[0],
-      minutes: now[1],
-      seconds: now[2].split(' ')[0], // Split to remove AM/PM if present
-    };
-  }, 1000); // Update every second
+  if (props.user.locale) {
+    // Starts an interval to update the current time every second.
+    setInterval(() => {
+      const now = new Date().toLocaleTimeString(props.user.locale, { hour: '2-digit', minute: '2-digit', second: '2-digit' }).split(':');
+      // Update time with leading zeros for formatting
+      currentTime.value = {
+        hours: now[0],
+        minutes: now[1],
+        seconds: now[2].split(' ')[0], // Split to remove AM/PM if present
+      };
+    }, 1000); // Update every second
+  }
 });
 
 /**

@@ -13,7 +13,6 @@ const props = defineProps<{
 }>()
 
 // TODO : Temp values until API returns it
-const aboutme = "I'm a French/German software engineer driven by a love for creation and a desire to craft meaningful solutions that solve real-world challenges. Whether it's building innovative tools or developing user-centric systems, I actively participate in the product to directly contribute to something impactful. Outside of work, I enjoy sports and exploring Asian culture, especially Korean and Japanese, whose emphasis on innovation and design aligns perfectly with my development philosophy."
 const projects: Project[] = [
   {
     title: "To-Do List App",
@@ -110,12 +109,16 @@ const education: Experience[] = [
       title="Work"
       :experiences="experiences"
   />
-  <ProjectContainer :projects="projects"/>
+  <ProjectContainer
+      :projects="projects"
+  />
   <ExperienceContainer
       title="Education"
       :experiences="education"
   />
-  <FooterComponent :user="user"/>
+  <FooterComponent
+      :user="user"
+  />
 </template>
 
 <style scoped>
