@@ -3,6 +3,8 @@ export interface User {
   email: string
   location: string
   locale: string
+  logo: FileType
+  resume: FileType
   socials: Social[]
   hero: Hero
   about: About
@@ -10,7 +12,7 @@ export interface User {
   footer: Footer
 }
 
-export interface Image {
+export interface FileType {
   name: string
   file: string
 }
@@ -19,7 +21,7 @@ export interface Social {
   name: string
   pseudo: string
   url: string
-  image: Image
+  image: FileType
   index: number
   hidden: boolean
 }
@@ -32,7 +34,7 @@ export interface Project {
   title: string
   index: number
   description: string
-  image: Image
+  image: FileType
   url: string
   technologies: Technology[]
   hidden: boolean
@@ -69,12 +71,12 @@ export interface Hero {
   title: string
   tagline: string
   callToActionContent: string
-  backgroundImage: Image
+  backgroundImage: FileType
 }
 
 export interface About {
-  image: Image
-  imageResponsive: Image
+  image: FileType
+  imageResponsive: FileType
   description: string
 }
 

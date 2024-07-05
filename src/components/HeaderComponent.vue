@@ -1,87 +1,91 @@
-<script lang="ts">
-export default {
-  data() {
-    return {
-      lastScrollTop: 0, // Tracks the last scroll position for header visibility
-      showResponsiveMenu: false, // Flag to indicate if responsive menu is open
-    }
-  },
-  mounted() {
-    // Add event listener for scroll events
-    window.addEventListener('scroll', this.handleScroll);
-  },
-  methods: {
-    /**
-     * Prevents default link behavior and scrolls to the target section smoothly.
-     * Also closes the responsive menu if it's open.
-     *
-     * @param id The element's id to head to.
-     */
-    scrollToSection(id: string) {
-      // Close responsive menu if it's open
-      if (this.showResponsiveMenu) {
-        this.toggleResponsiveMenu();
-      }
+<script setup lang="ts">
+import {onMounted, ref} from "vue";
+import type {FileType} from "@/types/models";
 
-      // Scroll to the target section smoothly
-      document.getElementById(id as string)?.scrollIntoView({ behavior: 'smooth' });
-    },
-    /**
-     * Handles scroll events to show/hide the header based on scroll direction.
-     * Ignores scrolls while the responsive menu is active.
-     */
-    handleScroll() {
-      // Ignore scrolls when responsive menu is active
-      if(this.showResponsiveMenu) return;
+// Define the props for the component
+const props = defineProps<{
+  logo: FileType
+}>()
 
-      // Get the current scroll position (credits: https://github.com/qeremy/so/blob/master/so.dom.js#L426)
-      const st = document.documentElement.scrollTop;
+const lastScrollTop = ref(0); // Tracks the last scroll position for header visibility
+const showResponsiveMenu = ref(false); // Flag to indicate if responsive menu is open
 
-      const header = document.querySelector('header');
-      // Check if there's a header element
-      if (!header) {
-        return;
-      }
+onMounted(() => {
+  // Add event listener for scroll events
+  window.addEventListener('scroll', handleScroll);
+})
 
-      // Hide header on scroll down, show on scroll up
-      if (st > this.lastScrollTop) {
-        header.style.opacity = "0";
-        header.style.visibility = "hidden";
-      } else if (st < this.lastScrollTop) {
-        header.style.opacity = "1";
-        header.style.visibility = "visible";
-      }
+/**
+ * Prevents default link behavior and scrolls to the target section smoothly.
+ * Also closes the responsive menu if it's open.
+ *
+ * @param id The element's id to head to.
+ */
+const scrollToSection = (id: string) => {
+  // Close responsive menu if it's open
+  if (showResponsiveMenu.value) {
+    toggleResponsiveMenu();
+  }
 
-      // Reset lastScrollTop for mobile or negative scrolling scenarios
-      this.lastScrollTop = st <= 0 ? 0 : st;
-    },
-    /**
-     * Toggles the visibility of the responsive menu and applies necessary style changes.
-     */
-    toggleResponsiveMenu() {
-      // Toggle the responsive menu state
-      this.showResponsiveMenu = !this.showResponsiveMenu;
+  // Scroll to the target section smoothly
+  document.getElementById(id as string)?.scrollIntoView({ behavior: 'smooth' });
+}
 
-      // Toggle display class on menu SVGs
-      document.querySelectorAll('.responsive-menu-svg').forEach(svg => {
-        svg.classList.toggle('display');
-      });
+/**
+ * Handles scroll events to show/hide the header based on scroll direction.
+ * Ignores scrolls while the responsive menu is active.
+ */
+const handleScroll = () => {
+  // Ignore scrolls when responsive menu is active
+  if(showResponsiveMenu.value) return;
 
-      // Toggle display class for the menu list
-      document.querySelector('ul')?.classList.toggle('display');
+  // Get the current scroll position (credits: https://github.com/qeremy/so/blob/master/so.dom.js#L426)
+  const st = document.documentElement.scrollTop;
 
-      // Toggle body class to disable/enable scroll while menu is open
-      document.body.classList.toggle('responsive-menu');
-    },
-  },
-};
+  const header = document.querySelector('header');
+  // Check if there's a header element
+  if (!header) {
+    return;
+  }
+
+  // Hide header on scroll down, show on scroll up
+  if (st > lastScrollTop.value) {
+    header.style.opacity = "0";
+    header.style.visibility = "hidden";
+  } else if (st < lastScrollTop.value) {
+    header.style.opacity = "1";
+    header.style.visibility = "visible";
+  }
+
+  // Reset lastScrollTop for mobile or negative scrolling scenarios
+  lastScrollTop.value = st <= 0 ? 0 : st;
+}
+
+/**
+ * Toggles the visibility of the responsive menu and applies necessary style changes.
+ */
+const toggleResponsiveMenu = () => {
+  // Toggle the responsive menu state
+  showResponsiveMenu.value = !showResponsiveMenu.value;
+
+  // Toggle display class on menu SVGs
+  document.querySelectorAll('.responsive-menu-svg').forEach(svg => {
+    svg.classList.toggle('display');
+  });
+
+  // Toggle display class for the menu list
+  document.querySelector('ul')?.classList.toggle('display');
+
+  // Toggle body class to disable/enable scroll while menu is open
+  document.body.classList.toggle('responsive-menu');
+}
 </script>
 
 <template>
   <header>
     <nav>
       <a class="logo">
-        <img src="https://matthieu-freitag.com/img/nav-logo.png" alt="Logo"/>
+        <img :src="logo.file" :alt="logo.name" class="social-icon"/>
       </a>
       <button aria-label="menu" class="responsive-menu-btn" @click="toggleResponsiveMenu">
         <svg class="responsive-menu-svg display" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="50px" height="50px"><path d="M 3 9 A 1.0001 1.0001 0 1 0 3 11 L 47 11 A 1.0001 1.0001 0 1 0 47 9 L 3 9 z M 3 24 A 1.0001 1.0001 0 1 0 3 26 L 47 26 A 1.0001 1.0001 0 1 0 47 24 L 3 24 z M 3 39 A 1.0001 1.0001 0 1 0 3 41 L 47 41 A 1.0001 1.0001 0 1 0 47 39 L 3 39 z"/></svg>

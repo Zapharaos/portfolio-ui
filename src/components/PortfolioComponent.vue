@@ -3,8 +3,8 @@ import HeaderComponent from "@/components/HeaderComponent.vue";
 import FooterComponent from "@/components/FooterComponent.vue";
 import HeroComponent from "@/components/HeroComponent.vue";
 import AboutComponent from "@/components/AboutComponent.vue";
-import type {User} from "@/types/models";
 import WorkComponent from "@/components/WorkComponent.vue";
+import type {User} from "@/types/models";
 
 // Define the props for the component
 const props = defineProps<{
@@ -13,7 +13,9 @@ const props = defineProps<{
 </script>
 
 <template>
-  <HeaderComponent/>
+  <HeaderComponent
+    :logo="user.logo"
+  />
   <HeroComponent
       :hero="user.hero"
   />
