@@ -13,24 +13,13 @@ const props = defineProps<{
 let activeIndex = ref(0);
 
 /**
- * This computed property returns a sorted copy of the 'experiences' prop.
- * Sorts the experiences based on their 'order' property in ascending order.
- * If 'props.experiences' is undefined, it returns an empty array.
- *
- * @returns {Experience[]} A sorted copy of the experiences or an empty array.
- */
-const sortedExperiences = computed(() => {
-  return props.experiences?.slice().sort((a: Experience, b: Experience) => a.order - b.order) || [];
-});
-
-/**
  * Checks if the provided experience item is currently active based on the 'activeIndex' state.
  *
  * @param {Experience} experience The experience item to check for active state.
  * @returns {boolean} True if the experience item is active, false otherwise.
  */
 const isActive = (experience: Experience): boolean => {
-  return activeIndex.value === experience.order
+  return activeIndex.value === experience.index
 };
 
 /**
@@ -39,7 +28,7 @@ const isActive = (experience: Experience): boolean => {
  * @param {Experience} experience The experience item to activate.
  */
 function activate(experience: Experience) {
-  activeIndex.value = experience.order
+  activeIndex.value = experience.index
 }
 
 /**
@@ -55,7 +44,7 @@ const collapse = () => {
     <h2>{{ title }}</h2>
     <ul class="grid-container">
       <ExperienceCard
-        v-for="experience in sortedExperiences"
+        v-for="experience in experiences"
         :key="experience.title"
         :experience="experience"
         :isActive="isActive(experience)"

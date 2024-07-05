@@ -9,17 +9,6 @@ const props = defineProps<{
 }>()
 
 /**
-  * This computed property returns a sorted copy of the 'projects' prop.
-  * Sorts the projects based on their 'order' property in ascending order.
-  * If 'props.projects' is undefined, it returns an empty array.
-  *
-  * @returns {Project[]} A sorted copy of the projects or an empty array.
-*/
-const sortedProjects = computed(() => {
-  return props.projects?.slice().sort((a: Project, b: Project) => a.index - b.index) || [];
-});
-
-/**
  * This computed property splits the sorted projects into even and odd groups.
  * Uses the index of the project in the sorted list to determine even/odd position.
  *
@@ -27,8 +16,8 @@ const sortedProjects = computed(() => {
  */
 const splitProjects = computed(() => {
   return {
-    even: sortedProjects.value.filter((_: Project, index: any) => index % 2 === 0),
-    odd: sortedProjects.value.filter((_: Project, index: any) => index % 2 !== 0),
+    even: props.projects?.filter((_: Project, index: any) => index % 2 === 0),
+    odd: props.projects?.filter((_: Project, index: any) => index % 2 !== 0),
   };
 });
 </script>
@@ -38,7 +27,7 @@ const splitProjects = computed(() => {
     <h2>Projects</h2>
     <div class="grid-container">
       <ul class="projects-list responsive">
-        <ProjectCard v-for="project in sortedProjects" :key="project.title" :project="project" />
+        <ProjectCard v-for="project in projects" :key="project.title" :project="project" />
       </ul>
       <ul class="projects-list">
         <ProjectCard v-for="project in splitProjects.even" :key="project.title" :project="project" />
