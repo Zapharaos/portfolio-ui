@@ -1,8 +1,3 @@
-export interface Theme {
-  name: string
-  todo: string
-}
-
 export interface User {
   id: number
   name: string
@@ -12,15 +7,13 @@ export interface User {
   hero: Hero
   about: About
   footer: Footer
-
-  logo: string
-  photo?: string
-  curriculum?: string
-  theme_light?: Theme
-  theme_dark?: Theme
   socials: Social[]
-  lists: List[]
   projects: Project[]
+}
+
+export interface Image {
+  name: string
+  file: string
 }
 
 export interface Social {
@@ -29,53 +22,6 @@ export interface Social {
   url: string
   image: Image
   hidden: boolean
-}
-
-export interface List {
-  name: string
-  index: number
-  hidden: boolean
-  items: ListItem[]
-}
-
-export interface ListItem {
-  index: number
-  organisation: string
-  name: string
-  menuName?: string
-  address?: string
-  period?: string
-  description?: string
-  hidden: boolean
-}
-
-export interface Project {
-  title: string
-  description: string
-  url: string
-  image: string
-  order: number
-  technologies: Technologies
-}
-
-export interface Experience {
-  title: string
-  company: string
-  period: string
-  order: number
-  description: string
-  technologies: Technologies
-  location: string
-  url: string
-  shortUrl?: string
-  logo: string
-}
-
-export type Technologies = string[]
-
-export interface Image {
-  name: string
-  file: string
 }
 
 export interface Hero {
@@ -98,4 +44,36 @@ export interface Footer {
   showSocials: boolean
   showEmail: boolean
   showResume: boolean
+}
+
+export interface Technology {
+  name: string
+}
+
+export interface Project {
+  title: string
+  index: number
+  description: string
+  image: Image
+  url: string
+  technologies: Technology[]
+  hidden: boolean
+}
+
+export interface Experience {
+  title: string
+  organisation: string
+  period: string
+  location: string
+  url: string
+  urlShort: string
+  description: string
+  technologies: Technology[]
+  index: number
+  hidden: boolean
+}
+
+export interface Theme {
+  name: string
+  todo: string
 }

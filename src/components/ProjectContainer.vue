@@ -16,7 +16,7 @@ const props = defineProps<{
   * @returns {Project[]} A sorted copy of the projects or an empty array.
 */
 const sortedProjects = computed(() => {
-  return props.projects?.slice().sort((a: Project, b: Project) => a.order - b.order) || [];
+  return props.projects?.slice().sort((a: Project, b: Project) => a.index - b.index) || [];
 });
 
 /**

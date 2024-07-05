@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import type { Technologies } from '@/types/models'
+import type {Technology} from '@/types/models'
 
 // Define the props for the component
 const props = defineProps<{
-  technologies: Technologies
+  technologies: Technology[]
 }>()
 </script>
 
 <template>
   <ul class="technologies">
-    <li v-for="technology in props.technologies" :key="technology" class="technologies-tag">
-      {{ technology }}
+    <li v-for="technology in props.technologies" :key="technology.name" class="technologies-tag">
+      {{ technology.name }}
     </li>
   </ul>
 </template>
