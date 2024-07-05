@@ -1,13 +1,12 @@
 export interface User {
-  id: number
   name: string
   email: string
   location: string
   locale: string
+  socials: Social[]
   hero: Hero
   about: About
   footer: Footer
-  socials: Social[]
   projects: Project[]
 }
 
@@ -22,28 +21,6 @@ export interface Social {
   url: string
   image: Image
   hidden: boolean
-}
-
-export interface Hero {
-  title: string
-  tagline: string
-  callToActionContent: string
-  backgroundImage: Image
-}
-
-export interface About {
-  image: Image
-  imageResponsive: Image
-  description: string
-}
-
-export interface Footer {
-  title: string
-  subTitle: string
-  showLocation: boolean
-  showSocials: boolean
-  showEmail: boolean
-  showResume: boolean
 }
 
 export interface Technology {
@@ -73,7 +50,24 @@ export interface Experience {
   hidden: boolean
 }
 
-export interface Theme {
-  name: string
-  todo: string
+export interface Hero {
+  title: string
+  tagline: string
+  callToActionContent: string
+  backgroundImage: Image
+}
+
+export interface About {
+  image: Image
+  imageResponsive: Image
+  description: string
+}
+
+export interface Footer {
+  title: string
+  subTitle: string
+  showLocation: boolean
+  showSocials: boolean
+  showEmail: boolean
+  showResume: boolean
 }
