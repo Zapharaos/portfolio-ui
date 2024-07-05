@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type {User} from "@/types/models";
-import {onMounted, ref} from "vue";
+import type {Social, User} from "@/types/models";
+import {computed, onMounted, ref} from "vue";
 
 // Define the props for the component
 const props = defineProps<{
@@ -51,6 +51,19 @@ async function copyEmail() {
     console.error('Failed to copy email:', error);
   }
 }
+
+/**
+ * This computed property returns a filtered and sorted copy of the 'socials' prop.
+ * Filters the socials based on their 'hidden' property.
+ * Sorts the socials based on their 'index' property in ascending order.
+ *
+ * @returns {Social[]} A sorted copy of the socials.
+ */
+const prepareSocials = computed(() => {
+  return props.user.socials.slice()
+      .filter(i => !i.hidden)
+      .sort((a: Social, b: Social) => a.index - b.index);
+});
 </script>
 
 <template>
@@ -91,7 +104,7 @@ async function copyEmail() {
         </a>
       </li>
       <li
-        v-for="(social, index) in user.socials"
+        v-for="(social, index) in prepareSocials"
         :key="index"
       >
         <a :href="social.url" target="_blank">

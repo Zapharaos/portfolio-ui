@@ -9,7 +9,11 @@ const props = defineProps<{
 
 <template>
   <ul class="technologies">
-    <li v-for="technology in props.technologies" :key="technology.name" class="technologies-tag">
+    <li
+        v-for="(technology, index) in props.technologies"
+        :key="index"
+        class="technologies-tag"
+    >
       {{ technology.name }}
     </li>
   </ul>

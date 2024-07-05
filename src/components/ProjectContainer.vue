@@ -39,20 +39,20 @@ const splitProjects = computed(() => {
     <div class="grid-container">
       <ul class="projects-list responsive">
         <ProjectCard
-            v-for="project in sortedProjects.filter(i => !i.hidden)"
-            :key="project.title"
+            v-for="(project, index) in sortedProjects.filter(i => !i.hidden)"
+            :key="index"
             :project="project" />
       </ul>
       <ul class="projects-list">
         <ProjectCard
-            v-for="project in splitProjects.even.filter(i => !i.hidden)"
-            :key="project.title"
+            v-for="(project, index) in splitProjects.even.filter(i => !i.hidden)"
+            :key="index"
             :project="project" />
       </ul>
       <ul class="projects-list">
         <ProjectCard
-            v-for="project in splitProjects.odd.filter(i => !i.hidden)"
-            :key="project.title"
+            v-for="(project, index) in splitProjects.odd.filter(i => !i.hidden)"
+            :key="index"
             :project="project" />
       </ul>
     </div>

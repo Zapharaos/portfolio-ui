@@ -25,7 +25,10 @@ const prepareItems = computed(() => {
 
 <template>
   <section id="work">
-    <div v-for="item in prepareItems" :key="item.title">
+    <div
+        v-for="(item, index) in prepareItems"
+        :key="index"
+    >
       <ProjectContainer
           v-if="item.showProjects && item.projects && item.projects.length > 0"
           :projects="item.projects"

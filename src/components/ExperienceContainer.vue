@@ -54,8 +54,8 @@ const collapse = () => {
     <h2>{{ title }}</h2>
     <ul class="grid-container">
       <ExperienceCard
-        v-for="experience in sortedExperiences.filter(i => !i.hidden)"
-        :key="experience.title"
+        v-for="(experience, index) in sortedExperiences.filter(i => !i.hidden)"
+        :key="index"
         :experience="experience"
         :isActive="isActive(experience)"
         @activate="activate(experience)"

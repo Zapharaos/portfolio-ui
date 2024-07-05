@@ -20,6 +20,7 @@ export interface Social {
   pseudo: string
   url: string
   image: Image
+  index: number
   hidden: boolean
 }
 
