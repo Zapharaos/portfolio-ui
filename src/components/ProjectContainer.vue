@@ -5,18 +5,18 @@ import type { Project } from '@/types/models'
 
 // Define the props for the component
 const props = defineProps<{
-  projects: Project[] | undefined
+  title: string
+  projects: Project[]
 }>()
 
 /**
   * This computed property returns a sorted copy of the 'projects' prop.
-  * Sorts the projects based on their 'order' property in ascending order.
-  * If 'props.projects' is undefined, it returns an empty array.
+  * Sorts the projects based on their 'index' property in ascending order.
   *
-  * @returns {Project[]} A sorted copy of the projects or an empty array.
+  * @returns {Project[]} A sorted copy of the projects.
 */
 const sortedProjects = computed(() => {
-  return props.projects?.slice().sort((a: Project, b: Project) => a.index - b.index) || [];
+  return props.projects.slice().sort((a: Project, b: Project) => a.index - b.index);
 });
 
 /**
@@ -34,17 +34,26 @@ const splitProjects = computed(() => {
 </script>
 
 <template>
-  <section id="projects">
-    <h2>Projects</h2>
+  <section>
+    <h2>{{ title }}</h2>
     <div class="grid-container">
       <ul class="projects-list responsive">
-        <ProjectCard v-for="project in sortedProjects" :key="project.title" :project="project" />
+        <ProjectCard
+            v-for="project in sortedProjects.filter(i => !i.hidden)"
+            :key="project.title"
+            :project="project" />
       </ul>
       <ul class="projects-list">
-        <ProjectCard v-for="project in splitProjects.even" :key="project.title" :project="project" />
+        <ProjectCard
+            v-for="project in splitProjects.even.filter(i => !i.hidden)"
+            :key="project.title"
+            :project="project" />
       </ul>
       <ul class="projects-list">
-        <ProjectCard v-for="project in splitProjects.odd" :key="project.title" :project="project" />
+        <ProjectCard
+            v-for="project in splitProjects.odd.filter(i => !i.hidden)"
+            :key="project.title"
+            :project="project" />
       </ul>
     </div>
   </section>

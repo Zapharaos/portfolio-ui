@@ -6,8 +6,8 @@ export interface User {
   socials: Social[]
   hero: Hero
   about: About
+  work: Work
   footer: Footer
-  projects: Project[]
 }
 
 export interface Image {
@@ -48,6 +48,20 @@ export interface Experience {
   technologies: Technology[]
   index: number
   hidden: boolean
+}
+
+export interface WorkItem {
+  index: number
+  hidden: boolean
+  title: string
+  projects: Project[]
+  experiences: Experience[]
+  showProjects: boolean
+  showExperiences: boolean
+}
+
+export interface Work {
+  items: WorkItem[]
 }
 
 export interface Hero {
