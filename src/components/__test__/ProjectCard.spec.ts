@@ -1,20 +1,15 @@
 import { expect, describe, test } from 'vitest';
 import { mount } from '@vue/test-utils'
 import ProjectCard from '@/components/ProjectCard.vue'
-import type { Project } from '@/types/models'
+import {mockProject} from "@/__test__/mocks";
 
 describe('ProjectCard.vue', () => {
-
-  // Define a base project + reusable project items for easier test data setup
-  const baseProject: Project = {
-    title: "", order: 0, description: "", image: "", technologies: ['HTML', 'CSS', 'JavaScript'], url: "https://example.com"
-  };
 
   test('does not render clickable element when URL is not provided', () => {
     // Mount the ProjectCard with an empty url
     const wrapper = mount(ProjectCard, {
       propsData: {
-        project: { ...baseProject, url: "" }
+        project: { ...mockProject, url: "" }
       }
     });
 
@@ -27,7 +22,7 @@ describe('ProjectCard.vue', () => {
     // Mount the ProjectCard with an url
     const wrapper = mount(ProjectCard, {
       propsData: {
-        project: baseProject
+        project: mockProject
       }
     });
 
