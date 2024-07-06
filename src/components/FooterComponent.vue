@@ -64,6 +64,12 @@ const prepareSocials = computed(() => {
       .filter(i => !i.hidden)
       .sort((a: Social, b: Social) => a.index - b.index);
 });
+
+defineExpose({
+  currentTime,
+  copyEmail,
+  hasCopiedEmail
+})
 </script>
 
 <template>

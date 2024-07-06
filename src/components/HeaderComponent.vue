@@ -79,6 +79,14 @@ const toggleResponsiveMenu = () => {
   // Toggle body class to disable/enable scroll while menu is open
   document.body.classList.toggle('responsive-menu');
 }
+
+defineExpose({
+  lastScrollTop,
+  showResponsiveMenu,
+  scrollToSection,
+  handleScroll,
+  toggleResponsiveMenu,
+})
 </script>
 
 <template>
