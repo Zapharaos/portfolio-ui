@@ -1,4 +1,15 @@
-import type {About, Experience, FileType, Footer, Hero, Project, Technology, User, Work} from "@/types/models";
+import type {
+    About,
+    Experience,
+    FileType,
+    Footer,
+    Hero,
+    Project,
+    Technology,
+    User,
+    Work,
+    WorkItem
+} from "@/types/models";
 
 export const mockFileType: FileType = {
     name: 'name',
@@ -13,6 +24,15 @@ export const mockHero: Hero = {
 export const mockAbout: About = {
     image: mockFileType,
     description: 'description',
+}
+export const mockWorkItem: WorkItem = {
+    index: 0,
+    hidden: false,
+    title: 'title',
+    projects: [],
+    experiences: [],
+    showProjects: false,
+    showExperiences: false,
 }
 export const mockWork: Work = {
     items: []
