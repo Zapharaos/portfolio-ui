@@ -5,6 +5,16 @@ import type {Hero} from "@/types/models";
 const props = defineProps<{
   hero: Hero
 }>()
+
+/**
+ * Prevents default link behavior and scrolls to the target section smoothly.
+ *
+ * @param id The element's id to head to.
+ */
+const scrollToSection = (id: string) => {
+  // Scroll to the target section smoothly
+  document.getElementById(id as string)?.scrollIntoView({ behavior: 'smooth' });
+}
 </script>
 
 <template>
@@ -12,7 +22,7 @@ const props = defineProps<{
     <div class="hero-body">
       <h1 class="name">{{ hero.title }}</h1>
       <p class="tagline" v-html="hero.tagline"></p>
-      <a href="#work" class="call-to-action">
+      <a @click="scrollToSection('work')" class="call-to-action">
         <p>{{ hero.callToActionContent }}</p>
         <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" class="iconify iconify--tabler" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
           <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-6 6l6-6m-6-6l6 6"></path>
@@ -86,6 +96,7 @@ svg {
 
 .call-to-action:hover {
   background-color: rgba(255, 255, 255, 100);
+  cursor: pointer;
 }
 
 img {
