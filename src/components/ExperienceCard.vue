@@ -65,7 +65,11 @@ function collapse(event: Event): void {
             </a>
           </div>
           <p>{{ experience.description }}</p>
-          <TechnologiesList :technologies="experience.technologies" class="animate-opacity"/>
+          <TechnologiesList
+              v-if="experience.technologies"
+              :technologies="experience.technologies"
+              class="animate-opacity"
+          />
         </div>
       </div>
     </div>
