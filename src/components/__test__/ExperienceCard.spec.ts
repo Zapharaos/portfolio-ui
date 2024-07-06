@@ -1,29 +1,15 @@
 import { expect, describe, test } from 'vitest';
 import { mount } from '@vue/test-utils'
 import ExperienceCard from '@/components/ExperienceCard.vue'
-import type { Experience } from '@/types/models'
+import { mockExperience } from '@/__test__/mocks'
 
 describe('ExperienceCard.vue', () => {
-
-  // Define a reusable items for easier test data setup
-  const baseExperience: Experience = {
-      index: 0,
-      hidden: false,
-      title: 'title',
-      organisation: 'organisation',
-      period: 'period',
-      location: 'location',
-      url: 'https://example.com',
-      urlShort: 'example.com',
-      description: 'description',
-      technologies: [{name: 'HTML'}, {name: 'CSS'}, {name: 'JavaScript'}]
-  };
 
   test('does not apply active class element when not active', () => {
     // Mount the ExperienceCard as not active
     const wrapper = mount(ExperienceCard, {
       propsData: {
-        experience: baseExperience,
+        experience: mockExperience,
         isActive: false
       }
     });
@@ -36,7 +22,7 @@ describe('ExperienceCard.vue', () => {
     // Mount the ExperienceCard as active
     const wrapper = mount(ExperienceCard, {
       propsData: {
-        experience: baseExperience,
+        experience: mockExperience,
         isActive: true
       }
     });

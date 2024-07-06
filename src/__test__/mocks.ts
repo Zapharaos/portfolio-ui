@@ -1,4 +1,4 @@
-import type {About, FileType, Footer, Hero, User, Work} from "@/types/models";
+import type {About, Experience, FileType, Footer, Hero, Project, Technology, User, Work} from "@/types/models";
 
 export const mockFileType: FileType = {
     name: 'name',
@@ -37,4 +37,28 @@ export const mockUser: User = {
     about: mockAbout,
     work: mockWork,
     footer: mockFooter,
+};
+export const mockTechnologies: Technology[] = [
+    {name: 'tech1'}, {name: 'tech2'}, {name: 'tech3'}
+];
+export const mockProject: Project = {
+    index: 0,
+    hidden: false,
+    url: 'https://url.com',
+    title: 'title',
+    description: 'description',
+    image: mockFileType,
+    technologies: mockTechnologies,
+};
+export const mockExperience: Experience = {
+    index: 0,
+    hidden: false,
+    title: 'title',
+    organisation: 'organisation',
+    period: 'period',
+    location: 'location',
+    url: 'https://url.com',
+    urlShort: 'url.com',
+    description: 'description',
+    technologies: mockTechnologies,
 };

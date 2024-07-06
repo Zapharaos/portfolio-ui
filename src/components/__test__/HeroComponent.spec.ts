@@ -1,16 +1,9 @@
 import { expect, describe, test } from 'vitest';
 import { mount } from '@vue/test-utils';
 import HeroComponent from '@/components/HeroComponent.vue';
-import type {Hero} from "@/types/models";
+import { mockHero } from '@/__test__/mocks'
 
 describe('HeroComponent.vue', () => {
-
-  const mockHero: Hero = {
-    title: 'title',
-    tagline: 'tagline',
-    callToActionContent: 'callToActionContent',
-    backgroundImage: {name: 'name', file: 'file'},
-  }
 
   test('renders correctly with expected content', async () => {
     // Mount the HeroComponent
@@ -25,7 +18,6 @@ describe('HeroComponent.vue', () => {
     expect(wrapper.find('.tagline').exists()).toBe(true)
     expect(wrapper.find('.call-to-action').exists()).toBe(true)
     expect(wrapper.find('img').exists()).toBe(true)
-
   })
 
 });
