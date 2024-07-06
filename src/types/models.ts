@@ -1,67 +1,90 @@
-export interface Theme {
+export interface User {
   name: string
-  todo: string
+  email: string
+  location: string
+  locale: string
+  logo: FileType
+  resume: FileType
+  socials: Social[]
+  hero: Hero
+  about: About
+  work: Work
+  footer: Footer
 }
 
-export interface User {
-  id: number
-  hero: string
-  description: string
-  email: string
-  logo: string
-  photo?: string
-  curriculum?: string
-  theme_light?: Theme
-  theme_dark?: Theme
-  socials: Social[]
-  lists: List[]
-  projects: Project[]
+export interface FileType {
+  name: string
+  file: string
 }
 
 export interface Social {
+  index: number
+  hidden: boolean
   name: string
+  pseudo?: string
   url: string
-  hidden: boolean
+  image: FileType
 }
 
-export interface List {
+export interface Technology {
   name: string
-  index: number
-  hidden: boolean
-  items: ListItem[]
-}
-
-export interface ListItem {
-  index: number
-  organisation: string
-  name: string
-  menuName?: string
-  address?: string
-  period?: string
-  description?: string
-  hidden: boolean
 }
 
 export interface Project {
+  index: number
+  hidden: boolean
+  url?: string
   title: string
   description: string
-  url: string
-  image: string
-  order: number
-  technologies: Technologies
+  image?: FileType
+  technologies?: Technology[]
 }
 
 export interface Experience {
+  index: number
+  hidden: boolean
   title: string
-  company: string
-  period: string
-  order: number
+  organisation: string
+  period?: string
+  location?: string
+  url?: string
+  urlShort?: string
   description: string
-  technologies: Technologies
-  location: string
-  url: string
-  shortUrl?: string
-  logo: string
+  technologies?: Technology[]
 }
 
-export type Technologies = string[]
+export interface WorkItem {
+  index: number
+  hidden: boolean
+  title: string
+  projects?: Project[]
+  experiences?: Experience[]
+  showProjects: boolean
+  showExperiences: boolean
+}
+
+export interface Work {
+  items: WorkItem[]
+}
+
+export interface Hero {
+  title: string
+  tagline: string
+  callToActionContent: string
+  backgroundImage: FileType
+}
+
+export interface About {
+  image: FileType
+  imageResponsive?: FileType
+  description: string
+}
+
+export interface Footer {
+  title: string
+  subTitle: string
+  showLocation: boolean
+  showSocials: boolean
+  showEmail: boolean
+  showResume: boolean
+}

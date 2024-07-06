@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import {computed, ref} from 'vue'
 import type { Experience } from '@/types/models'
 import ExperienceCard from '@/components/ExperienceCard.vue'
 
@@ -14,13 +14,12 @@ let activeIndex = ref(0);
 
 /**
  * This computed property returns a sorted copy of the 'experiences' prop.
- * Sorts the experiences based on their 'order' property in ascending order.
- * If 'props.experiences' is undefined, it returns an empty array.
+ * Sorts the experiences based on their 'index' property in ascending order.
  *
- * @returns {Experience[]} A sorted copy of the experiences or an empty array.
+ * @returns {Experience[]} A sorted copy of the experiences.
  */
 const sortedExperiences = computed(() => {
-  return props.experiences?.slice().sort((a: Experience, b: Experience) => a.order - b.order) || [];
+  return props.experiences.slice().sort((a: Experience, b: Experience) => a.index - b.index);
 });
 
 /**
@@ -30,7 +29,7 @@ const sortedExperiences = computed(() => {
  * @returns {boolean} True if the experience item is active, false otherwise.
  */
 const isActive = (experience: Experience): boolean => {
-  return activeIndex.value === experience.order
+  return activeIndex.value === experience.index
 };
 
 /**
@@ -39,7 +38,7 @@ const isActive = (experience: Experience): boolean => {
  * @param {Experience} experience The experience item to activate.
  */
 function activate(experience: Experience) {
-  activeIndex.value = experience.order
+  activeIndex.value = experience.index
 }
 
 /**
@@ -51,12 +50,12 @@ const collapse = () => {
 </script>
 
 <template>
-  <section :id="title">
+  <section>
     <h2>{{ title }}</h2>
     <ul class="grid-container">
       <ExperienceCard
-        v-for="experience in sortedExperiences"
-        :key="experience.title"
+        v-for="(experience, index) in sortedExperiences.filter(i => !i.hidden)"
+        :key="index"
         :experience="experience"
         :isActive="isActive(experience)"
         @activate="activate(experience)"

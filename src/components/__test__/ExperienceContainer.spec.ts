@@ -3,31 +3,29 @@ import { mount } from '@vue/test-utils'
 import ExperienceContainer from '@/components/ExperienceContainer.vue'
 import ExperienceCard from '@/components/ExperienceCard.vue'
 import type { Experience } from '@/types/models'
+import { mockExperience } from '@/__test__/mocks'
 
 describe('ExperienceContainer.vue', () => {
 
   // Define a reusable items for easier test data setup
-  const baseExperience: Experience = {
-    title: "", company: "", period: "", order: 0, description: "", technologies: [], location: "", url: "", logo: ""
-  };
-  const baseExperiences: Experience[] = [
-    {...baseExperience, order: 2},
-    baseExperience,
-    {...baseExperience, order: 1}
+  const mockExperiences: Experience[] = [
+    {...mockExperience, index: 2},
+      mockExperience,
+    {...mockExperience, index: 1}
   ];
 
   test('renders work items correctly', () => {
     // Mount the ExperienceContainer
     const wrapper = mount(ExperienceContainer, {
       propsData: {
-        title: "",
-        experiences: baseExperiences
+        title: "title",
+        experiences: mockExperiences
       }
     });
 
     // Assert that the active class is not applied
     const experienceItems = wrapper.findAllComponents(ExperienceCard);
-    expect(experienceItems.length).toBe(baseExperiences.length);
+    expect(experienceItems.length).toBe(mockExperiences.length);
 
   });
 
@@ -36,7 +34,7 @@ describe('ExperienceContainer.vue', () => {
     const wrapper = mount(ExperienceContainer, {
       propsData: {
         title: "",
-        experiences: baseExperiences
+        experiences: mockExperiences
       }
     });
 

@@ -60,7 +60,7 @@
        Redirect to home page
        */
       redirect(){
-        this.$router.push({ name: 'HomeView' });
+        this.$router.push({ name: 'PortfolioView' });
       },
       /**
        * Creates an array of puzzle pieces with their styles and correct positions.

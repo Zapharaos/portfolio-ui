@@ -1,29 +1,13 @@
 import { expect, describe, test, vi, afterEach } from 'vitest'
 import { flushPromises, mount } from '@vue/test-utils'
-import PortfolioComponent from '@/components/PortfolioComponent.vue';
-import type { User } from '@/types/models'
+import PortfolioView from '@/views/PortfolioView.vue';
 import { getUserData} from '@/services/user'
+import { mockUser } from '@/__test__/mocks'
 
 // Mock the user service
 vi.mock('@/services/user');
 
-describe('PortfolioComponent.vue', () => {
-
-  // Define mock user data object
-  const successMockData: User = {
-    id: 1,
-    hero: 'Hero',
-    description: 'Description',
-    email: 'john.doe@example.com',
-    logo: '',
-    photo: undefined,
-    curriculum: undefined,
-    theme_light: undefined,
-    theme_dark: undefined,
-    socials: [],
-    lists: [],
-    projects: [],
-  };
+describe('PortfolioView.vue', () => {
 
   // Define mock error object
   const errorMock = new Error('Failed to fetch user data');
@@ -38,7 +22,7 @@ describe('PortfolioComponent.vue', () => {
     vi.mocked(getUserData).mockRejectedValue(errorMock)
 
     // Mount the component
-    const wrapper = mount(PortfolioComponent);
+    const wrapper = mount(PortfolioView);
 
     // Wait until the DOM updates.
     await flushPromises();
@@ -50,10 +34,10 @@ describe('PortfolioComponent.vue', () => {
 
   test('renders correctly with user data', async () => {
     // Mock the user service to succeed
-    vi.mocked(getUserData).mockResolvedValue(successMockData);
+    vi.mocked(getUserData).mockResolvedValue(mockUser);
 
     // Mount the component
-    const wrapper = mount(PortfolioComponent)
+    const wrapper = mount(PortfolioView)
 
     // Wait until the DOM updates.
     await flushPromises()

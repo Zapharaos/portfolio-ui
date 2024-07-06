@@ -1,7 +1,7 @@
 import { describe, expect, test, vi } from 'vitest'
 import apiClient from '../api';
 import { getUserData } from '../user';
-import type { User } from '@/types/models';
+import { mockUser } from '@/__test__/mocks'
 import { fail } from 'node:assert'
 
 vi.mock('../api'); // Mock the apiClient dependency
@@ -11,29 +11,15 @@ describe('User Service', () => {
   describe('getUserData', () => {
 
     test('fetch user data successfully', async () => {
-      const mockData: User = {
-        id: 1,
-        hero: 'Hero',
-        description: 'Description',
-        email: 'john.doe@example.com',
-        logo: '',
-        photo: undefined,
-        curriculum: undefined,
-        theme_light: undefined,
-        theme_dark: undefined,
-        socials: [],
-        lists: [],
-        projects: []
-      };
 
       // Set up the mock implementation for apiClient.get
-      apiClient.get = vi.fn().mockResolvedValueOnce({ data: mockData });
+      apiClient.get = vi.fn().mockResolvedValueOnce({ data: mockUser });
 
       // Execute
       const userData = await getUserData();
 
       // Assert
-      expect(userData).toEqual(mockData);
+      expect(userData).toEqual(mockUser);
       expect(apiClient.get).toHaveBeenCalledOnce();
     })
 
