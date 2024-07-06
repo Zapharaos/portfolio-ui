@@ -7,20 +7,29 @@ import type { Experience } from '@/types/models'
 describe('ExperienceContainer.vue', () => {
 
   // Define a reusable items for easier test data setup
-  const baseExperience: Experience = {
-    title: "", company: "", period: "", order: 0, description: "", technologies: [], location: "", url: "", logo: ""
-  };
+    const baseExperience: Experience = {
+        index: 0,
+        hidden: false,
+        title: 'title',
+        organisation: 'organisation',
+        period: 'period',
+        location: 'location',
+        url: 'https://example.com',
+        urlShort: 'example.com',
+        description: 'description',
+        technologies: [{name: 'HTML'}, {name: 'CSS'}, {name: 'JavaScript'}]
+    };
   const baseExperiences: Experience[] = [
-    {...baseExperience, order: 2},
+    {...baseExperience, index: 2},
     baseExperience,
-    {...baseExperience, order: 1}
+    {...baseExperience, index: 1}
   ];
 
   test('renders work items correctly', () => {
     // Mount the ExperienceContainer
     const wrapper = mount(ExperienceContainer, {
       propsData: {
-        title: "",
+        title: "title",
         experiences: baseExperiences
       }
     });

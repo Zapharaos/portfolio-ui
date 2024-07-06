@@ -7,7 +7,13 @@ describe('ProjectCard.vue', () => {
 
   // Define a base project + reusable project items for easier test data setup
   const baseProject: Project = {
-    title: "", order: 0, description: "", image: "", technologies: ['HTML', 'CSS', 'JavaScript'], url: "https://example.com"
+      index: 0,
+      hidden: false,
+      url: 'https://example.com',
+      title: 'project',
+      description: 'description',
+      image: {name: 'name', file: 'file'},
+      technologies: [{name: 'HTML'}, {name: 'CSS'}, {name: 'JavaScript'}]
   };
 
   test('does not render clickable element when URL is not provided', () => {

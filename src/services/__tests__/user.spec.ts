@@ -1,30 +1,56 @@
 import { describe, expect, test, vi } from 'vitest'
 import apiClient from '../api';
 import { getUserData } from '../user';
-import type { User } from '@/types/models';
+import type {About, FileType, Footer, Hero, User, Work} from '@/types/models';
 import { fail } from 'node:assert'
+import {flushPromises} from "@vue/test-utils";
 
 vi.mock('../api'); // Mock the apiClient dependency
 
 describe('User Service', () => {
 
+  const mockFileType: FileType = {
+    name: 'name',
+    file: 'file',
+  }
+  const mockHero: Hero = {
+    title: 'title',
+    tagline: 'tagline',
+    callToActionContent: 'callToActionContent',
+    backgroundImage: mockFileType,
+  }
+  const mockAbout: About = {
+    image: mockFileType,
+    description: 'description',
+  }
+  const mockWork: Work = {
+    items: []
+  }
+  const mockFooter: Footer = {
+    title: 'title',
+    subTitle: 'subTitle',
+    showLocation: false,
+    showSocials: false,
+    showEmail: false,
+    showResume: false,
+  }
+  const mockData: User = {
+    name: 'Name',
+    email: 'contact@example.com',
+    location: 'location',
+    locale: 'locale',
+    logo: mockFileType,
+    resume: mockFileType,
+    socials: [],
+    hero: mockHero,
+    about: mockAbout,
+    work: mockWork,
+    footer: mockFooter,
+  };
+
   describe('getUserData', () => {
 
     test('fetch user data successfully', async () => {
-      const mockData: User = {
-        id: 1,
-        hero: 'Hero',
-        description: 'Description',
-        email: 'john.doe@example.com',
-        logo: '',
-        photo: undefined,
-        curriculum: undefined,
-        theme_light: undefined,
-        theme_dark: undefined,
-        socials: [],
-        lists: [],
-        projects: []
-      };
 
       // Set up the mock implementation for apiClient.get
       apiClient.get = vi.fn().mockResolvedValueOnce({ data: mockData });

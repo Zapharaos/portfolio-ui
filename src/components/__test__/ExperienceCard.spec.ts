@@ -7,7 +7,16 @@ describe('ExperienceCard.vue', () => {
 
   // Define a reusable items for easier test data setup
   const baseExperience: Experience = {
-    title: "", company: "", period: "", order: 0, description: "", technologies: [], location: "", url: "", logo: ""
+      index: 0,
+      hidden: false,
+      title: 'title',
+      organisation: 'organisation',
+      period: 'period',
+      location: 'location',
+      url: 'https://example.com',
+      urlShort: 'example.com',
+      description: 'description',
+      technologies: [{name: 'HTML'}, {name: 'CSS'}, {name: 'JavaScript'}]
   };
 
   test('does not apply active class element when not active', () => {

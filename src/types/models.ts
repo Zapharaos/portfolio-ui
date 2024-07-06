@@ -18,12 +18,12 @@ export interface FileType {
 }
 
 export interface Social {
-  name: string
-  pseudo: string
-  url: string
-  image: FileType
   index: number
   hidden: boolean
+  name: string
+  pseudo?: string
+  url: string
+  image: FileType
 }
 
 export interface Technology {
@@ -31,34 +31,34 @@ export interface Technology {
 }
 
 export interface Project {
-  title: string
   index: number
-  description: string
-  image: FileType
-  url: string
-  technologies: Technology[]
   hidden: boolean
+  url?: string
+  title: string
+  description: string
+  image?: FileType
+  technologies?: Technology[]
 }
 
 export interface Experience {
-  title: string
-  organisation: string
-  period: string
-  location: string
-  url: string
-  urlShort: string
-  description: string
-  technologies: Technology[]
   index: number
   hidden: boolean
+  title: string
+  organisation: string
+  period?: string
+  location?: string
+  url?: string
+  urlShort?: string
+  description: string
+  technologies?: Technology[]
 }
 
 export interface WorkItem {
   index: number
   hidden: boolean
   title: string
-  projects: Project[]
-  experiences: Experience[]
+  projects?: Project[]
+  experiences?: Experience[]
   showProjects: boolean
   showExperiences: boolean
 }
@@ -76,7 +76,7 @@ export interface Hero {
 
 export interface About {
   image: FileType
-  imageResponsive: FileType
+  imageResponsive?: FileType
   description: string
 }
 
