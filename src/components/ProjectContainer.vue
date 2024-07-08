@@ -34,7 +34,7 @@ const splitProjects = computed(() => {
 </script>
 
 <template>
-  <section class="container">
+  <section class="container presentation">
     <h2 class="section-title">{{ title }}</h2>
     <div class="section-content grid">
       <ul class="projects-list responsive">
@@ -61,7 +61,6 @@ const splitProjects = computed(() => {
 
 <style scoped>
 .grid {
-  margin-top: 3rem;
   grid-template-columns: repeat(2, 1fr);
 }
 .projects-list{
