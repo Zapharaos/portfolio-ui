@@ -138,6 +138,8 @@ footer {
   display: flex;
   flex-direction: column;
   row-gap: 3.5rem;
+  background: rgb(24,24,24);
+  background: linear-gradient(180deg, rgba(24,24,24,1) 0%, rgba(47,37,22,1) 100%);
 }
 h1 {
   font-size: 4.5rem;
@@ -162,6 +164,7 @@ h2 {
   font-size: 2rem;
   text-decoration: none;
   line-height: 110%;
+  animation: color-email 3s ease-in-out infinite alternate;
 }
 .email-container:hover .email-underline {
   width: 100%;
@@ -170,6 +173,23 @@ h2 {
   width: 0;
   height: 2px;
   transition: width 0.3s ease-in-out;
+  animation: bg-color-email-underline 3s ease-in-out infinite alternate;
+}
+@keyframes color-email {
+  from {
+    color: #A89C88;
+  }
+  to {
+    color: #D4A144;
+  }
+}
+@keyframes bg-color-email-underline {
+  from {
+    background-color: #A89C88;
+  }
+  to {
+    background-color: #D4A144;
+  }
 }
 
 .copied {
@@ -214,13 +234,13 @@ h2 {
   color: white;
   padding: 0.5rem 0;
   transition: all 0.3s ease-in-out;
-  border: solid 1px transparent;
-  border-top-color: white;
+  border: solid 2px transparent;
+  border-top-color: #A89C88;
 }
 .links a:hover {
-  padding: 0.5rem;
-  background-color: gray;
-  border-color: gray;
+  padding: 0.5rem 1rem;
+  background-color: #423214;
+  border-color: #573E11;
   border-radius: 0.5rem;
 }
 .links p {

@@ -19,10 +19,10 @@
 }
 
 .grey-container {
-  background-color: var(--color-text);
+  background-color: #A89C88;
 }
 .grey-text {
-  color: var(--color-text);
+  color: #A89C88;
 }
 
 body.responsive-menu {
