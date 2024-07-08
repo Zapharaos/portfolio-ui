@@ -46,7 +46,19 @@ body.responsive-menu {
   max-width: 1024px;
   width: 100%;
   align-self: center;
+  margin: 0 auto;
 }
+.section-container .container.presentation {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+}
+.section-title {
+  text-align: center;
+}
+
 h2 {
   font-size: 4rem;
   color: white;
@@ -80,6 +92,13 @@ ul {
   .section-container {
     padding: 1rem;
   }
+}
+
+.grid {
+  display: grid;
+  justify-content: center;
+  margin: 0 auto;
+  gap: 2rem;
 }
 
 .item {
@@ -123,11 +142,4 @@ ul {
 }
 .item.active {
   border-color: #573E11;
-}
-
-.grid-container {
-  display: grid;
-  justify-content: center;
-  margin: 0 auto;
-  gap: 2rem;
 }

@@ -25,7 +25,7 @@ const prepareItems = computed(() => {
 
 <template>
   <section id="work" class="section-container">
-    <div
+    <template
         v-for="(item, index) in prepareItems"
         :key="index"
         class="container"
@@ -40,13 +40,14 @@ const prepareItems = computed(() => {
           :experiences="item.experiences"
           :title="item.title"
       />
-    </div>
+    </template>
   </section>
 </template>
 
 <style scoped>
-section {
+#work {
   display: flex;
   flex-direction: column;
+  gap: 5rem
 }
 </style>

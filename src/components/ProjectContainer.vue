@@ -34,9 +34,9 @@ const splitProjects = computed(() => {
 </script>
 
 <template>
-  <section>
-    <h2 class="center">{{ title }}</h2>
-    <div class="grid-container">
+  <section class="container">
+    <h2 class="section-title">{{ title }}</h2>
+    <div class="section-content grid">
       <ul class="projects-list responsive">
         <ProjectCard
             v-for="(project, index) in sortedProjects.filter(i => !i.hidden)"
@@ -60,7 +60,7 @@ const splitProjects = computed(() => {
 </template>
 
 <style scoped>
-.grid-container {
+.grid {
   margin-top: 3rem;
   grid-template-columns: repeat(2, 1fr);
 }
@@ -74,7 +74,7 @@ const splitProjects = computed(() => {
 }
 
 @media (max-width: 768px) {
-  .grid-container {
+  .grid {
     grid-template-columns: 1fr;
   }
   .projects-list.responsive {

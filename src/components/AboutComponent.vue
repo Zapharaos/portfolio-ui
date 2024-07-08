@@ -9,9 +9,9 @@ const props = defineProps<{
 
 <template>
   <section id="about" class="section-container">
-    <div class="container">
-      <h2 class="center">About</h2>
-      <div class="grid-container">
+    <div class="container presentation">
+      <h2 class="section-title">About</h2>
+      <div class="section-content grid">
         <img :src="about.image.file" :alt="about.image.name"/>
         <p>
           {{ about.description }}
@@ -22,12 +22,7 @@ const props = defineProps<{
 </template>
 
 <style scoped>
-section {
-  display: flex;
-  flex-direction: column;
-  gap: 3rem
-}
-.grid-container {
+.grid {
   grid-template-columns: 1fr 2fr;
   gap: 5rem;
 }
@@ -37,13 +32,12 @@ img {
   width: inherit;
 }
 p {
-  color: white;
   font-size: 1.125rem;
   text-align: justify;
   align-self: center;
 }
 @media (max-width: 992px) {
-  .grid-container {
+  .grid {
     display: flex;
     flex-direction: column-reverse;
     gap: 2rem;
