@@ -9,7 +9,7 @@ const props = defineProps<{
 
 <template>
   <section id="about">
-    <h2>About</h2>
+    <h2 class="center">About</h2>
     <div class="grid-container">
       <img :src="about.image.file" :alt="about.image.name"/>
       <p>

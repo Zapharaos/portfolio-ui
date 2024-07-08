@@ -51,7 +51,7 @@ const collapse = () => {
 
 <template>
   <section>
-    <h2>{{ title }}</h2>
+    <h2 class="center">{{ title }}</h2>
     <ul class="grid-container">
       <ExperienceCard
         v-for="(experience, index) in sortedExperiences.filter(i => !i.hidden)"

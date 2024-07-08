@@ -35,7 +35,7 @@ const splitProjects = computed(() => {
 
 <template>
   <section>
-    <h2>{{ title }}</h2>
+    <h2 class="center">{{ title }}</h2>
     <div class="grid-container">
       <ul class="projects-list responsive">
         <ProjectCard

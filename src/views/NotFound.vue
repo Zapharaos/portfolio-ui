@@ -1,5 +1,5 @@
 <template>
-  <section class="not-found">
+  <section class="not-found center">
     <h1>The page you are looking for does not exist.</h1>
     <button @click="redirect">GO BACK HOME</button>
     <div class="puzzle-description">
@@ -140,9 +140,6 @@
 </script>
 
 <style scoped>
-.not-found {
-  text-align: center;
-}
 .puzzle-description {
   margin: 7% auto;
 }
