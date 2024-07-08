@@ -7,7 +7,6 @@
   place-items: center;
   place-content: center;
   margin: 0 auto;
-  color: white;
 }
 
 @keyframes blink {
@@ -59,13 +58,51 @@ body.responsive-menu {
   text-align: center;
 }
 
-h2 {
-  font-size: 4rem;
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6{
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
   color: white;
 }
-h3 {
-  font-size: 2rem;
+h1, .h1 {
+  font-size: 61px;
+  letter-spacing: -0.5px;
+  font-weight: 600;
 }
+h2, .h2 {
+  font-size: 49px;
+  letter-spacing: 0;
+  font-weight: 600;
+}
+h3, .h3 {
+  font-size: 30px;
+  letter-spacing: 0.25px;
+  font-weight: 500;
+}
+h4, .h4 {
+  font-size: 20px;
+  letter-spacing: 0;
+}
+.caption {
+  font-family: "Open Sans", sans-serif;
+  font-weight: normal;
+  font-size: 12px;
+  letter-spacing: 0.4px;
+}
+.overline {
+  font-family: "Open Sans", sans-serif;
+  font-weight: normal;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.button {
+  font-family: "Open Sans", sans-serif;
+  font-weight: normal;
+  font-size: 20px;
+}
+
 ul {
   list-style: none;
   margin: 0;

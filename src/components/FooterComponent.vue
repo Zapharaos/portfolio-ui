@@ -76,11 +76,11 @@ defineExpose({
   <footer id="footer" class="section-container">
     <div class="container">
       <div>
-        <h1>{{ user.footer.title }}</h1>
-        <h2 class="grey-text">{{ user.footer.subTitle }}</h2>
+        <h2>{{ user.footer.title }}</h2>
+        <h3 class="grey-text">{{ user.footer.subTitle }}</h3>
       </div>
       <div v-if="user.footer.showLocation" class="location">
-        <p>{{ user.location }}</p>
+        <p class="h4">{{ user.location }}</p>
         <div class="grey-text">
           <p>{{ currentTime.hours }}</p>
           <span class="animate-1s-blink">:</span>
@@ -91,9 +91,9 @@ defineExpose({
       </div>
       <div class="contact">
         <div class="email-container grey-text" @click="copyEmail">
-          <span v-if="!hasCopiedEmail">Click to copy</span>
-          <span v-else-if="hasCopiedEmail" class="copied">Copied!</span>
-          <p class="email">{{ user.email }}</p>
+          <span v-if="!hasCopiedEmail" class="overline">Click to copy</span>
+          <span v-else-if="hasCopiedEmail" class="overline copied">Copied!</span>
+          <p class="h4 email">{{ user.email }}</p>
           <div class="email-underline grey-container"></div>
         </div>
       </div>
@@ -123,7 +123,7 @@ defineExpose({
           </a>
         </li>
       </ul>
-      <div class="copyright">
+      <div class="copyright caption">
         <p>Copyright © {{ year }} {{ user.name }}. All rights reserved.</p>
         <p class="grey-text">Design &amp; Development by <a :href="developerLink">{{ developerName }}</a>.</p>
       </div>
@@ -146,11 +146,7 @@ footer {
   flex-direction: column;
   row-gap: 3.5rem;
 }
-h1 {
-  font-size: 4.5rem;
-}
 h2 {
-  font-size: 3rem;
   line-height: 100%;
 }
 
@@ -161,15 +157,9 @@ h2 {
 .email-container:hover {
   cursor: pointer;
 }
-.email-container span {
-  font-size: 12px;
-  text-transform: uppercase;
-}
 .email {
-  font-size: 2rem;
   text-decoration: none;
-  line-height: 110%;
-  animation: color-email 3s ease-in-out infinite alternate;
+  animation: color-email 2s ease-in-out infinite alternate;
 }
 .email-container:hover .email-underline {
   width: 100%;
@@ -178,7 +168,7 @@ h2 {
   width: 0;
   height: 2px;
   transition: width 0.3s ease-in-out;
-  animation: bg-color-email-underline 3s ease-in-out infinite alternate;
+  animation: bg-color-email-underline 2s ease-in-out infinite alternate;
 }
 @keyframes color-email {
   from {
@@ -193,7 +183,7 @@ h2 {
     background-color: #A89C88;
   }
   to {
-    background-color: #D4A144;
+    background-color: #FFA500;
   }
 }
 
@@ -211,9 +201,6 @@ h2 {
   }
 }
 
-.location {
-  font-size: 1.5rem;
-}
 .location div {
   display: flex;
   line-height: 100%;
@@ -248,9 +235,6 @@ h2 {
   border-color: #573E11;
   border-radius: 0.5rem;
 }
-.links p {
-  font-size: 1.2rem;
-}
 .links .social-icon {
   display: flex;
   width: 2rem;
@@ -268,8 +252,6 @@ h2 {
 }
 .copyright p {
   margin-right: 10px;
-  font-size: 14px;
-  font-weight: 200;
 }
 .copyright a, .copyright a:-webkit-any-link {
   color: inherit;
@@ -277,14 +259,7 @@ h2 {
 
 @media (max-width: 1200px) {
   h1 {
-    font-size: 3.5rem;
     line-height: 120%;
-  }
-}
-
-@media (max-width: 991px) {
-  h1 {
-    font-size: 3rem;
   }
 }
 
@@ -296,23 +271,11 @@ h2 {
   h1 {
     line-height: 100%;
   }
-  h2 {
-    font-size: 2rem;
-  }
   h1+h2 {
     margin-top: 1.5rem;
   }
-  .location {
-    font-size: 1.125rem;
-  }
   .location div {
     justify-content: center;
-  }
-  .email {
-    font-size: 1.25rem;
-  }
-  .email-container span {
-    font-size: 10px;
   }
   .links {
     flex-direction: column;
@@ -322,9 +285,6 @@ h2 {
   }
   .links div {
     text-align: left;
-  }
-  .links p {
-    font-size: 1rem;
   }
   .links a:hover {
     border-radius: 0;

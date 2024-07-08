@@ -30,9 +30,9 @@ img {
   border: solid 0.25rem white;
   border-radius: 1rem;
   width: inherit;
+  max-width: 350px;
 }
 p {
-  font-size: 1.125rem;
   text-align: justify;
   align-self: center;
 }

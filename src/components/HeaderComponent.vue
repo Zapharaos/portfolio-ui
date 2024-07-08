@@ -102,17 +102,17 @@ defineExpose({
         </button>
         <ul>
           <li>
-            <a class="nav-item-link" @click="scrollToSection('work')">
+            <a class="button nav-item-link" @click="scrollToSection('work')">
               Work
             </a>
           </li>
           <li>
-            <a class="nav-item-link" @click="scrollToSection('about')">
+            <a class="button nav-item-link" @click="scrollToSection('about')">
               About
             </a>
           </li>
           <li>
-            <a class="nav-item-link" @click="scrollToSection('footer')">
+            <a class="button nav-item-link" @click="scrollToSection('footer')">
               Contact
             </a>
           </li>
@@ -124,8 +124,6 @@ defineExpose({
 
 <style scoped>
 header {
-  color: white;
-  font-size: 1.5rem;
   width: 100%;
   transition: all .9s cubic-bezier(.215,.61,.355,1);
   background-color: transparent;
@@ -238,7 +236,6 @@ svg.display {
   }
   ul li {
     margin: 0 !important;
-    font-size: 4rem;
     text-align: center;
   }
 }
