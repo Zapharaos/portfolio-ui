@@ -91,32 +91,34 @@ defineExpose({
 
 <template>
   <header>
-    <nav>
-      <a class="logo">
-        <img :src="logo.file" :alt="logo.name" class="social-icon"/>
-      </a>
-      <button aria-label="menu" class="responsive-menu-btn" @click="toggleResponsiveMenu">
-        <svg class="responsive-menu-svg display" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="50px" height="50px"><path d="M 3 9 A 1.0001 1.0001 0 1 0 3 11 L 47 11 A 1.0001 1.0001 0 1 0 47 9 L 3 9 z M 3 24 A 1.0001 1.0001 0 1 0 3 26 L 47 26 A 1.0001 1.0001 0 1 0 47 24 L 3 24 z M 3 39 A 1.0001 1.0001 0 1 0 3 41 L 47 41 A 1.0001 1.0001 0 1 0 47 39 L 3 39 z"/></svg>
-        <svg class="responsive-menu-svg close-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="50px" height="50px"><path d="M 7.71875 6.28125 L 6.28125 7.71875 L 23.5625 25 L 6.28125 42.28125 L 7.71875 43.71875 L 25 26.4375 L 42.28125 43.71875 L 43.71875 42.28125 L 26.4375 25 L 43.71875 7.71875 L 42.28125 6.28125 L 25 23.5625 Z"/></svg>
-      </button>
-      <ul>
-        <li>
-          <a class="nav-item-link" @click="scrollToSection('work')">
-            Work
-          </a>
-        </li>
-        <li>
-          <a class="nav-item-link" @click="scrollToSection('about')">
-            About
-          </a>
-        </li>
-        <li>
-          <a class="nav-item-link" @click="scrollToSection('footer')">
-            Contact
-          </a>
-        </li>
-      </ul>
-    </nav>
+    <div class="section-container">
+      <nav class="container">
+        <a class="logo">
+          <img :src="logo.file" :alt="logo.name" class="social-icon"/>
+        </a>
+        <button aria-label="menu" class="responsive-menu-btn" @click="toggleResponsiveMenu">
+          <svg class="responsive-menu-svg display" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="50px" height="50px"><path d="M 3 9 A 1.0001 1.0001 0 1 0 3 11 L 47 11 A 1.0001 1.0001 0 1 0 47 9 L 3 9 z M 3 24 A 1.0001 1.0001 0 1 0 3 26 L 47 26 A 1.0001 1.0001 0 1 0 47 24 L 3 24 z M 3 39 A 1.0001 1.0001 0 1 0 3 41 L 47 41 A 1.0001 1.0001 0 1 0 47 39 L 3 39 z"/></svg>
+          <svg class="responsive-menu-svg close-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="50px" height="50px"><path d="M 7.71875 6.28125 L 6.28125 7.71875 L 23.5625 25 L 6.28125 42.28125 L 7.71875 43.71875 L 25 26.4375 L 42.28125 43.71875 L 43.71875 42.28125 L 26.4375 25 L 43.71875 7.71875 L 42.28125 6.28125 L 25 23.5625 Z"/></svg>
+        </button>
+        <ul>
+          <li>
+            <a class="nav-item-link" @click="scrollToSection('work')">
+              Work
+            </a>
+          </li>
+          <li>
+            <a class="nav-item-link" @click="scrollToSection('about')">
+              About
+            </a>
+          </li>
+          <li>
+            <a class="nav-item-link" @click="scrollToSection('footer')">
+              Contact
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
   </header>
 </template>
 
@@ -127,18 +129,23 @@ header {
   width: 100%;
   transition: all .9s cubic-bezier(.215,.61,.355,1);
   background-color: transparent;
-}
-nav {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 1rem 3rem;
+
   position: fixed;
   z-index: 9999;
   top: 0;
   bottom: auto;
   left: 0;
   right: 0;
+}
+.section-container {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 auto;
 }
 .logo {
   display: flex;
@@ -207,9 +214,6 @@ svg.display {
   scale: initial;
 }
 @media only screen and (max-width: 768px) {
-  nav {
-    padding: 1rem 2rem;
-  }
   .responsive-menu-btn {
     display: flex;
   }
@@ -236,11 +240,6 @@ svg.display {
     margin: 0 !important;
     font-size: 4rem;
     text-align: center;
-  }
-}
-@media (max-width: 576px) {
-  nav {
-    padding: 1rem 1.5rem;
   }
 }
 </style>

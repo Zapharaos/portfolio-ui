@@ -19,21 +19,27 @@ const scrollToSection = (id: string) => {
 
 <template>
   <section id="hero">
-    <div class="hero-body">
-      <h1 class="name">{{ hero.title }}</h1>
-      <p class="tagline" v-html="hero.tagline"></p>
-      <a @click="scrollToSection('work')" class="call-to-action">
-        <p>{{ hero.callToActionContent }}</p>
-        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" class="iconify iconify--tabler" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
-          <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-6 6l6-6m-6-6l6 6"></path>
-        </svg>
-      </a>
+    <div class="section-container">
+      <div class="hero-body">
+        <h1 class="name">{{ hero.title }}</h1>
+        <p class="tagline" v-html="hero.tagline"></p>
+        <a @click="scrollToSection('work')" class="call-to-action">
+          <p>{{ hero.callToActionContent }}</p>
+          <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" class="iconify iconify--tabler" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-6 6l6-6m-6-6l6 6"></path>
+          </svg>
+        </a>
+      </div>
     </div>
-    <img :src="hero.backgroundImage.file" :alt="hero.backgroundImage.name" />
+<!--    <img :src="hero.backgroundImage.file" :alt="hero.backgroundImage.name" />-->
   </section>
 </template>
 
 <style scoped>
+.section-container {
+  height: 100%;
+  display: flex;
+}
 .tagline span {
   color: orange;
   font-weight: bold
@@ -60,6 +66,7 @@ section {
   gap: 3rem;
   z-index: 2;
   align-self: flex-start;
+  max-width: 1024px;
 }
 
 .name {

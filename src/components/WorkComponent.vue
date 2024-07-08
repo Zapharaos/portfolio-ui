@@ -24,10 +24,11 @@ const prepareItems = computed(() => {
 </script>
 
 <template>
-  <section id="work">
+  <section id="work" class="section-container">
     <div
         v-for="(item, index) in prepareItems"
         :key="index"
+        class="container"
     >
       <ProjectContainer
           v-if="item.showProjects && item.projects && item.projects.length > 0"
@@ -44,5 +45,8 @@ const prepareItems = computed(() => {
 </template>
 
 <style scoped>
-
+section {
+  display: flex;
+  flex-direction: column;
+}
 </style>

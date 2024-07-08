@@ -73,73 +73,78 @@ defineExpose({
 </script>
 
 <template>
-  <footer id="footer">
-    <div>
-      <h1>{{ user.footer.title }}</h1>
-      <h2 class="grey-text">{{ user.footer.subTitle }}</h2>
-    </div>
-    <div v-if="user.footer.showLocation" class="location">
-      <p>{{ user.location }}</p>
-      <div class="grey-text">
-        <p>{{ currentTime.hours }}</p>
-        <span class="animate-1s-blink">:</span>
-        <p>{{ currentTime.minutes }}</p>
-        <span class="animate-1s-blink">:</span>
-        <p>{{ currentTime.seconds }}</p>
+  <footer id="footer" class="section-container">
+    <div class="container">
+      <div>
+        <h1>{{ user.footer.title }}</h1>
+        <h2 class="grey-text">{{ user.footer.subTitle }}</h2>
       </div>
-    </div>
-    <div class="contact">
-      <div class="email-container grey-text" @click="copyEmail">
-        <span v-if="!hasCopiedEmail">Click to copy</span>
-        <span v-else-if="hasCopiedEmail" class="copied">Copied!</span>
-        <p class="email">{{ user.email }}</p>
-        <div class="email-underline grey-container"></div>
+      <div v-if="user.footer.showLocation" class="location">
+        <p>{{ user.location }}</p>
+        <div class="grey-text">
+          <p>{{ currentTime.hours }}</p>
+          <span class="animate-1s-blink">:</span>
+          <p>{{ currentTime.minutes }}</p>
+          <span class="animate-1s-blink">:</span>
+          <p>{{ currentTime.seconds }}</p>
+        </div>
       </div>
-    </div>
-    <ul v-if="user.footer.showSocials" class="links">
-      <li v-if="user.footer.showEmail">
-        <a :href="'mailto:'+user.email">
-          <p>Email me</p>
-          <svg fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 64 64" width="64px" height="64px"><path d="M 32 6 A 26 26 0 0 0 10.429688 46.460938 L 8 58 L 20.59375 55.347656 A 26 26 0 0 0 32 58 A 26 26 0 0 0 32 6 z"/></svg>
-        </a>
-      </li>
-      <li v-if="user.footer.showResume && user.resume">
-        <a :href="user.resume.file" target="_blank">
-          <p>My resume</p>
-          <svg fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 50 50" width="50px" height="50px"><path d="M 30.398438 2 L 7 2 L 7 48 L 43 48 L 43 14.601563 Z M 15 28 L 31 28 L 31 30 L 15 30 Z M 35 36 L 15 36 L 15 34 L 35 34 Z M 35 24 L 15 24 L 15 22 L 35 22 Z M 30 15 L 30 4.398438 L 40.601563 15 Z"/></svg>
-        </a>
-      </li>
-      <li
-        v-for="(social, index) in prepareSocials"
-        :key="index"
-      >
-        <a :href="social.url" target="_blank">
-          <div>
-            <p>{{ social.name }}</p>
-            <span v-if="social.pseudo" class="grey-text">@{{ social.pseudo }}</span>
-          </div>
-          <img :src="social.image.file" :alt="social.image.name" class="social-icon"/>
-        </a>
-      </li>
-    </ul>
-    <div class="copyright">
-      <p>Copyright © {{ year }} {{ user.name }}. All rights reserved.</p>
-      <p class="grey-text">Design &amp; Development by <a :href="developerLink">{{ developerName }}</a>.</p>
+      <div class="contact">
+        <div class="email-container grey-text" @click="copyEmail">
+          <span v-if="!hasCopiedEmail">Click to copy</span>
+          <span v-else-if="hasCopiedEmail" class="copied">Copied!</span>
+          <p class="email">{{ user.email }}</p>
+          <div class="email-underline grey-container"></div>
+        </div>
+      </div>
+      <ul v-if="user.footer.showSocials" class="links">
+        <li v-if="user.footer.showEmail">
+          <a :href="'mailto:'+user.email">
+            <p>Email me</p>
+            <svg fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 64 64" width="64px" height="64px"><path d="M 32 6 A 26 26 0 0 0 10.429688 46.460938 L 8 58 L 20.59375 55.347656 A 26 26 0 0 0 32 58 A 26 26 0 0 0 32 6 z"/></svg>
+          </a>
+        </li>
+        <li v-if="user.footer.showResume && user.resume">
+          <a :href="user.resume.file" target="_blank">
+            <p>My resume</p>
+            <svg fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 50 50" width="50px" height="50px"><path d="M 30.398438 2 L 7 2 L 7 48 L 43 48 L 43 14.601563 Z M 15 28 L 31 28 L 31 30 L 15 30 Z M 35 36 L 15 36 L 15 34 L 35 34 Z M 35 24 L 15 24 L 15 22 L 35 22 Z M 30 15 L 30 4.398438 L 40.601563 15 Z"/></svg>
+          </a>
+        </li>
+        <li
+            v-for="(social, index) in prepareSocials"
+            :key="index"
+        >
+          <a :href="social.url" target="_blank">
+            <div>
+              <p>{{ social.name }}</p>
+              <span v-if="social.pseudo" class="grey-text">@{{ social.pseudo }}</span>
+            </div>
+            <img :src="social.image.file" :alt="social.image.name" class="social-icon"/>
+          </a>
+        </li>
+      </ul>
+      <div class="copyright">
+        <p>Copyright © {{ year }} {{ user.name }}. All rights reserved.</p>
+        <p class="grey-text">Design &amp; Development by <a :href="developerLink">{{ developerName }}</a>.</p>
+      </div>
     </div>
   </footer>
 </template>
 
 <style scoped>
+.section-container {
+  padding-bottom: 0.5rem;
+}
 footer {
-  width: 100%;
-  padding: 20px 5rem;
-  margin-top: 5rem;
-  color: white;
+  display: flex;
+  justify-content: center;
+  background: rgb(24,24,24);
+  background: linear-gradient(180deg, rgba(24,24,24,1) 0%, rgba(47,37,22,1) 100%);
+}
+.container {
   display: flex;
   flex-direction: column;
   row-gap: 3.5rem;
-  background: rgb(24,24,24);
-  background: linear-gradient(180deg, rgba(24,24,24,1) 0%, rgba(47,37,22,1) 100%);
 }
 h1 {
   font-size: 4.5rem;
@@ -278,9 +283,6 @@ h2 {
 }
 
 @media (max-width: 991px) {
-  footer {
-    padding: 20px 2rem;
-  }
   h1 {
     font-size: 3rem;
   }
@@ -314,6 +316,9 @@ h2 {
   }
   .links {
     flex-direction: column;
+    max-width: 400px;
+    width: 100%;
+    align-self: center;
   }
   .links div {
     text-align: left;
@@ -323,6 +328,9 @@ h2 {
   }
   .links a:hover {
     border-radius: 0;
+  }
+  .links li:hover + li a {
+    border-top-color: transparent;
   }
   .copyright {
     flex-direction: column;

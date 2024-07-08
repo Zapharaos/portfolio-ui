@@ -8,13 +8,15 @@ const props = defineProps<{
 </script>
 
 <template>
-  <section id="about">
-    <h2 class="center">About</h2>
-    <div class="grid-container">
-      <img :src="about.image.file" :alt="about.image.name"/>
-      <p>
-        {{ about.description }}
-      </p>
+  <section id="about" class="section-container">
+    <div class="container">
+      <h2 class="center">About</h2>
+      <div class="grid-container">
+        <img :src="about.image.file" :alt="about.image.name"/>
+        <p>
+          {{ about.description }}
+        </p>
+      </div>
     </div>
   </section>
 </template>
