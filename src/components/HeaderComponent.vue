@@ -102,17 +102,17 @@ defineExpose({
         </button>
         <ul>
           <li>
-            <a class="button nav-item-link" @click="scrollToSection('work')">
+            <a class="nav-item-link" @click="scrollToSection('work')">
               Work
             </a>
           </li>
           <li>
-            <a class="button nav-item-link" @click="scrollToSection('about')">
+            <a class="nav-item-link" @click="scrollToSection('about')">
               About
             </a>
           </li>
           <li>
-            <a class="button nav-item-link" @click="scrollToSection('footer')">
+            <a class="nav-item-link" @click="scrollToSection('footer')">
               Contact
             </a>
           </li>
@@ -171,6 +171,11 @@ li a:hover {
 }
 a:hover {
   cursor: pointer;
+}
+.nav-item-link {
+  font-size: 24px;
+  letter-spacing: 0.25px;
+  font-weight: 500;
 }
 </style>
 
@@ -237,6 +242,11 @@ svg.display {
   ul li {
     margin: 0 !important;
     text-align: center;
+  }
+  .nav-item-link {
+    font-size: 61px;
+    letter-spacing: -0.5px;
+    font-weight: 600;
   }
 }
 </style>
