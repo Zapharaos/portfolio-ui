@@ -1,36 +1,21 @@
-<template>
-  <section class="not-found center">
-    <h1>The page you are looking for does not exist.</h1>
-    <button @click="redirect">GO BACK HOME</button>
-    <div class="puzzle-description">
-      <p>Solve the puzzle or click on the above button to return to homepage!</p>
-      <p class="puzzle-score">{{ correctlyPlacedCount }}/{{ totalPieces }}</p>
-    </div>
-    <div
-      class="puzzle-container"
-      :style="puzzleContainerStyle"
-    >
-      <div
-        v-for="(piece, index) in puzzlePieces"
-        :key="index"
-        :style="piece.style"
-        class="puzzle-piece"
-        draggable="true"
-        @dragstart="dragStart(index)"
-        @dragover.prevent
-        @drop="drop(index)"
-      ></div>
-    </div>
-  </section>
-</template>
-
 <script lang="ts">
 
   const gridWidth = 5; // Number of puzzle pieces per row
   const gridHeight = 3; // Number of puzzle rows
 
   // Since a square piece is required, calculate the smallest size based on the window dimensions.
-  const pieceSize = Math.min(window.innerWidth / (gridWidth + 2), window.innerHeight / (gridHeight + 2));
+  const additionalUnits = 4;
+
+  function calculatePieceSize() {
+    let currentUnits = additionalUnits
+    if (window.innerWidth <= 576) {
+      currentUnits = 1;
+    }
+    else if (window.innerWidth <= 992) {
+      currentUnits = 2;
+    }
+    return Math.min(window.innerWidth / (gridWidth + currentUnits), window.innerHeight / (gridHeight + currentUnits));
+  }
 
   // Interface for a Puzzle Piece
   interface PuzzlePiece {
@@ -41,6 +26,7 @@
   export default {
     data() {
       return {
+        pieceSize: calculatePieceSize(),
         puzzlePieces: [] as PuzzlePiece[], // Array of puzzle pieces
         dragIndex: null as number | null, // Index of the currently dragged piece
         correctlyPlacedCount: 0, // Number of correctly placed pieces
@@ -50,8 +36,8 @@
     computed: {
       puzzleContainerStyle() {
         return {
-          gridTemplateColumns: `repeat(${gridWidth}, ${pieceSize}px)`,
-          gridTemplateRows: `repeat(${gridHeight}, ${pieceSize}px)`,
+          gridTemplateColumns: `repeat(${gridWidth}, ${this.pieceSize}px)`,
+          gridTemplateRows: `repeat(${gridHeight}, ${this.pieceSize}px)`,
         };
       },
     },
@@ -63,9 +49,9 @@
         this.$router.push({ name: 'PortfolioView' });
       },
       /**
-       * Creates an array of puzzle pieces with their styles and correct positions.
+       * Prepares an array of puzzle pieces with their styles and correct positions.
        */
-      createPuzzlePieces() {
+      preparePuzzlePieces() {
         let pieces: PuzzlePiece[] = [];
 
         for (let row = 0; row < gridHeight; row++) {
@@ -74,18 +60,16 @@
             pieces.push({
               style: {
                 backgroundImage: 'url(/src/assets/404.svg)',
-                backgroundSize: `${gridWidth * pieceSize}px ${gridHeight * pieceSize}px`,
-                backgroundPosition: `-${col * pieceSize}px -${row * pieceSize}px`,
-                width: `${pieceSize}px`,
-                height: `${pieceSize}px`,
+                backgroundSize: `${gridWidth * this.pieceSize}px ${gridHeight * this.pieceSize}px`,
+                backgroundPosition: `-${col * this.pieceSize}px -${row * this.pieceSize}px`,
+                width: `${this.pieceSize}px`,
+                height: `${this.pieceSize}px`,
               },
               correctIndex: index,
             });
           }
         }
-
-        this.totalPieces = pieces.length;
-        this.puzzlePieces = this.shuffleArray(pieces);
+        return pieces;
       },
       /**
        * Shuffles an array using the Fisher-Yates shuffle algorithm.
@@ -132,21 +116,73 @@
           }
         }
       },
+      onResize() {
+        this.pieceSize = calculatePieceSize();
+        const pieces = this.preparePuzzlePieces();
+        pieces.forEach(piece => {
+          const puzzlePieceIndex = this.puzzlePieces.findIndex(puzzlePiece => puzzlePiece.correctIndex === piece.correctIndex);
+          this.puzzlePieces[puzzlePieceIndex].style = piece.style;
+        })
+      },
     },
     mounted() {
-      this.createPuzzlePieces();
+      // Build puzzle
+      const pieces = this.preparePuzzlePieces();
+      this.totalPieces = pieces.length;
+      this.puzzlePieces = this.shuffleArray(pieces);
+
+      // Events
+      window.addEventListener('resize', this.onResize);
     },
   };
 </script>
 
+<template>
+  <section class="section-container center">
+    <div class="container">
+      <h3>The page you are looking for does not exist.</h3>
+      <div class="puzzle-container">
+        <div
+            class="puzzle"
+            :style="puzzleContainerStyle"
+        >
+          <div
+              v-for="(piece, index) in puzzlePieces"
+              :key="index"
+              :style="piece.style"
+              class="puzzle-piece"
+              draggable="true"
+              @dragstart="dragStart(index)"
+              @dragover.prevent
+              @drop="drop(index)"
+          />
+        </div>
+        <p class="grey-text">
+          Solve the puzzle to return to homepage :
+          <span class="puzzle-score">{{ correctlyPlacedCount }}/{{ totalPieces }}</span>
+        </p>
+      </div>
+      <button @click="redirect" class="btn text-button">
+        Click to crack the code
+      </button>
+    </div>
+  </section>
+</template>
+
 <style scoped>
-.puzzle-description {
-  margin: 7% auto;
+section {
+  height: 100svh;
+  max-height: 100svh;
+  overflow: hidden;
 }
-.puzzle-score {
-  color: orange;
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
-.puzzle-container {
+.puzzle {
   display: grid;
   justify-content: center;
   gap: 1px;
@@ -154,6 +190,17 @@
 }
 .puzzle-piece {
   box-sizing: border-box;
+}
+.puzzle-container p {
+  margin-top: 2rem;
+}
+.puzzle-score {
+  color: orange;
+}
+@media (max-width: 768px) {
+  .container {
+    justify-content: space-evenly;
+  }
 }
 </style>
 

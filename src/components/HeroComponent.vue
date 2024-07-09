@@ -23,7 +23,7 @@ const scrollToSection = (id: string) => {
       <div class="hero-body">
         <h1 class="hero-title">{{ hero.title }}</h1>
         <p class="h4 tagline" v-html="hero.tagline"></p>
-        <a @click="scrollToSection('work')" class="button call-to-action">
+        <a @click="scrollToSection('work')" class="btn text-button">
           <p>{{ hero.callToActionContent }}</p>
           <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" class="iconify iconify--tabler" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
             <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-6 6l6-6m-6-6l6 6"></path>
@@ -74,27 +74,10 @@ section {
   margin-bottom: 0;
 }
 
-.call-to-action {
-  text-decoration: none;
-  padding: 0.5rem 2rem;
-  display: flex;
-  transition: all 0.5s ease-in-out;
-  width: fit-content;
-  background-color: orange;
-  color: black;
-  border-radius: 0.5rem;
-  align-items: center;
-  gap: 1rem;
-}
 svg {
   height: 1.5rem;
   width: auto;
   transform: rotate(90deg);
-}
-
-.call-to-action:hover {
-  background-color: rgba(255, 255, 255, 100);
-  cursor: pointer;
 }
 
 img {
