@@ -134,6 +134,7 @@ header {
   bottom: auto;
   left: 0;
   right: 0;
+  background-image: linear-gradient(0deg, rgba(24,24,24,0) 0%, rgba(24,24,24,1));
 }
 .section-container {
   padding-top: 1rem;
