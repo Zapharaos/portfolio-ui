@@ -101,13 +101,13 @@ defineExpose({
         <li v-if="user.footer.showEmail">
           <a :href="'mailto:'+user.email">
             <p>Email me</p>
-            <svg fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 64 64" width="64px" height="64px"><path d="M 32 6 A 26 26 0 0 0 10.429688 46.460938 L 8 58 L 20.59375 55.347656 A 26 26 0 0 0 32 58 A 26 26 0 0 0 32 6 z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 64 64" width="64px" height="64px"><path d="M 32 6 A 26 26 0 0 0 10.429688 46.460938 L 8 58 L 20.59375 55.347656 A 26 26 0 0 0 32 58 A 26 26 0 0 0 32 6 z"/></svg>
           </a>
         </li>
         <li v-if="user.footer.showResume && user.resume">
           <a :href="user.resume.file" target="_blank">
             <p>My resume</p>
-            <svg fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 50 50" width="50px" height="50px"><path d="M 30.398438 2 L 7 2 L 7 48 L 43 48 L 43 14.601563 Z M 15 28 L 31 28 L 31 30 L 15 30 Z M 35 36 L 15 36 L 15 34 L 35 34 Z M 35 24 L 15 24 L 15 22 L 35 22 Z M 30 15 L 30 4.398438 L 40.601563 15 Z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 50 50" width="50px" height="50px"><path d="M 30.398438 2 L 7 2 L 7 48 L 43 48 L 43 14.601563 Z M 15 28 L 31 28 L 31 30 L 15 30 Z M 35 36 L 15 36 L 15 34 L 35 34 Z M 35 24 L 15 24 L 15 22 L 35 22 Z M 30 15 L 30 4.398438 L 40.601563 15 Z"/></svg>
           </a>
         </li>
         <li
@@ -159,32 +159,22 @@ h2 {
 }
 .email {
   text-decoration: none;
-  animation: color-email 2s ease-in-out infinite alternate;
-}
-.email-container:hover .email-underline {
-  width: 100%;
+  color: var(--color-alternative);
 }
 .email-underline {
   width: 0;
   height: 2px;
-  transition: width 0.3s ease-in-out;
-  animation: bg-color-email-underline 2s ease-in-out infinite alternate;
+  background-color: var(--color-alternative);
 }
-@keyframes color-email {
-  from {
-    color: var(--color-alternative);
-  }
-  to {
-    color: var(--color-primary);
-  }
+.email-container .email, .email-container .email-underline {
+  transition: all 0.3s ease-in-out;
 }
-@keyframes bg-color-email-underline {
-  from {
-    background-color: var(--color-alternative);
-  }
-  to {
-    background-color: var(--color-primary);
-  }
+.email-container:hover .email {
+  color: var(--color-primary);
+}
+.email-container:hover .email-underline {
+  width: 100%;
+  background-color: var(--color-primary);
 }
 
 .copied {
@@ -243,6 +233,7 @@ h2 {
 .links svg, .links :deep(svg) {
   width: 2rem;
   height: 2rem;
+  fill: var(--color-alternative);
 }
 
 .copyright {

@@ -64,7 +64,6 @@ h1, h2, h3, h4, h5, h6,
   font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
-  color: white;
 }
 h1, .h1 {
   font-size: clamp(36px, 5vw, 72px);
@@ -111,14 +110,16 @@ h4, .h4 {
   transition: all 0.5s ease-in-out;
   width: fit-content;
   background-color: var(--color-primary);
-  color: var(--color-text);
+  border: solid 2px var(--color-primary);
+  color: var(--color-text-opposite);
   border-radius: 0.5rem;
   align-items: center;
   gap: 1rem;
-  border: none;
 }
 .btn:hover {
-  background-color: rgba(255, 255, 255, 100);
+  background-color: var(--color-item-bg-secondary);
+  border-color: var(--color-item-asset);
+  color: var(--color-text);
   cursor: pointer;
 }
 
@@ -168,7 +169,7 @@ ul {
   transition: all 0.5s ease-in-out;
 }
 .item .subtitle {
-  color: color-mix(in srgb, #ebebeb, var(--color-item-asset) 18%);;
+  color: color-mix(in srgb, var(--color-text), var(--color-item-asset) 18%);;
 }
 .item .link-open {
   visibility: hidden;
