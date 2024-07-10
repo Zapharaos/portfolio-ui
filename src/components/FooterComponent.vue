@@ -77,11 +77,11 @@ defineExpose({
     <div class="container">
       <div>
         <h2>{{ user.footer.title }}</h2>
-        <h3 class="grey-text">{{ user.footer.subTitle }}</h3>
+        <h3 class="text-alternative">{{ user.footer.subTitle }}</h3>
       </div>
       <div v-if="user.footer.showLocation" class="location">
         <p class="h4">{{ user.location }}</p>
-        <div class="grey-text">
+        <div class="text-alternative">
           <p>{{ currentTime.hours }}</p>
           <span class="animate-1s-blink">:</span>
           <p>{{ currentTime.minutes }}</p>
@@ -90,11 +90,11 @@ defineExpose({
         </div>
       </div>
       <div class="contact">
-        <div class="email-container grey-text" @click="copyEmail">
+        <div class="email-container text-alternative" @click="copyEmail">
           <span v-if="!hasCopiedEmail" class="overline">Click to copy</span>
           <span v-else-if="hasCopiedEmail" class="overline copied">Copied!</span>
           <p class="h4 email">{{ user.email }}</p>
-          <div class="email-underline grey-container"></div>
+          <div class="email-underline bg-alternative"></div>
         </div>
       </div>
       <ul v-if="user.footer.showSocials" class="links">
@@ -117,7 +117,7 @@ defineExpose({
           <a :href="social.url" target="_blank">
             <div>
               <p>{{ social.name }}</p>
-              <span v-if="social.pseudo" class="grey-text">@{{ social.pseudo }}</span>
+              <span v-if="social.pseudo" class="text-alternative">@{{ social.pseudo }}</span>
             </div>
             <img :src="social.image.file" :alt="social.image.name" class="social-icon"/>
           </a>
@@ -125,7 +125,7 @@ defineExpose({
       </ul>
       <div class="copyright caption">
         <p>Copyright © {{ year }} {{ user.name }}. All rights reserved.</p>
-        <p class="grey-text">Design &amp; Development by <a :href="developerLink">{{ developerName }}</a>.</p>
+        <p class="text-alternative">Design &amp; Development by <a :href="developerLink">{{ developerName }}</a>.</p>
       </div>
     </div>
   </footer>
@@ -138,8 +138,8 @@ defineExpose({
 footer {
   display: flex;
   justify-content: center;
-  background: rgb(24,24,24);
-  background: linear-gradient(180deg, rgba(24,24,24,1) 0%, rgba(47,37,22,1) 100%);
+  background: var(--color-background);
+  background: linear-gradient(180deg, var(--color-background) 0%, color-mix(in srgb, var(--color-background), var(--color-primary) 15%) 100%);
 }
 .container {
   display: flex;
@@ -172,7 +172,7 @@ h2 {
 }
 @keyframes color-email {
   from {
-    color: #A89C88;
+    color: var(--color-alternative);
   }
   to {
     color: var(--color-primary);
@@ -180,7 +180,7 @@ h2 {
 }
 @keyframes bg-color-email-underline {
   from {
-    background-color: #A89C88;
+    background-color: var(--color-alternative);
   }
   to {
     background-color: var(--color-primary);
@@ -227,12 +227,12 @@ h2 {
   padding: 0.5rem 0;
   transition: all 0.3s ease-in-out;
   border: solid 2px transparent;
-  border-top-color: #A89C88;
+  border-top-color: var(--color-alternative);
 }
 .links a:hover {
   padding: 0.5rem 1rem;
-  background-color: #423214;
-  border-color: #573E11;
+  background-color: var(--color-item-bg-secondary);
+  border-color: var(--color-item-asset);
   border-radius: 0.5rem;
 }
 .links .social-icon {

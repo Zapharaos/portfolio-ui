@@ -134,7 +134,7 @@ header {
   bottom: auto;
   left: 0;
   right: 0;
-  background-image: linear-gradient(0deg, var(--color-rgba-0-background) 0%, var(--color-rgba-1-background));
+  background-image: linear-gradient(0deg, rgb(from var(--color-background) r g b / 0%) 0%, rgb(from var(--color-background) r g b / 100%));
 }
 .section-container {
   padding-top: 1rem;

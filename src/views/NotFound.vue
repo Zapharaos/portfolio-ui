@@ -162,7 +162,7 @@ onMounted(() => {
               @drop="drop(index)"
           />
         </div>
-        <p class="grey-text">
+        <p class="text-alternative">
           Solve the puzzle to return to homepage :
           <span class="puzzle-score">{{ correctlyPlacedCount }}/{{ totalPieces }}</span>
         </p>

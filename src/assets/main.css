@@ -18,11 +18,11 @@
   animation: blink 1s steps(2, start) infinite;
 }
 
-.grey-container {
-  background-color: #A89C88;
+.bg-alternative {
+  background-color: var(--color-alternative);
 }
-.grey-text {
-  color: #A89C88;
+.text-alternative {
+  color: var(--color-alternative);
 }
 
 body.responsive-menu {
@@ -42,7 +42,7 @@ body.responsive-menu {
   width: 100%;
 }
 .container {
-  max-width: 1024px;
+  max-width: var(--container-max-width);
   width: 100%;
   align-self: center;
   margin: 0 auto;
@@ -110,8 +110,8 @@ h4, .h4 {
   display: flex;
   transition: all 0.5s ease-in-out;
   width: fit-content;
-  background-color: orange;
-  color: black;
+  background-color: var(--color-primary);
+  color: var(--color-text);
   border-radius: 0.5rem;
   align-items: center;
   gap: 1rem;
@@ -158,18 +158,21 @@ ul {
 }
 
 .item {
-  background-color: #2F2516;
+  background-color: var(--color-item-bg);
   border: solid 3px transparent;
   border-radius: 10px;
   padding: 2rem;
-  color: white;
+  color: var(--color-text);
 }
 .item, .item .link-open, .item img {
   transition: all 0.5s ease-in-out;
 }
+.item .subtitle {
+  color: color-mix(in srgb, #ebebeb, var(--color-item-asset) 18%);;
+}
 .item .link-open {
   visibility: hidden;
-  fill: orange;
+  fill: var(--color-primary);
   opacity: 0;
 }
 .item .image-container {
@@ -180,22 +183,22 @@ ul {
   max-width: 100%;
   max-height: 350px;
   border-radius: 10px;
-  box-shadow: 0 0 25px 25px rgba(93, 63, 17, 0.375);
+  box-shadow: 0 0 25px 25px rgb(from var(--color-item-asset) r g b / 0.375);
 }
 .item p {
   text-align: justify;
 }
 .item:hover {
-  background-color: #423214;
-  border-color: #573E11;
+  background-color: var(--color-item-bg-secondary);
+  border-color: var(--color-item-asset);
 }
 .item:hover .link-open {
   visibility: initial;
   opacity: 1;
 }
 .item:hover img{
-  box-shadow: 0 0 25px 25px rgba(93, 63, 17, 0.75);
+  box-shadow: 0 0 25px 25px rgb(from var(--color-item-asset) r g b / 0.85);
 }
 .item.active {
-  border-color: #573E11;
+  border-color: var(--color-item-asset);
 }

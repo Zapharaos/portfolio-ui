@@ -62,7 +62,7 @@ section {
   gap: 3rem;
   z-index: 2;
   align-self: flex-start;
-  max-width: 1024px;
+  max-width: var(--container-max-width);
 }
 
 .hero-title {

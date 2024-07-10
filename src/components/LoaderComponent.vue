@@ -21,9 +21,9 @@
   aspect-ratio: 1;
   border-radius: 50%;
   background:
-      radial-gradient(farthest-side,var(--color-primary) 94%, var(--color-background)) top/8px 8px no-repeat,
+      radial-gradient(farthest-side,var(--color-primary) 95%, var(--color-background)) top/8px 8px no-repeat,
       conic-gradient(var(--color-background) 30%, var(--color-primary));
-  mask: radial-gradient(farthest-side,var(--color-rgba-0-background) calc(100% - 8px), var(--color-background) 0);
+  mask: radial-gradient(farthest-side,rgb(from var(--color-background) r g b / 0%) calc(100% - 8px), var(--color-background) 0);
   animation: loader-spinner 1s infinite linear;
 }
 @keyframes loader-spinner{

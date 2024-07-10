@@ -20,12 +20,17 @@
   --vt-c-text-dark-1: var(--vt-c-white);
   --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
 
-  --container-max-width: 1024px; /* TODO : clamp */
+  /* TODO : max-width clamp, text colors, #ebebeb, button hover, email animation */
+  --container-max-width: 1024px;
   --loader-spinner-width: clamp(100px, 50vw, 300px);
   --404-puzzle-filter: brightness(0) saturate(100%) invert(57%) sepia(95%) saturate(623%) hue-rotate(358deg) brightness(99%) contrast(107%);
   --color-primary: orange;
-  --color-rgba-0-background: rgb(24, 24, 24, 0);
-  --color-rgba-1-background: rgb(24, 24, 24, 1);
+
+  --color-item-bg: color-mix(in srgb, var(--color-background), var(--color-primary) 10%);
+  --color-item-bg-secondary: color-mix(in srgb, var(--color-background), var(--color-primary) 20%);
+  --color-item-asset: color-mix(in srgb, var(--color-background), var(--color-primary) 30%);
+
+  --color-alternative: color-mix(in srgb, #ebebeb, var(--color-item-asset) 45%);
 }
 
 /* semantic color variables for this project */

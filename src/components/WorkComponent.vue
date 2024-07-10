@@ -28,7 +28,6 @@ const prepareItems = computed(() => {
     <template
         v-for="(item, index) in prepareItems"
         :key="index"
-        class="container"
     >
       <ProjectContainer
           v-if="item.showProjects && item.projects && item.projects.length > 0"
