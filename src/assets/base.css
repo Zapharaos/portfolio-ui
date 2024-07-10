@@ -19,6 +19,9 @@
   --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
   --vt-c-text-dark-1: var(--vt-c-white);
   --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
+
+  --loader-spinner-width: clamp(100px, 50vw, 300px);
+  --404-puzzle-filter: brightness(0) saturate(100%) invert(57%) sepia(95%) saturate(623%) hue-rotate(358deg) brightness(99%) contrast(107%);
 }
 
 /* semantic color variables for this project */

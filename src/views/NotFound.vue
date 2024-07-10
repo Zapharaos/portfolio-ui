@@ -195,12 +195,19 @@ section {
 }
 .puzzle-piece {
   box-sizing: border-box;
+  filter: var(--404-puzzle-filter);
+}
+.puzzle-piece:hover {
+  cursor: pointer;
 }
 .puzzle-container p {
   margin-top: 2rem;
 }
 .puzzle-score {
   color: orange;
+}
+svg {
+  fill: white !important;
 }
 @media (max-width: 768px) {
   .container {
