@@ -138,7 +138,7 @@ h4 {
   display: flex;
 }
 .infos svg {
-  color: orange;
+  color: var(--color-primary);
   width: 20px;
   margin-right: 10px;
 }

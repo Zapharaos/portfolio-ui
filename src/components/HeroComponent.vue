@@ -40,10 +40,6 @@ const scrollToSection = (id: string) => {
   height: 100%;
   display: flex;
 }
-.tagline span {
-  color: orange;
-  font-weight: bold
-}
 section {
   min-height: 100svh;
   width: 100%;

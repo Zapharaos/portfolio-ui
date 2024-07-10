@@ -27,7 +27,6 @@ const props = defineProps<{
   gap: 5rem;
 }
 img {
-  border: solid 0.25rem white;
   border-radius: 1rem;
   width: inherit;
   max-width: 350px;

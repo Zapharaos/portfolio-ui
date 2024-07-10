@@ -175,7 +175,7 @@ h2 {
     color: #A89C88;
   }
   to {
-    color: #D4A144;
+    color: var(--color-primary);
   }
 }
 @keyframes bg-color-email-underline {
@@ -183,7 +183,7 @@ h2 {
     background-color: #A89C88;
   }
   to {
-    background-color: #FFA500;
+    background-color: var(--color-primary);
   }
 }
 
@@ -223,7 +223,7 @@ h2 {
   justify-content: space-between;
   align-items: center;
   text-decoration: none;
-  color: white;
+  color: var(--color-text);
   padding: 0.5rem 0;
   transition: all 0.3s ease-in-out;
   border: solid 2px transparent;

@@ -134,7 +134,7 @@ header {
   bottom: auto;
   left: 0;
   right: 0;
-  background-image: linear-gradient(0deg, rgba(24,24,24,0) 0%, rgba(24,24,24,1));
+  background-image: linear-gradient(0deg, var(--color-rgba-0-background) 0%, var(--color-rgba-1-background));
 }
 .section-container {
   padding-top: 1rem;
@@ -196,9 +196,9 @@ a:hover {
 }
 svg {
   visibility: hidden;
-  color: white;
-  stroke: white;
-  fill: white;
+  color: var(--color-text);
+  stroke: var(--color-text);
+  fill: var(--color-text);
   scale: 0;
   transition: all 0.3s ease-in-out;
   width: 24px;

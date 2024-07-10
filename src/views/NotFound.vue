@@ -204,7 +204,7 @@ section {
   margin-top: 2rem;
 }
 .puzzle-score {
-  color: orange;
+  color: var(--color-primary);
 }
 svg {
   fill: white !important;
