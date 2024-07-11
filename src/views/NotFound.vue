@@ -140,6 +140,17 @@ onMounted(() => {
   // Events
   window.addEventListener('resize', onResize);
 });
+
+defineExpose( {
+  puzzlePieces,
+  dragIndex,
+  totalPieces,
+  correctlyPlacedCount,
+  shuffleArray,
+  dragStart,
+  drop,
+  }
+)
 </script>
 
 <template>
