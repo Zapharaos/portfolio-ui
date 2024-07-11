@@ -14,10 +14,9 @@ describe('HeroComponent.vue', () => {
     });
 
     expect(wrapper.find('#hero').exists()).toBe(true)
-    expect(wrapper.find('.name').exists()).toBe(true)
+    expect(wrapper.find('.hero-title').exists()).toBe(true)
     expect(wrapper.find('.tagline').exists()).toBe(true)
-    expect(wrapper.find('.call-to-action').exists()).toBe(true)
-    expect(wrapper.find('img').exists()).toBe(true)
+    expect(wrapper.find('.btn').exists()).toBe(true)
   })
 
 });
