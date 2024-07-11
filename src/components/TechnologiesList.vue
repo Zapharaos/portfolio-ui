@@ -31,8 +31,8 @@ const props = defineProps<{
 }
 .technologies-tag {
   border-radius: 9999px;
-  color: orange;
-  background-color: #5D3F11;
+  color: var(--color-primary);
+  background-color: var(--color-item-asset);
   font-size: .75rem;
   font-weight: 500;
   padding: 0.25rem 0.75rem;

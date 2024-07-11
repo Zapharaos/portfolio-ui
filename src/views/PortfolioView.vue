@@ -7,6 +7,7 @@ import WorkComponent from "@/components/WorkComponent.vue";
 import AboutComponent from "@/components/AboutComponent.vue";
 import HeroComponent from "@/components/HeroComponent.vue";
 import HeaderComponent from "@/components/HeaderComponent.vue";
+import LoaderComponent from "@/components/LoaderComponent.vue";
 
 // Define reactive variables for component state
 let user = ref<User | null>(null)
@@ -52,6 +53,7 @@ defineExpose({
         :user="user"
     />
   </template>
+  <LoaderComponent v-else-if="loading"/>
   <template v-else>
     <h1>Error while fetching data</h1>
   </template>

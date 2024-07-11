@@ -50,9 +50,9 @@ const collapse = () => {
 </script>
 
 <template>
-  <section>
-    <h2>{{ title }}</h2>
-    <ul class="grid-container">
+  <section class="container presentation">
+    <h2 class="section-title">{{ title }}</h2>
+    <ul class="section-content grid">
       <ExperienceCard
         v-for="(experience, index) in sortedExperiences.filter(i => !i.hidden)"
         :key="index"
@@ -66,12 +66,7 @@ const collapse = () => {
 </template>
 
 <style scoped>
-section {
-  display: flex;
-  flex-direction: column;
-  gap: 3rem
-}
-.grid-container {
+.grid {
   grid-template-columns: 1fr;
 }
 </style>

@@ -1,22 +1,26 @@
 import { expect, describe, test, vi } from 'vitest';
 import { mount } from '@vue/test-utils';
 import NotFound from '@/views/NotFound.vue';
+import {useRouter} from "vue-router";
 
-// Mock the vue-router dependency
-vi.mock('vue-router')
+vi.mock('vue-router', () => ({
+  useRoute: vi.fn(),
+  useRouter: vi.fn(() => ({
+    push: () => {},
+  })),
+}));
 
 describe('NotFound.vue', () => {
 
   test('navigates to home on button click', async () => {
-    const mockRouter = {
-      push: vi.fn()
-    }
+    const push = vi.fn();
+    (useRouter as ReturnType<typeof vi.fn>).mockImplementationOnce(() => ({
+      push,
+    }));
 
     const wrapper = mount(NotFound, {
       global: {
-        mocks: {
-          $router: mockRouter
-        }
+        stubs: ["router-link", "router-view"]
       }
     });
 
@@ -24,8 +28,8 @@ describe('NotFound.vue', () => {
 
     // Assert that the mocked router push function was called
     // once and with the expected arguments for navigating to Home
-    expect(mockRouter.push).toHaveBeenCalledTimes(1)
-    expect(mockRouter.push).toHaveBeenCalledWith({ name: 'PortfolioView' });
+    expect(push).toHaveBeenCalledTimes(1)
+    expect(push).toHaveBeenCalledWith({ name: 'PortfolioView' });
   });
 
   test('createPuzzlePieces creates pieces with same background size and varying positions', () => {
@@ -98,58 +102,56 @@ describe('NotFound.vue', () => {
   test('drop swaps pieces', async () => {
     const wrapper = mount(NotFound);
 
-    // Overwriting puzzlePieces for simplicity
-    wrapper.vm.puzzlePieces = [
-      { style: {}, correctIndex: 0 },
-      { style: {}, correctIndex: 1 },
-    ];
+    // Copying previous correctIndex values before performing a drag-and-drop
+    const prevCorrectIndexAt0 = wrapper.vm.puzzlePieces[0].correctIndex;
+    const prevCorrectIndexAt1 = wrapper.vm.puzzlePieces[1].correctIndex;
 
     // Running swap functions
     wrapper.vm.dragStart(0);
     wrapper.vm.drop(1);
 
     // Assert that the correctIndex values of the pieces are swapped after drop
-    expect(wrapper.vm.puzzlePieces[0].correctIndex).toBe(1);
-    expect(wrapper.vm.puzzlePieces[1].correctIndex).toBe(0);
+    expect(wrapper.vm.puzzlePieces[0].correctIndex).toBe(prevCorrectIndexAt1);
+    expect(wrapper.vm.puzzlePieces[1].correctIndex).toBe(prevCorrectIndexAt0);
 
     // Assert that dragIndex is reset to null after drop
     expect(wrapper.vm.dragIndex).toBeNull;
   });
 
   test('finishing puzzle and redirecting to home', async () => {
-
-    const mockRouter = {
-      push: vi.fn()
-    }
+    const push = vi.fn();
+    (useRouter as ReturnType<typeof vi.fn>).mockImplementationOnce(() => ({
+      push,
+    }));
 
     const wrapper = mount(NotFound, {
       global: {
-        mocks: {
-          $router: mockRouter
-        }
+        stubs: ["router-link", "router-view"],
       }
     });
 
-    // Overwriting puzzlePieces for simplicity
-    wrapper.vm.puzzlePieces = [
-      { style: {}, correctIndex: 1 },
-      { style: {}, correctIndex: 0 },
-    ];
-    wrapper.vm.totalPieces = wrapper.vm.puzzlePieces.length
+    // Assert that the puzzle has yet to be solved
+    expect(wrapper.vm.correctlyPlacedCount).not.toBe(wrapper.vm.totalPieces);
 
-    // Running swap functions
+    // Solving puzzle
+    wrapper.vm.puzzlePieces.sort((a: any, b: any) => a.correctIndex - b.correctIndex);
+
+    // Still need to call the drop function to officially trigger the end of the puzzle
+    // Let's switch back and forth two items
     wrapper.vm.dragStart(0);
     wrapper.vm.drop(1);
+    wrapper.vm.dragStart(1);
+    wrapper.vm.drop(0);
 
     // Wait for the timeout using await and advance time by 1s
     await new Promise(resolve => setTimeout(resolve, 1000));
 
-    // Assert that both pieces are placed correctly (correctlyPlacedCount is 2)
-    expect(wrapper.vm.correctlyPlacedCount).toBe(2);
+    // Assert that pieces are placed correctly
+    expect(wrapper.vm.correctlyPlacedCount).toBe(wrapper.vm.totalPieces);
 
     // Assert that the mocked router push function was called once
     // and with the expected arguments for navigating to Home
-    expect(mockRouter.push).toHaveBeenCalledTimes(1)
-    expect(mockRouter.push).toHaveBeenCalledWith({ name: 'PortfolioView' });
+    expect(push).toHaveBeenCalledTimes(1)
+    expect(push).toHaveBeenCalledWith({ name: 'PortfolioView' });
   });
 });

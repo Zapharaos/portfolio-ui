@@ -73,77 +73,80 @@ defineExpose({
 </script>
 
 <template>
-  <footer id="footer">
-    <div>
-      <h1>{{ user.footer.title }}</h1>
-      <h2 class="grey-text">{{ user.footer.subTitle }}</h2>
-    </div>
-    <div v-if="user.footer.showLocation" class="location">
-      <p>{{ user.location }}</p>
-      <div class="grey-text">
-        <p>{{ currentTime.hours }}</p>
-        <span class="animate-1s-blink">:</span>
-        <p>{{ currentTime.minutes }}</p>
-        <span class="animate-1s-blink">:</span>
-        <p>{{ currentTime.seconds }}</p>
+  <footer id="footer" class="section-container">
+    <div class="container">
+      <div>
+        <h2>{{ user.footer.title }}</h2>
+        <h3 class="text-alternative">{{ user.footer.subTitle }}</h3>
       </div>
-    </div>
-    <div class="contact">
-      <div class="email-container grey-text" @click="copyEmail">
-        <span v-if="!hasCopiedEmail">Click to copy</span>
-        <span v-else-if="hasCopiedEmail" class="copied">Copied!</span>
-        <p class="email">{{ user.email }}</p>
-        <div class="email-underline grey-container"></div>
+      <div v-if="user.footer.showLocation" class="location">
+        <p class="h4">{{ user.location }}</p>
+        <div class="text-alternative">
+          <p>{{ currentTime.hours }}</p>
+          <span class="animate-1s-blink">:</span>
+          <p>{{ currentTime.minutes }}</p>
+          <span class="animate-1s-blink">:</span>
+          <p>{{ currentTime.seconds }}</p>
+        </div>
       </div>
-    </div>
-    <ul v-if="user.footer.showSocials" class="links">
-      <li v-if="user.footer.showEmail">
-        <a :href="'mailto:'+user.email">
-          <p>Email me</p>
-          <svg fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 64 64" width="64px" height="64px"><path d="M 32 6 A 26 26 0 0 0 10.429688 46.460938 L 8 58 L 20.59375 55.347656 A 26 26 0 0 0 32 58 A 26 26 0 0 0 32 6 z"/></svg>
-        </a>
-      </li>
-      <li v-if="user.footer.showResume && user.resume">
-        <a :href="user.resume.file" target="_blank">
-          <p>My resume</p>
-          <svg fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 50 50" width="50px" height="50px"><path d="M 30.398438 2 L 7 2 L 7 48 L 43 48 L 43 14.601563 Z M 15 28 L 31 28 L 31 30 L 15 30 Z M 35 36 L 15 36 L 15 34 L 35 34 Z M 35 24 L 15 24 L 15 22 L 35 22 Z M 30 15 L 30 4.398438 L 40.601563 15 Z"/></svg>
-        </a>
-      </li>
-      <li
-        v-for="(social, index) in prepareSocials"
-        :key="index"
-      >
-        <a :href="social.url" target="_blank">
-          <div>
-            <p>{{ social.name }}</p>
-            <span v-if="social.pseudo" class="grey-text">@{{ social.pseudo }}</span>
-          </div>
-          <img :src="social.image.file" :alt="social.image.name" class="social-icon"/>
-        </a>
-      </li>
-    </ul>
-    <div class="copyright">
-      <p>Copyright © {{ year }} {{ user.name }}. All rights reserved.</p>
-      <p class="grey-text">Design &amp; Development by <a :href="developerLink">{{ developerName }}</a>.</p>
+      <div class="contact">
+        <div class="email-container text-alternative" @click="copyEmail">
+          <span v-if="!hasCopiedEmail" class="overline">Click to copy</span>
+          <span v-else-if="hasCopiedEmail" class="overline copied">Copied!</span>
+          <p class="h4 email">{{ user.email }}</p>
+          <div class="email-underline bg-alternative"></div>
+        </div>
+      </div>
+      <ul v-if="user.footer.showSocials" class="links">
+        <li v-if="user.footer.showEmail">
+          <a :href="'mailto:'+user.email">
+            <p>Email me</p>
+            <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 64 64" width="64px" height="64px"><path d="M 32 6 A 26 26 0 0 0 10.429688 46.460938 L 8 58 L 20.59375 55.347656 A 26 26 0 0 0 32 58 A 26 26 0 0 0 32 6 z"/></svg>
+          </a>
+        </li>
+        <li v-if="user.footer.showResume && user.resume">
+          <a :href="user.resume.file" target="_blank">
+            <p>My resume</p>
+            <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 50 50" width="50px" height="50px"><path d="M 30.398438 2 L 7 2 L 7 48 L 43 48 L 43 14.601563 Z M 15 28 L 31 28 L 31 30 L 15 30 Z M 35 36 L 15 36 L 15 34 L 35 34 Z M 35 24 L 15 24 L 15 22 L 35 22 Z M 30 15 L 30 4.398438 L 40.601563 15 Z"/></svg>
+          </a>
+        </li>
+        <li
+            v-for="(social, index) in prepareSocials"
+            :key="index"
+        >
+          <a :href="social.url" target="_blank">
+            <div>
+              <p>{{ social.name }}</p>
+              <span v-if="social.pseudo" class="text-alternative">@{{ social.pseudo }}</span>
+            </div>
+            <img :src="social.image.file" :alt="social.image.name" class="social-icon"/>
+          </a>
+        </li>
+      </ul>
+      <div class="copyright caption">
+        <p>Copyright © {{ year }} {{ user.name }}. All rights reserved.</p>
+        <p class="text-alternative">Design &amp; Development by <a :href="developerLink">{{ developerName }}</a>.</p>
+      </div>
     </div>
   </footer>
 </template>
 
 <style scoped>
+.section-container {
+  padding-bottom: 0.5rem;
+}
 footer {
-  width: 100%;
-  padding: 20px 5rem;
-  margin-top: 5rem;
-  color: white;
+  display: flex;
+  justify-content: center;
+  background: var(--color-background);
+  background: linear-gradient(180deg, var(--color-background) 0%, color-mix(in srgb, var(--color-background), var(--color-primary) 15%) 100%);
+}
+.container {
   display: flex;
   flex-direction: column;
   row-gap: 3.5rem;
 }
-h1 {
-  font-size: 4.5rem;
-}
 h2 {
-  font-size: 3rem;
   line-height: 100%;
 }
 
@@ -154,22 +157,24 @@ h2 {
 .email-container:hover {
   cursor: pointer;
 }
-.email-container span {
-  font-size: 12px;
-  text-transform: uppercase;
-}
 .email {
-  font-size: 2rem;
   text-decoration: none;
-  line-height: 110%;
-}
-.email-container:hover .email-underline {
-  width: 100%;
+  color: var(--color-alternative);
 }
 .email-underline {
   width: 0;
   height: 2px;
-  transition: width 0.3s ease-in-out;
+  background-color: var(--color-alternative);
+}
+.email-container .email, .email-container .email-underline {
+  transition: all 0.3s ease-in-out;
+}
+.email-container:hover .email {
+  color: var(--color-primary);
+}
+.email-container:hover .email-underline {
+  width: 100%;
+  background-color: var(--color-primary);
 }
 
 .copied {
@@ -186,9 +191,6 @@ h2 {
   }
 }
 
-.location {
-  font-size: 1.5rem;
-}
 .location div {
   display: flex;
   line-height: 100%;
@@ -211,20 +213,17 @@ h2 {
   justify-content: space-between;
   align-items: center;
   text-decoration: none;
-  color: white;
+  color: var(--color-text);
   padding: 0.5rem 0;
   transition: all 0.3s ease-in-out;
-  border: solid 1px transparent;
-  border-top-color: white;
+  border: solid 2px transparent;
+  border-top-color: var(--color-alternative);
 }
 .links a:hover {
-  padding: 0.5rem;
-  background-color: gray;
-  border-color: gray;
+  padding: 0.5rem 1rem;
+  background-color: var(--color-item-bg-secondary);
+  border-color: var(--color-item-asset);
   border-radius: 0.5rem;
-}
-.links p {
-  font-size: 1.2rem;
 }
 .links .social-icon {
   display: flex;
@@ -234,6 +233,7 @@ h2 {
 .links svg, .links :deep(svg) {
   width: 2rem;
   height: 2rem;
+  fill: var(--color-alternative);
 }
 
 .copyright {
@@ -243,8 +243,6 @@ h2 {
 }
 .copyright p {
   margin-right: 10px;
-  font-size: 14px;
-  font-weight: 200;
 }
 .copyright a, .copyright a:-webkit-any-link {
   color: inherit;
@@ -252,17 +250,7 @@ h2 {
 
 @media (max-width: 1200px) {
   h1 {
-    font-size: 3.5rem;
     line-height: 120%;
-  }
-}
-
-@media (max-width: 991px) {
-  footer {
-    padding: 20px 2rem;
-  }
-  h1 {
-    font-size: 3rem;
   }
 }
 
@@ -274,35 +262,26 @@ h2 {
   h1 {
     line-height: 100%;
   }
-  h2 {
-    font-size: 2rem;
-  }
   h1+h2 {
     margin-top: 1.5rem;
-  }
-  .location {
-    font-size: 1.125rem;
   }
   .location div {
     justify-content: center;
   }
-  .email {
-    font-size: 1.25rem;
-  }
-  .email-container span {
-    font-size: 10px;
-  }
   .links {
     flex-direction: column;
+    max-width: 400px;
+    width: 100%;
+    align-self: center;
   }
   .links div {
     text-align: left;
   }
-  .links p {
-    font-size: 1rem;
-  }
   .links a:hover {
     border-radius: 0;
+  }
+  .links li:hover + li a {
+    border-top-color: transparent;
   }
   .copyright {
     flex-direction: column;

@@ -30,12 +30,12 @@ function collapse(event: Event): void {
   <li class="item" :class="{ 'active': isActive }">
     <div class="item-header" @click="$emit('activate')">
       <div class="item-title">
-        <h3>
+        <h3 class="card-title">
           {{ experience.title }}
         </h3>
-        <p class="grey-text">
+        <h4 class="text-alternative subtitle">
           @ {{ experience.organisation }}
-        </p>
+        </h4>
       </div>
       <button @click="collapse">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -46,7 +46,7 @@ function collapse(event: Event): void {
     <div class="item-content">
       <div class="wrapper">
         <div class="inner">
-          <div class="infos">
+          <div class="infos text-alternative">
             <p v-if="experience.period">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M21 10H3M16 2V6M8 2V6M7.8 22H16.2C17.8802 22 18.7202 22 19.362 21.673C19.9265 21.3854 20.3854 20.9265 20.673 20.362C21 19.7202 21 18.8802 21 17.2V8.8C21 7.11984 21 6.27976 20.673 5.63803C20.3854 5.07354 19.9265 4.6146 19.362 4.32698C18.7202 4 17.8802 4 16.2 4H7.8C6.11984 4 5.27976 4 4.63803 4.32698C4.07354 4.6146 3.6146 5.07354 3.32698 5.63803C3 6.27976 3 7.11984 3 8.8V17.2C3 18.8802 3 19.7202 3.32698 20.362C3.6146 20.9265 4.07354 21.3854 4.63803 21.673C5.27976 22 6.11984 22 7.8 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -58,7 +58,7 @@ function collapse(event: Event): void {
                 <path d="M12 22C14 18 20 15.4183 20 10C20 5.58172 16.4183 2 12 2C7.58172 2 4 5.58172 4 10C4 15.4183 10 18 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>{{ experience.location }}
             </p>
-            <a v-if="experience.url" :href="experience.url" target="_blank">
+            <a v-if="experience.url" :href="experience.url" target="_blank" class="text-alternative">
               <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M6 18L18 6M18 6H10M18 6V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>{{ experience.urlShort ? experience.urlShort : experience.url }}
@@ -102,12 +102,8 @@ function collapse(event: Event): void {
   gap: 0 1rem;
   flex-wrap: wrap;
 }
-.item-title p {
-  font-size: 1.25rem;
-  font-weight: 500;
-}
 .item-header button {
-  color: orange;
+  color: var(--color-primary);
   background-color: transparent;
   border: none;
   border-radius: 5px;
@@ -139,12 +135,11 @@ function collapse(event: Event): void {
   display: flex;
 }
 .infos svg {
-  color: orange;
+  color: var(--color-primary);
   width: 20px;
   margin-right: 10px;
 }
 .infos a {
-  color: white;
   text-decoration: none;
 }
 .infos a:hover {
@@ -154,9 +149,6 @@ function collapse(event: Event): void {
 
 /* Animations */
 
-.item {
-  transition: gap 0.5s ease, padding 0.5s ease;
-}
 .item-header svg {
   transition: transform .5s ease;
 }
@@ -181,7 +173,7 @@ function collapse(event: Event): void {
   cursor: pointer;
 }
 .active .item-header button:hover {
-  background-color: #5D3F11;
+  background-color: var(--color-item-asset);
 }
 .active .item-header svg {
   transform: rotate(calc(360deg + 180deg));
