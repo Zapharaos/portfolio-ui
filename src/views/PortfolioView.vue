@@ -51,10 +51,11 @@ defineExpose({
     <FooterComponent
         :user="user"
     />
+
   </template>
   <LoaderComponent v-else-if="loading"/>
   <template v-else>
-    <h1>Error while fetching data</h1>
+    <h1 class="center">Error while fetching data</h1>
   </template>
 </template>
 
