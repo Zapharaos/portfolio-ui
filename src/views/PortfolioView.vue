@@ -18,7 +18,6 @@ let error = ref<string | null>(null)
 async function fetchData() {
   try {
     user.value = await getUserData()
-    console.log(user.value)
   } catch (err) {
     error.value = (err as Error).message
   } finally {
