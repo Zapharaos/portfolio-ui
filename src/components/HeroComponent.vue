@@ -76,6 +76,7 @@ svg {
 }
 
 .wrapper {
+  z-index: 1;
   justify-content: flex-end;
   align-items: center;
   display: flex;
@@ -87,11 +88,10 @@ svg {
   overflow: hidden;
 }
 .bg-gradient {
-  z-index: 1;
+  z-index: 2;
   width: 50vw;
   height: 100%;
-  /*background-image: linear-gradient(90deg, color-mix(in srgb, var(--color-background), grey 50%) 67%, rgba(80, 80, 80, 0));*/
-  background-image: linear-gradient(90deg, var(--color-background) 67%, rgba(80, 80, 80, 0));
+  background-image: linear-gradient(90deg, var(--color-background) 60%, rgba(80, 80, 80, 0));
   position: absolute;
   top: 0;
   bottom: auto;
@@ -120,6 +120,20 @@ img {
   object-fit: cover;
 }
 
+@media (min-width: 993px) and (max-width: 1200px) {
+  .bg-gradient {
+    width: 45vw;
+    background-image: linear-gradient(90deg, var(--color-background) 50%, rgba(80, 80, 80, 0));
+  }
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+  .bg-gradient {
+    width: 20vw;
+    background-image: linear-gradient(90deg, var(--color-background) 25%, rgba(80, 80, 80, 0));
+  }
+}
+
 @media (max-width: 768px) {
   section {
     text-align: center;
@@ -129,6 +143,9 @@ img {
     gap: 3.5rem;
   }
   .tagline p {
+    width: auto;
+  }
+  .bg-gradient {
     width: auto;
   }
 }
