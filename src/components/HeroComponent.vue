@@ -40,20 +40,6 @@ const scrollToSection = (id: string) => {
         </div>
     </div>
   </section>
-  <div class="container">
-    <div class="test">
-      <h1 class="hero-title">{{ hero.title }}</h1>
-      <div class="tagline">
-        <p class="h4" v-html="hero.tagline"></p>
-      </div>
-      <a @click="scrollToSection('work')" class="btn text-button">
-        <p>{{ hero.callToActionContent }}</p>
-        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" class="iconify iconify--tabler" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
-          <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-6 6l6-6m-6-6l6 6"></path>
-        </svg>
-      </a>
-    </div>
-  </div>
 </template>
 
 <style scoped>
