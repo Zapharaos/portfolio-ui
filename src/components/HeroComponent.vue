@@ -34,10 +34,11 @@ const scrollToSection = (id: string) => {
       </div>
     </div>
     <div class="wrapper">
-      <div class="bg-transition-filler"/>
+      <div class="bg-gradient"/>
       <div class="content">
+        <div class="image-gradient"/>
         <img :src="hero.backgroundImage.file" :alt="hero.backgroundImage.name" />
-        </div>
+      </div>
     </div>
   </section>
 </template>
@@ -85,9 +86,9 @@ svg {
   right: 0;
   overflow: hidden;
 }
-.bg-transition-filler {
+.bg-gradient {
   z-index: 1;
-  width: 60vw;
+  width: 50vw;
   height: 100%;
   /*background-image: linear-gradient(90deg, color-mix(in srgb, var(--color-background), grey 50%) 67%, rgba(80, 80, 80, 0));*/
   background-image: linear-gradient(90deg, var(--color-background) 67%, rgba(80, 80, 80, 0));
@@ -107,9 +108,16 @@ svg {
   left: auto;
   right: 0;
 }
+.image-gradient {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(circle, transparent 50%, var(--color-background) 100%);
+}
 img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
 }
 
 @media (max-width: 768px) {
