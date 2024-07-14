@@ -7,7 +7,7 @@
   --container-max-width: clamp(1024px, 100vw, 1280px);
   --loader-spinner-width: clamp(100px, 50vw, 300px);
   --404-puzzle-filter: brightness(0) saturate(100%) invert(57%) sepia(95%) saturate(623%) hue-rotate(358deg) brightness(99%) contrast(107%);
-  --color-primary: grey;
+  --color-primary: orange;
   --color-alternative: color-mix(in srgb, var(--color-text), var(--color-item-asset) 45%);
 
   --color-item-bg: color-mix(in srgb, var(--color-background), var(--color-primary) 10%);
