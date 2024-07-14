@@ -116,7 +116,7 @@ button:hover {
 }
 
 .theme-toggle:is(:hover) > .sun-and-moon > :is(.moon, .sun) {
-  fill: var(--color-alternative);
+  fill: var(--color-header-hover);
 }
 
 .sun-and-moon > .sun-beams {
@@ -125,7 +125,7 @@ button:hover {
 }
 
 .theme-toggle:is(:hover) .sun-and-moon > .sun-beams {
-  stroke: var(--color-alternative);
+  stroke: var(--color-header-hover);
 }
 
 html:not(.light) .sun-and-moon > .sun {

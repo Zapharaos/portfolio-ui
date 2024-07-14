@@ -14,20 +14,8 @@
   --color-item-asset: color-mix(in srgb, var(--color-background), var(--color-primary) 30%);
 
   --color-alternative: color-mix(in srgb, var(--color-text), var(--color-item-asset) 45%);
-}
-
-/* default theming to dark */
-:root {
-  --color-background: var(--dark-color);
-  --color-text: var(--light-color);
-  --color-text-opposite: var(--dark-color);
-}
-@media (prefers-color-scheme: light) {
-  :root {
-    --color-background: var(--light-color);
-    --color-text: var(--dark-color);
-    --color-text-opposite: var(--light-color);
-  }
+  --color-header-hover-light: color-mix(in srgb, var(--color-text), var(--color-background) 15%);
+  --color-header-hover-dark: color-mix(in srgb, var(--color-background), var(--color-text) 50%);
 }
 
 /* default theming to dark */
@@ -36,14 +24,15 @@ html, html.dark {
   --color-background: var(--dark-color);
   --color-text: var(--light-color);
   --color-text-opposite: var(--dark-color);
+  --color-header-hover: var(--color-header-hover-dark)
 }
 html.light {
   color-scheme: light;
   --color-background: var(--light-color);
   --color-text: var(--dark-color);
   --color-text-opposite: var(--light-color);
+  --color-header-hover: var(--color-header-hover-light)
 }
-
 
 *,
 *::before,

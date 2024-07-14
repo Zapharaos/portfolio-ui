@@ -176,7 +176,7 @@ li a {
   transition: opacity .9s cubic-bezier(.215,.61,.355,1);
 }
 li a:hover {
-  opacity: 0.4;
+  color: var(--color-header-hover);
 }
 a:hover {
   cursor: pointer;
