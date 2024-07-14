@@ -157,6 +157,7 @@ nav {
 }
 .logo img {
   height: 1.5rem;
+  filter: var(--filter-header-logo);
 }
 ul {
   list-style-type: none;
