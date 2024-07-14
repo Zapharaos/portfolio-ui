@@ -2,6 +2,8 @@
   --dark-color: #181818;
   --light-color: #ffffff;
 
+  --text-line-height: 1.6;
+
   --container-max-width: clamp(1024px, 100vw, 1280px);
   --loader-spinner-width: clamp(100px, 50vw, 300px);
   --404-puzzle-filter: brightness(0) saturate(100%) invert(57%) sepia(95%) saturate(623%) hue-rotate(358deg) brightness(99%) contrast(107%);
@@ -44,7 +46,7 @@ body {
   transition:
     color 0.5s,
     background-color 0.5s;
-  line-height: 1.6;
+  line-height: var(--text-line-height);
   font-family:
     "Open Sans",
     Inter,
