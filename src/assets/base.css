@@ -16,20 +16,34 @@
   --color-alternative: color-mix(in srgb, var(--color-text), var(--color-item-asset) 45%);
 }
 
-/* semantic color variables for this project */
+/* default theming to dark */
 :root {
+  --color-background: var(--dark-color);
+  --color-text: var(--light-color);
+  --color-text-opposite: var(--dark-color);
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-background: var(--light-color);
+    --color-text: var(--dark-color);
+    --color-text-opposite: var(--light-color);
+  }
+}
+
+/* default theming to dark */
+html, html.dark {
+  color-scheme: dark;
+  --color-background: var(--dark-color);
+  --color-text: var(--light-color);
+  --color-text-opposite: var(--dark-color);
+}
+html.light {
+  color-scheme: light;
   --color-background: var(--light-color);
   --color-text: var(--dark-color);
   --color-text-opposite: var(--light-color);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-background: var(--dark-color);
-    --color-text: var(--light-color);
-    --color-text-opposite: var(--dark-color);
-  }
-}
 
 *,
 *::before,

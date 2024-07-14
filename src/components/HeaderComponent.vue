@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {onMounted, ref} from "vue";
 import type {FileType} from "@/types/models";
+import ThemeToggler from "@/components/ThemeToggler.vue";
 
 // Define the props for the component
 const props = defineProps<{
@@ -116,6 +117,9 @@ defineExpose({
               Contact
             </a>
           </li>
+          <li>
+            <ThemeToggler/>
+          </li>
         </ul>
       </nav>
     </div>
@@ -163,6 +167,10 @@ ul {
 }
 li:not(:first-child) {
   margin-left: 2rem;
+}
+li:last-child {
+  display: flex;
+  justify-content: center;
 }
 li a {
   transition: opacity .9s cubic-bezier(.215,.61,.355,1);
