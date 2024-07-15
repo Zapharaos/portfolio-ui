@@ -6,28 +6,6 @@ import { mockFileType } from '@/__test__/mocks'
 
 describe('HeaderComponent.vue', () => {
 
-  // Mock window.matchMedia
-  Object.defineProperty(window, 'matchMedia', {
-    writable: true,
-    value: vi.fn().mockImplementation(query => ({
-      matches: false,
-      media: query,
-      onchange: null,
-      addListener: vi.fn(), // deprecated
-      removeListener: vi.fn(), // deprecated
-      addEventListener: vi.fn(),
-      removeEventListener: vi.fn(),
-      dispatchEvent: vi.fn(),
-    })),
-  })
-
-  beforeEach(() => {
-    // creates a fresh pinia and makes it active
-    // so it's automatically picked up by any useStore() call
-    // without having to pass it to it: `useStore(pinia)`
-    setActivePinia(createPinia())
-  })
-
   afterEach(() => {
     document.documentElement.scrollTop = 0;
   })
