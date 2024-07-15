@@ -1,74 +1,13 @@
 <script setup lang="ts">
 
-import {onMounted} from "vue";
+import { useThemeStore } from '@/stores/theme'
 
-enum Theme {
- DARK = "dark",
- LIGHT = "light"
-}
-
-/* Credits : https://web.dev/patterns/theming/theme-switch?hl=fr#js */
-
-const storageKey = 'theme-preference'
-
-const toggleTheme = () => {
-  theme.value = theme.value === Theme.LIGHT
-      ? Theme.DARK
-      : Theme.LIGHT
-  setPreference()
-}
-
-const getColorPreference = () => {
-  if (localStorage.getItem(storageKey))
-    return localStorage.getItem(storageKey)
-  else
-    return window.matchMedia('(prefers-color-scheme: dark)').matches
-        ? Theme.DARK
-        : Theme.LIGHT
-}
-
-const setPreference = () => {
-  localStorage.setItem(storageKey, theme.value as string)
-  reflectPreference()
-}
-
-const reflectPreference = () => {
-  if (theme.value === Theme.DARK) {
-    document.firstElementChild?.classList.remove(Theme.LIGHT)
-    document.firstElementChild?.classList.add(Theme.DARK)
-  }
-  else {
-    document.firstElementChild?.classList.remove(Theme.DARK)
-    document.firstElementChild?.classList.add(Theme.LIGHT)
-  }
-}
-
-const theme = {
-  value: getColorPreference(),
-}
-
-onMounted(() => {
-  // set early so no page flashes / CSS is made aware
-  reflectPreference()
-
-  window.onload = () => {
-    // set on load so screen readers can see latest value on the button
-    reflectPreference()
-  }
-
-  // sync with system changes
-  window
-      .matchMedia('(prefers-color-scheme: dark)')
-      .addEventListener('change', ({matches:isDark}) => {
-        theme.value = isDark ? Theme.DARK : Theme.LIGHT
-        setPreference()
-      })
-})
+const themeStore = useThemeStore()
 </script>
 
 <template>
   <!--  Credits : https://web.dev/patterns/theming/theme-switch?hl=fr#js-->
-  <button @click="toggleTheme" class="theme-toggle" title="Toggles light & dark" aria-label="auto" aria-live="polite">
+  <button @click="themeStore.toggleTheme()" class="theme-toggle" title="Toggles light & dark" aria-label="auto" aria-live="polite">
     <svg class="sun-and-moon" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
       <mask class="moon" id="moon-mask">
         <rect x="0" y="0" width="100%" height="100%" fill="white" />
