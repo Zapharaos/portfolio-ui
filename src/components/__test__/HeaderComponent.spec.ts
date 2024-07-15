@@ -1,15 +1,38 @@
-import {expect, describe, test, vi, afterEach} from 'vitest';
+import {expect, describe, test, vi, beforeEach, afterEach} from 'vitest';
 import {enableAutoUnmount, mount} from '@vue/test-utils';
+import { setActivePinia, createPinia } from 'pinia'
 import HeaderComponent from '@/components/HeaderComponent.vue';
 import { mockFileType } from '@/__test__/mocks'
 
 describe('HeaderComponent.vue', () => {
 
-  enableAutoUnmount(afterEach);
+  // Mock window.matchMedia
+  Object.defineProperty(window, 'matchMedia', {
+    writable: true,
+    value: vi.fn().mockImplementation(query => ({
+      matches: false,
+      media: query,
+      onchange: null,
+      addListener: vi.fn(), // deprecated
+      removeListener: vi.fn(), // deprecated
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+      dispatchEvent: vi.fn(),
+    })),
+  })
+
+  beforeEach(() => {
+    // creates a fresh pinia and makes it active
+    // so it's automatically picked up by any useStore() call
+    // without having to pass it to it: `useStore(pinia)`
+    setActivePinia(createPinia())
+  })
 
   afterEach(() => {
     document.documentElement.scrollTop = 0;
   })
+
+  enableAutoUnmount(afterEach);
 
   test('handleScroll to quit if the menu is shown', async () => {
     const wrapper = mount(HeaderComponent, {
