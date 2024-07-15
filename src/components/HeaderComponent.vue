@@ -2,11 +2,14 @@
 import {onMounted, ref} from "vue";
 import type {FileType} from "@/types/models";
 import ThemeToggler from "@/components/ThemeToggler.vue";
+import { useThemeStore } from '@/stores/theme'
 
 // Define the props for the component
 const props = defineProps<{
   logo: FileType
 }>()
+
+const themeStore = useThemeStore();
 
 const lastScrollTop = ref(0); // Tracks the last scroll position for header visibility
 const showResponsiveMenu = ref(false); // Flag to indicate if responsive menu is open
@@ -117,7 +120,7 @@ defineExpose({
               Contact
             </a>
           </li>
-          <li>
+          <li v-if="!themeStore.hasSingleTheme">
             <ThemeToggler/>
           </li>
         </ul>

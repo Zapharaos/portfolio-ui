@@ -51,7 +51,6 @@ defineExpose({
     <FooterComponent
         :user="user"
     />
-
   </template>
   <LoaderComponent v-else-if="loading"/>
   <template v-else>

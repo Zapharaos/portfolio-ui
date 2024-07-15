@@ -4,7 +4,7 @@ const themeStore = useThemeStore()
 </script>
 
 <template>
-  <!--  Credits : https://web.dev/patterns/theming/theme-switch?hl=fr#js-->
+  <!--  Credits : https://web.dev/articles/building/a-theme-switch-component?hl=fr -->
   <button @click="themeStore.toggleTheme()" class="theme-toggle" title="Toggles light & dark" aria-label="auto" aria-live="polite">
     <svg class="sun-and-moon" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
       <mask class="moon" id="moon-mask">
@@ -43,7 +43,7 @@ button:hover {
   }
 }
 
-/* Credits : https://web.dev/patterns/theming/theme-switch?hl=fr#js */
+/* Credits : https://web.dev/articles/building/a-theme-switch-component?hl=fr */
 .sun-and-moon > :is(.moon, .sun, .sun-beams) {
   transform-origin: center;
 }
