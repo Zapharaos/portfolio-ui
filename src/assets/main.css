@@ -203,3 +203,16 @@ ul {
 .item.active {
   border-color: var(--color-item-asset);
 }
+
+.text span {
+  color: var(--color-primary);
+  font-weight: bold;
+}
+.text a {
+  color: var(--color-alternative);
+  text-decoration: none;
+}
+.text a:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}

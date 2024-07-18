@@ -34,6 +34,7 @@
   max-width: calc(var(--loader-spinner-width)/2);
   position: absolute;
   animation: logo-loader 1s infinite alternate ease-in-out;
+  filter: var(--filter-img-color);
 }
 @keyframes logo-loader {
   from { transform: scale(1); }  /* Start at original size */

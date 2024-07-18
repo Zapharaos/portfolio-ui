@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type {Social, User} from "@/types/models";
 import {computed, onMounted, ref} from "vue";
+import svgMessage from "@/assets/message.svg"
+import svgDocument from "@/assets/document.svg"
 
 // Define the props for the component
 const props = defineProps<{
@@ -101,13 +103,13 @@ defineExpose({
         <li v-if="user.footer.showEmail">
           <a :href="'mailto:'+user.email">
             <p>Email me</p>
-            <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 64 64" width="64px" height="64px"><path d="M 32 6 A 26 26 0 0 0 10.429688 46.460938 L 8 58 L 20.59375 55.347656 A 26 26 0 0 0 32 58 A 26 26 0 0 0 32 6 z"/></svg>
+            <img :src="svgMessage" alt="Email icon" class="social-icon">
           </a>
         </li>
         <li v-if="user.footer.showResume && user.resume">
           <a :href="user.resume.file" target="_blank">
             <p>My resume</p>
-            <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 50 50" width="50px" height="50px"><path d="M 30.398438 2 L 7 2 L 7 48 L 43 48 L 43 14.601563 Z M 15 28 L 31 28 L 31 30 L 15 30 Z M 35 36 L 15 36 L 15 34 L 35 34 Z M 35 24 L 15 24 L 15 22 L 35 22 Z M 30 15 L 30 4.398438 L 40.601563 15 Z"/></svg>
+            <img :src="svgDocument" alt="Resume icon" class="social-icon">
           </a>
         </li>
         <li
@@ -229,11 +231,7 @@ h2 {
   display: flex;
   width: 2rem;
   height: 2rem;
-}
-.links svg, .links :deep(svg) {
-  width: 2rem;
-  height: 2rem;
-  fill: var(--color-alternative);
+  filter: var(--filter-img-color);
 }
 
 .copyright {

@@ -1,4 +1,4 @@
-import { fileURLToPath } from 'node:url'
+import { fileURLToPath, resolve } from 'node:url'
 import { mergeConfig, defineConfig, configDefaults } from 'vitest/config'
 import viteConfig from './vite.config'
 
@@ -12,6 +12,7 @@ export default mergeConfig(
       coverage: {
         reporter: ['json'],
       },
+      setupFiles: ['src/__test__/setup.ts'],
     }
   })
 )

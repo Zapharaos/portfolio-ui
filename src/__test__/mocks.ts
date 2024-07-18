@@ -14,6 +14,8 @@ import type {
 export const mockFileType: FileType = {
     name: 'name',
     file: 'file',
+    creditsUrl: 'https://credits.com',
+    creditsShortUrl: 'credits.com',
 }
 export const mockHero: Hero = {
     title: 'title',

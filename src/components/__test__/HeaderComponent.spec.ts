@@ -1,15 +1,16 @@
-import {expect, describe, test, vi, afterEach} from 'vitest';
+import {expect, describe, test, vi, beforeEach, afterEach} from 'vitest';
 import {enableAutoUnmount, mount} from '@vue/test-utils';
+import { setActivePinia, createPinia } from 'pinia'
 import HeaderComponent from '@/components/HeaderComponent.vue';
 import { mockFileType } from '@/__test__/mocks'
 
 describe('HeaderComponent.vue', () => {
 
-  enableAutoUnmount(afterEach);
-
   afterEach(() => {
     document.documentElement.scrollTop = 0;
   })
+
+  enableAutoUnmount(afterEach);
 
   test('handleScroll to quit if the menu is shown', async () => {
     const wrapper = mount(HeaderComponent, {

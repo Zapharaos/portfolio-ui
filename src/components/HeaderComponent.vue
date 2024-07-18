@@ -1,11 +1,15 @@
 <script setup lang="ts">
 import {onMounted, ref} from "vue";
 import type {FileType} from "@/types/models";
+import ThemeToggler from "@/components/ThemeToggler.vue";
+import { useThemeStore } from '@/stores/theme'
 
 // Define the props for the component
 const props = defineProps<{
   logo: FileType
 }>()
+
+const themeStore = useThemeStore();
 
 const lastScrollTop = ref(0); // Tracks the last scroll position for header visibility
 const showResponsiveMenu = ref(false); // Flag to indicate if responsive menu is open
@@ -116,6 +120,9 @@ defineExpose({
               Contact
             </a>
           </li>
+          <li v-if="!themeStore.hasSingleTheme">
+            <ThemeToggler/>
+          </li>
         </ul>
       </nav>
     </div>
@@ -153,6 +160,7 @@ nav {
 }
 .logo img {
   height: 1.5rem;
+  filter: var(--filter-img-color);
 }
 ul {
   list-style-type: none;
@@ -164,11 +172,15 @@ ul {
 li:not(:first-child) {
   margin-left: 2rem;
 }
+li:last-child {
+  display: flex;
+  justify-content: center;
+}
 li a {
   transition: opacity .9s cubic-bezier(.215,.61,.355,1);
 }
 li a:hover {
-  opacity: 0.4;
+  color: var(--color-header-hover);
 }
 a:hover {
   cursor: pointer;
