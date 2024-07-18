@@ -15,6 +15,8 @@ export interface User {
 export interface FileType {
   name: string
   file: string
+  creditsUrl?: string
+  creditsShortUrl?: string
 }
 
 export interface Social {

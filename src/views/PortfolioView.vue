@@ -18,7 +18,6 @@ let error = ref<string | null>(null)
 async function fetchData() {
   try {
     user.value = await getUserData()
-    console.log(user.value)
   } catch (err) {
     error.value = (err as Error).message
   } finally {
@@ -55,7 +54,7 @@ defineExpose({
   </template>
   <LoaderComponent v-else-if="loading"/>
   <template v-else>
-    <h1>Error while fetching data</h1>
+    <h1 class="center">Error while fetching data</h1>
   </template>
 </template>
 

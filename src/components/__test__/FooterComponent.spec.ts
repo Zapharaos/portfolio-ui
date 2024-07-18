@@ -5,13 +5,6 @@ import {mockUser} from "@/__test__/mocks";
 
 describe('FooterComponent.vue', () => {
 
-  // Mock the navigator.clipboard object for testing purposes
-  Object.assign(navigator, {
-    clipboard: {
-      writeText: vi.fn(),
-    },
-  });
-
   test('copyEmail updates hasCopiedEmail on success', async () => {
     // Mount the FooterComponent
     const wrapper = mount(FooterComponent, {

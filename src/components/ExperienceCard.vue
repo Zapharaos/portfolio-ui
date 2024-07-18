@@ -64,7 +64,7 @@ function collapse(event: Event): void {
               </svg>{{ experience.urlShort ? experience.urlShort : experience.url }}
             </a>
           </div>
-          <p>{{ experience.description }}</p>
+          <p class="text" v-html="experience.description"/>
           <TechnologiesList
               v-if="experience.technologies"
               :technologies="experience.technologies"
