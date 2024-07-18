@@ -47,9 +47,7 @@ const props = defineProps<{
             </a>
           </span>
         </div>
-        <p class="about-text">
-          {{ about.description }}
-        </p>
+        <p class="text about" v-html="about.description"/>
       </div>
     </div>
   </section>
@@ -98,11 +96,10 @@ img {
   opacity: 1;
 }
 
-/* About me text */
-.about-text {
+/* About */
+.about {
   text-align: justify;
   align-self: center;
-  line-height: 1.9;
 }
 @media (max-width: 992px) {
   .grid {
@@ -117,9 +114,6 @@ img {
   .responsive-image-container {
     display: flex;
     flex-direction: column;
-  }
-  .about-text {
-    line-height: var(--text-line-height);
   }
 }
 </style>

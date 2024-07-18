@@ -23,7 +23,7 @@ const scrollToSection = (id: string) => {
       <div class="hero-body">
         <h1 class="hero-title">{{ hero.title }}</h1>
         <div class="tagline">
-          <p class="h4" v-html="hero.tagline"></p>
+          <p class="h4 text" v-html="hero.tagline"/>
         </div>
         <a @click="scrollToSection('work')" class="btn text-button">
           <p>{{ hero.callToActionContent }}</p>

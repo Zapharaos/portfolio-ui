@@ -23,7 +23,7 @@ const props = defineProps<{
       >
         <img :src="project.image.file" :alt="project.image.name" />
       </div>
-      <p>{{ project.description }}</p>
+      <p class="text" v-html="project.description"/>
       <TechnologiesList
           v-if="project.technologies"
           :technologies="project.technologies"
