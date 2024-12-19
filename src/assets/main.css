@@ -1,0 +1,218 @@
+@import 'base.css';
+
+#app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  place-content: center;
+  margin: 0 auto;
+}
+
+@keyframes blink {
+  to {
+    visibility: hidden
+  }
+}
+.animate-1s-blink {
+  animation: blink 1s steps(2, start) infinite;
+}
+
+.bg-alternative {
+  background-color: var(--color-alternative);
+}
+.text-alternative {
+  color: var(--color-alternative);
+}
+
+body.responsive-menu {
+  overflow: hidden;
+}
+
+.clickable:hover {
+  cursor: pointer !important;
+}
+
+.center {
+  text-align: center;
+}
+
+.section-container {
+  padding: 5rem;
+  width: 100%;
+}
+.container {
+  max-width: var(--container-max-width);
+  width: 100%;
+  align-self: center;
+  margin: 0 auto;
+}
+.section-container .container.presentation {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+}
+.section-title {
+  text-align: center;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6,
+.nav-item-link {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+h1, .h1 {
+  font-size: clamp(36px, 5vw, 72px);
+  letter-spacing: -0.5px;
+  font-weight: 600;
+}
+h2, .h2 {
+  font-size: clamp(30px, 4vw, 56px);
+  letter-spacing: 0;
+  font-weight: 600;
+}
+h3, .h3 {
+  font-size: clamp(24px, 3vw, 36px);
+  letter-spacing: 0.25px;
+  font-weight: 500;
+}
+h4, .h4 {
+  font-size: clamp(16px, 2vw, 24px);
+  letter-spacing: 0;
+}
+.caption {
+  font-family: "Open Sans", sans-serif;
+  font-weight: normal;
+  font-size: clamp(11px, 1.5vw, 14px);
+  letter-spacing: 0.4px;
+}
+.overline {
+  font-family: "Open Sans", sans-serif;
+  font-weight: normal;
+  font-size: clamp(8px, 1vw, 12px);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.text-button {
+  font-family: "Open Sans", sans-serif;
+  font-weight: normal;
+  font-size: clamp(18px, 2.5vw, 22px);
+}
+
+.btn {
+  text-decoration: none;
+  padding: 0.5rem 2rem;
+  display: flex;
+  transition: all 0.5s ease-in-out;
+  width: fit-content;
+  background-color: var(--color-primary);
+  border: solid 2px var(--color-primary);
+  color: var(--color-text-opposite);
+  border-radius: 0.5rem;
+  align-items: center;
+  gap: 1rem;
+}
+.btn:hover {
+  background-color: var(--color-item-bg-secondary);
+  border-color: var(--color-item-asset);
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (max-width: 992px) {
+  .section-container {
+    padding: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .section-container {
+    padding: 1.75rem;
+  }
+
+  h2 {
+    text-align: center;
+  }
+}
+
+@media (max-width: 400px) {
+  .section-container {
+    padding: 1rem;
+  }
+}
+
+.grid {
+  display: grid;
+  justify-content: center;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+.item {
+  background-color: var(--color-item-bg);
+  border: solid 3px transparent;
+  border-radius: 10px;
+  padding: 2rem;
+  color: var(--color-text);
+}
+.item, .item .link-open, .item img {
+  transition: all 0.5s ease-in-out;
+}
+.item .subtitle {
+  color: color-mix(in srgb, var(--color-text), var(--color-item-asset) 18%);;
+}
+.item .link-open {
+  visibility: hidden;
+  fill: var(--color-primary);
+  opacity: 0;
+}
+.item .image-container {
+  align-self: center;
+  margin: 5%;
+}
+.item img {
+  max-width: 100%;
+  max-height: 350px;
+  border-radius: 10px;
+  box-shadow: 0 0 25px 25px rgb(from var(--color-item-asset) r g b / 0.375);
+}
+.item p {
+  text-align: justify;
+}
+.item:hover {
+  background-color: var(--color-item-bg-secondary);
+  border-color: var(--color-item-asset);
+}
+.item:hover .link-open {
+  visibility: initial;
+  opacity: 1;
+}
+.item:hover img{
+  box-shadow: 0 0 25px 25px rgb(from var(--color-item-asset) r g b / 0.85);
+}
+.item.active {
+  border-color: var(--color-item-asset);
+}
+
+.text span {
+  color: var(--color-primary);
+  font-weight: bold;
+}
+.text a {
+  color: var(--color-alternative);
+  text-decoration: none;
+}
+.text a:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
