@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { getUserData } from '@/services/user'
+import { useSeo } from '@/composables/useSeo'
 import type { User } from '@/types/models'
 import FooterComponent from "@/components/FooterComponent.vue";
 import WorkComponent from "@/components/WorkComponent.vue";
@@ -14,10 +15,14 @@ let user = ref<User | null>(null)
 let loading = ref(true)
 let error = ref<string | null>(null)
 
+// Head/SEO enrichment from the fetched data
+const { setUserSeo } = useSeo()
+
 // Function to fetch user data and handle errors
 async function fetchData() {
   try {
     user.value = await getUserData()
+    setUserSeo(user.value)
   } catch (err) {
     error.value = (err as Error).message
   } finally {
