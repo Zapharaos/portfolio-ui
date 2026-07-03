@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type {Social, User} from "@/types/models";
 import {computed, onMounted, ref} from "vue";
+import {track, trackOutbound} from "@/composables/useAnalytics";
 import svgMessage from "@/assets/message.svg"
 import svgDocument from "@/assets/document.svg"
 
@@ -48,6 +49,7 @@ async function copyEmail() {
   try {
     await navigator.clipboard.writeText(props.user.email);
     hasCopiedEmail.value = true;
+    track('email-copy'); // custom umami event (no-op if analytics disabled)
     setTimeout(() => (hasCopiedEmail.value = false), 1000); // Reset after 1s
   } catch (error) {
     console.error('Failed to copy email:', error);
@@ -101,13 +103,13 @@ defineExpose({
       </div>
       <ul v-if="user.footer.showSocials" class="links">
         <li v-if="user.footer.showEmail">
-          <a :href="'mailto:'+user.email">
+          <a :href="'mailto:'+user.email" @click="track('email-click')">
             <p>Email me</p>
             <img :src="svgMessage" alt="Email icon" class="social-icon">
           </a>
         </li>
         <li v-if="user.footer.showResume && user.resume">
-          <a :href="user.resume.file" target="_blank">
+          <a :href="user.resume.file" target="_blank" @click="trackOutbound(user.resume.file, 'resume')">
             <p>My resume</p>
             <img :src="svgDocument" alt="Resume icon" class="social-icon">
           </a>
@@ -116,7 +118,7 @@ defineExpose({
             v-for="(social, index) in prepareSocials"
             :key="index"
         >
-          <a :href="social.url" target="_blank">
+          <a :href="social.url" target="_blank" @click="trackOutbound(social.url, 'social')">
             <div>
               <p>{{ social.name }}</p>
               <span v-if="social.pseudo" class="text-alternative">@{{ social.pseudo }}</span>

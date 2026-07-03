@@ -150,6 +150,26 @@ After deploying, check that the metadata is picked up correctly:
 If you change the OG image or title later, re-run these debuggers so the social
 networks refresh their cached preview.
 
+## Analytics
+
+Optional, privacy-friendly, **cookieless** analytics via
+[umami](https://umami.is) — no consent banner needed. Like SEO, it is driven by a
+**single config file**: [`src/config/analytics.ts`](src/config/analytics.ts),
+fed by `VITE_UMAMI_*` env vars.
+
+It is **off by default**: with no `VITE_UMAMI_HOST` / `VITE_UMAMI_WEBSITE_ID` set,
+no tracker is injected and the site ships zero tracking. To enable it, point it at
+your umami instance:
+
+```dotenv
+VITE_UMAMI_HOST=https://analytics.example.com
+VITE_UMAMI_WEBSITE_ID=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+```
+
+Set `VITE_UMAMI_ENABLED=false` to turn it off without clearing the ids. Full
+setup (self-hosting, first-party mode to dodge ad-blockers, custom events) is in
+[`docs/analytics.md`](docs/analytics.md).
+
 ## License
 
 All code is licensed under the MIT License. See [LICENSE](./LICENSE) file for

@@ -1,11 +1,19 @@
 <script setup lang="ts">
 import { useThemeStore } from '@/stores/theme'
+import { track } from '@/composables/useAnalytics'
+
 const themeStore = useThemeStore()
+
+/** Toggle the theme and record the resulting mode ('dark' | 'light'). */
+function toggleTheme(): void {
+  themeStore.toggleTheme()
+  track('theme-toggle', { to: themeStore.theme.value })
+}
 </script>
 
 <template>
   <!--  Credits : https://web.dev/articles/building/a-theme-switch-component?hl=fr -->
-  <button @click="themeStore.toggleTheme()" class="theme-toggle" title="Toggles light & dark" aria-label="auto" aria-live="polite">
+  <button @click="toggleTheme()" class="theme-toggle" title="Toggles light & dark" aria-label="auto" aria-live="polite">
     <svg class="sun-and-moon" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
       <mask class="moon" id="moon-mask">
         <rect x="0" y="0" width="100%" height="100%" fill="white" />

@@ -3,6 +3,7 @@ import {onMounted, ref} from "vue";
 import type {FileType} from "@/types/models";
 import ThemeToggler from "@/components/ThemeToggler.vue";
 import { useThemeStore } from '@/stores/theme'
+import { track } from '@/composables/useAnalytics'
 
 // Define the props for the component
 const props = defineProps<{
@@ -26,6 +27,9 @@ onMounted(() => {
  * @param id The element's id to head to.
  */
 const scrollToSection = (id: string) => {
+  // Track the internal navigation ('footer' is surfaced as 'contact' in the menu).
+  track('nav', { to: id === 'footer' ? 'contact' : id });
+
   // Close responsive menu if it's open
   if (showResponsiveMenu.value) {
     toggleResponsiveMenu();

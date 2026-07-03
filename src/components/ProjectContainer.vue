@@ -41,19 +41,22 @@ const splitProjects = computed(() => {
         <ProjectCard
             v-for="(project, index) in sortedProjects.filter(i => !i.hidden)"
             :key="index"
-            :project="project" />
+            :project="project"
+            :section="title" />
       </ul>
       <ul class="projects-list">
         <ProjectCard
             v-for="(project, index) in splitProjects.even.filter(i => !i.hidden)"
             :key="index"
-            :project="project" />
+            :project="project"
+            :section="title" />
       </ul>
       <ul class="projects-list">
         <ProjectCard
             v-for="(project, index) in splitProjects.odd.filter(i => !i.hidden)"
             :key="index"
-            :project="project" />
+            :project="project"
+            :section="title" />
       </ul>
     </div>
   </section>
