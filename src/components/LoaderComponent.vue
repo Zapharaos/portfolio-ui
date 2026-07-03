@@ -1,11 +1,13 @@
 <script setup lang="ts">
-
+// Import the asset through Vite so it is bundled/hashed and resolves in production
+// (a raw "/src/assets/…" path only works with the dev server).
+import logoUrl from '@/assets/logo.png'
 </script>
 
 <template>
   <div class="loader-container">
     <div class="loader-spinner"/>
-    <img src="/src/assets/logo.png" alt="logo loader" class="logo-loader"/>
+    <img :src="logoUrl" alt="logo loader" class="logo-loader"/>
   </div>
 </template>
 

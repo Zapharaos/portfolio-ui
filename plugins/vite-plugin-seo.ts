@@ -91,6 +91,30 @@ function renderHeadTags(siteUrl: string): HtmlTagDescriptor[] {
   return tags
 }
 
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+}
+
+/**
+ * Fallback content shown when JavaScript is disabled (the app is client-rendered,
+ * so the body would otherwise be blank). Built from the SEO config.
+ */
+function renderNoscriptTag(): HtmlTagDescriptor {
+  const { defaultTitle, description, author } = seoConfig
+  const children =
+    `<div style="max-width:680px;margin:15vh auto;padding:0 1.5rem;font-family:sans-serif;text-align:center;line-height:1.5">` +
+    `<h1>${escapeHtml(defaultTitle)}</h1>` +
+    (author.jobTitle ? `<p><strong>${escapeHtml(author.jobTitle)}</strong></p>` : '') +
+    `<p>${escapeHtml(description)}</p>` +
+    `<p>This website requires JavaScript to display its full content.</p>` +
+    `</div>`
+  return { tag: 'noscript', children, injectTo: 'body-prepend' }
+}
+
 export default function seoPlugin(): Plugin {
   let siteUrl = seoConfig.siteUrl
 
@@ -106,7 +130,7 @@ export default function seoPlugin(): Plugin {
       return {
         // Normalize the opening <html> tag so it carries the configured locale.
         html: html.replace(/<html\b[^>]*>/i, `<html lang="${seoConfig.locale}">`),
-        tags: renderHeadTags(siteUrl),
+        tags: [...renderHeadTags(siteUrl), renderNoscriptTag()],
       }
     },
 

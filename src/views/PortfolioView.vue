@@ -44,15 +44,17 @@ defineExpose({
     <HeaderComponent
         :logo="user.logo"
     />
-    <HeroComponent
-        :hero="user.hero"
-    />
-    <AboutComponent
-        :about="user.about"
-    />
-    <WorkComponent
-        :work="user.work"
-    />
+    <main>
+      <HeroComponent
+          :hero="user.hero"
+      />
+      <AboutComponent
+          :about="user.about"
+      />
+      <WorkComponent
+          :work="user.work"
+      />
+    </main>
     <FooterComponent
         :user="user"
     />
@@ -64,5 +66,9 @@ defineExpose({
 </template>
 
 <style scoped>
-
+/* #app is a centered flex column, so the <main> wrapper needs an explicit full
+   width to keep its sections full-bleed (like the header/footer siblings). */
+main {
+  width: 100%;
+}
 </style>

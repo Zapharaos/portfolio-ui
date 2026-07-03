@@ -2,6 +2,9 @@
 import {ref, reactive, onMounted, computed} from 'vue';
 import { useRouter } from 'vue-router';
 import { useHead } from '@unhead/vue';
+// Import the asset through Vite so it is bundled/hashed and resolves in production
+// (a raw "/src/assets/…" path only works with the dev server).
+import puzzleImage from '@/assets/404.svg';
 
 // 404 pages must not be indexed by search engines.
 useHead({
@@ -65,7 +68,7 @@ const preparePuzzlePieces = () => {
       const index = row * gridWidth + col;
       pieces.push({
         style: {
-          backgroundImage: 'url(/src/assets/404.svg)',
+          backgroundImage: `url(${puzzleImage})`,
           backgroundSize: `${gridWidth * pieceSize.value}px ${gridHeight * pieceSize.value}px`,
           backgroundPosition: `-${col * pieceSize.value}px -${row * pieceSize.value}px`,
           width: `${pieceSize.value}px`,
@@ -163,7 +166,7 @@ defineExpose( {
 <template>
   <section class="section-container center">
     <div class="container">
-      <h3>The page you are looking for does not exist.</h3>
+      <h1 class="h3">The page you are looking for does not exist.</h1>
       <div class="puzzle-container">
         <div
             class="puzzle"
