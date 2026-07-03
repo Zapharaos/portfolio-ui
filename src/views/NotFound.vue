@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import {ref, reactive, onMounted, computed} from 'vue';
 import { useRouter } from 'vue-router';
+import { useHead } from '@unhead/vue';
+
+// 404 pages must not be indexed by search engines.
+useHead({
+  title: '404 — Page not found',
+  meta: [{ name: 'robots', content: 'noindex, follow' }],
+});
 
 interface PuzzlePiece {
   style: Record<string, string>; // Style properties for the puzzle piece
