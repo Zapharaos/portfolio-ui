@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import type { Experience } from '@/types/models'
 import TechnologiesList from '@/components/TechnologiesList.vue'
+import { trackOutbound } from '@/composables/useAnalytics'
 
 // Define the props for the component
 const props = defineProps<{
   experience: Experience
   isActive: boolean
+  /** Title of the enclosing section (e.g. "Experience", "Education") — for analytics. */
+  section?: string
 }>()
 
 // Define emits options for custom events
@@ -58,7 +61,8 @@ function collapse(event: Event): void {
                 <path d="M12 22C14 18 20 15.4183 20 10C20 5.58172 16.4183 2 12 2C7.58172 2 4 5.58172 4 10C4 15.4183 10 18 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>{{ experience.location }}
             </p>
-            <a v-if="experience.url" :href="experience.url" target="_blank" class="text-alternative">
+            <a v-if="experience.url" :href="experience.url" target="_blank" class="text-alternative"
+               @click="trackOutbound(experience.url, 'experience', { label: experience.title, section })">
               <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M6 18L18 6M18 6H10M18 6V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>{{ experience.urlShort ? experience.urlShort : experience.url }}

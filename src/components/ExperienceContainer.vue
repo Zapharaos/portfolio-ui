@@ -2,6 +2,7 @@
 import {computed, ref} from 'vue'
 import type { Experience } from '@/types/models'
 import ExperienceCard from '@/components/ExperienceCard.vue'
+import { track } from '@/composables/useAnalytics'
 
 // Define the props for the component
 const props = defineProps<{
@@ -38,6 +39,10 @@ const isActive = (experience: Experience): boolean => {
  * @param {Experience} experience The experience item to activate.
  */
 function activate(experience: Experience) {
+  // Only record real opens (ignore re-clicks on the already-active card).
+  if (activeIndex.value !== experience.index) {
+    track('experience-open', { label: experience.title, section: props.title })
+  }
   activeIndex.value = experience.index
 }
 
@@ -57,6 +62,7 @@ const collapse = () => {
         v-for="(experience, index) in sortedExperiences.filter(i => !i.hidden)"
         :key="index"
         :experience="experience"
+        :section="title"
         :isActive="isActive(experience)"
         @activate="activate(experience)"
         @collapse="collapse"

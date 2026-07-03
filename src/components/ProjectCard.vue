@@ -1,16 +1,20 @@
 <script setup lang="ts">
 import type { Project } from '@/types/models'
 import TechnologiesList from '@/components/TechnologiesList.vue'
+import { trackOutbound } from '@/composables/useAnalytics'
 
 // Define the props for the component
 const props = defineProps<{
   project: Project
+  /** Title of the enclosing section (e.g. "Projects") — used for analytics. */
+  section?: string
 }>()
 </script>
 
 <template>
   <li>
-    <a :href="project.url" target="_blank" class="item project-card" :class="{ 'clickable': project.url }">
+    <a :href="project.url" target="_blank" class="item project-card" :class="{ 'clickable': project.url }"
+       @click="trackOutbound(project.url, 'project', { label: project.title, section })">
       <h3 class="card-title">
         {{ project.title }}
         <span v-if="project.url">

@@ -51,7 +51,6 @@ export const useThemeStore = defineStore('theme', () => {
   const reflectPreference = () => {
     const root = document.querySelector<HTMLElement>(':root');
     if (theme.value === Theme.DARK) {
-      console.log("dark")
       document.firstElementChild?.classList.remove(Theme.LIGHT)
       document.firstElementChild?.classList.add(Theme.DARK)
       root?.style.setProperty('--color-background', 'var(--dark-color)');
@@ -61,7 +60,6 @@ export const useThemeStore = defineStore('theme', () => {
       root?.style.setProperty('--filter-img-color', 'var(--filter-img-color-dark)');
     }
     else {
-      console.log("light")
       document.firstElementChild?.classList.remove(Theme.DARK)
       document.firstElementChild?.classList.add(Theme.LIGHT)
       root?.style.setProperty('--color-background', 'var(--light-color)');
