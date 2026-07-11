@@ -8,6 +8,7 @@ import type {
   ProjectLink,
   Social,
   Technology,
+  Theme,
   User,
   Work,
   WorkItem
@@ -67,6 +68,12 @@ export const mockSocials: Social[] = [
     image: mockFileType
   }
 ]
+export const mockTheme: Theme = {
+  name: 'Ocean',
+  background: '#0b1622',
+  text: '#eaf2ff',
+  primary: '#00add8'
+}
 export const mockUser: User = {
   name: 'Name',
   email: 'contact@example.com',
@@ -75,10 +82,15 @@ export const mockUser: User = {
   logo: mockFileType,
   resume: mockFileType,
   socials: [],
+  theme: null,
   hero: mockHero,
   about: mockAbout,
   work: mockWork,
   footer: mockFooter
+}
+export const mockUserWithTheme: User = {
+  ...mockUser,
+  theme: mockTheme
 }
 export const mockTechnologies: Technology[] = [
   { name: 'tech1', color: '#ff8800' },

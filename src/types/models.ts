@@ -1,3 +1,10 @@
+export interface Theme {
+  name: string
+  background: string
+  text: string
+  primary: string
+}
+
 export interface User {
   name: string
   email: string
@@ -6,6 +13,7 @@ export interface User {
   logo: FileType
   resume: FileType
   socials: Social[]
+  theme: Theme | null
   hero: Hero
   about: About
   work: Work
