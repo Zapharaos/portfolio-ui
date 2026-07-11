@@ -10,6 +10,7 @@ export interface User {
   email: string
   location: string
   locale: string
+  timezone?: string
   logo: FileType
   resume: FileType
   socials: Social[]

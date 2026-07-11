@@ -29,15 +29,20 @@ const year = ref(new Date().getFullYear())
 
 onMounted(() => {
   if (props.user.locale) {
+    // Format options: render the clock in the owner's timezone when provided,
+    // so visitors see the owner's local time (matching the location label) — not
+    // their own. Empty/absent timezone falls back to the visitor's local time.
+    const timeOptions: Intl.DateTimeFormatOptions = {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    }
+    if (props.user.timezone) {
+      timeOptions.timeZone = props.user.timezone
+    }
     // Starts an interval to update the current time every second.
     setInterval(() => {
-      const now = new Date()
-        .toLocaleTimeString(props.user.locale, {
-          hour: '2-digit',
-          minute: '2-digit',
-          second: '2-digit'
-        })
-        .split(':')
+      const now = new Date().toLocaleTimeString(props.user.locale, timeOptions).split(':')
       // Update time with leading zeros for formatting
       currentTime.value = {
         hours: now[0],
