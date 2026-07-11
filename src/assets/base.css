@@ -1,23 +1,29 @@
 :root {
-  --dark-color: #181818;
-  --light-color: #ffffff;
-
-  --text-line-height: 1.6;
-
-  --container-max-width: clamp(1024px, 100vw, 1280px);
-  --loader-spinner-width: clamp(100px, 50vw, 300px);
-  --404-puzzle-filter: brightness(0) saturate(100%) invert(57%) sepia(95%) saturate(623%) hue-rotate(358deg) brightness(99%) contrast(107%);
+  /* ==========================================================================
+     THEME TOKENS — edit these few variables to re-theme the whole site.
+     Everything else below is derived from them.
+     (Future: these are the values the admin panel will override.)
+     ========================================================================== */
+  --color-background: #181818;
+  --color-text: #ffffff;
   --color-primary: orange;
-  --color-alternative: color-mix(in srgb, var(--color-text), var(--color-item-asset) 45%);
+
+  /* === Derived from the tokens above — no need to touch === */
+  --color-text-opposite: var(--color-background);
 
   --color-item-bg: color-mix(in srgb, var(--color-background), var(--color-primary) 10%);
   --color-item-bg-secondary: color-mix(in srgb, var(--color-background), var(--color-primary) 20%);
   --color-item-asset: color-mix(in srgb, var(--color-background), var(--color-primary) 30%);
 
-  --color-header-hover-light: color-mix(in srgb, var(--color-text), var(--color-background) 15%);
-  --color-header-hover-dark: color-mix(in srgb, var(--color-background), var(--color-text) 50%);
-  --filter-img-color-light: brightness(0) saturate(100%) invert(8%) sepia(0%) saturate(4874%) hue-rotate(274deg) brightness(101%) contrast(96%);
-  --filter-img-color-dark: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(1%) hue-rotate(183deg) brightness(103%) contrast(101%);
+  --color-alternative: color-mix(in srgb, var(--color-text), var(--color-item-asset) 45%);
+  --color-header-hover: color-mix(in srgb, var(--color-background), var(--color-text) 50%);
+
+  /* === Layout / misc constants (not theme colors) === */
+  --text-line-height: 1.6;
+  --container-max-width: clamp(1024px, 100vw, 1280px);
+  --loader-spinner-width: clamp(100px, 50vw, 300px);
+  --404-puzzle-filter: brightness(0) saturate(100%) invert(57%) sepia(95%) saturate(623%)
+    hue-rotate(358deg) brightness(99%) contrast(107%);
 }
 
 *,
@@ -37,7 +43,7 @@ body {
     background-color 0.5s;
   line-height: var(--text-line-height);
   font-family:
-    "Open Sans",
+    'Open Sans',
     Inter,
     -apple-system,
     BlinkMacSystemFont,

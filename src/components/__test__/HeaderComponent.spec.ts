@@ -1,45 +1,44 @@
-import {expect, describe, test, vi, beforeEach, afterEach} from 'vitest';
-import {enableAutoUnmount, mount} from '@vue/test-utils';
+import { expect, describe, test, vi, beforeEach, afterEach } from 'vitest'
+import { enableAutoUnmount, mount } from '@vue/test-utils'
 import { setActivePinia, createPinia } from 'pinia'
-import HeaderComponent from '@/components/HeaderComponent.vue';
+import HeaderComponent from '@/components/HeaderComponent.vue'
 import { mockFileType } from '@/__test__/mocks'
 
 describe('HeaderComponent.vue', () => {
-
   afterEach(() => {
-    document.documentElement.scrollTop = 0;
+    document.documentElement.scrollTop = 0
   })
 
-  enableAutoUnmount(afterEach);
+  enableAutoUnmount(afterEach)
 
   test('handleScroll to quit if the menu is shown', async () => {
     const wrapper = mount(HeaderComponent, {
       propsData: {
         logo: mockFileType
       }
-    });
+    })
 
     // Indicating that the responsive menu is open
-    wrapper.vm.showResponsiveMenu = true;
+    wrapper.vm.showResponsiveMenu = true
 
     // Saving the previous value to compare
-    const previousScrollValue = wrapper.vm.lastScrollTop;
+    const previousScrollValue = wrapper.vm.lastScrollTop
 
     // Mocking the scroll position
     Object.defineProperty(document.documentElement, 'scrollTop', {
       value: 100,
-      writable: true,
-    });
+      writable: true
+    })
 
     // Triggering the scroll event
-    window.dispatchEvent(new Event('scroll'));
+    window.dispatchEvent(new Event('scroll'))
 
     // Wait for component to update
-    await wrapper.vm.$nextTick();
+    await wrapper.vm.$nextTick()
 
     // Asserting that the function instantly quit since the menu is open
-    expect(wrapper.vm.lastScrollTop).toBe(previousScrollValue);
-  });
+    expect(wrapper.vm.lastScrollTop).toBe(previousScrollValue)
+  })
 
   test('handleScroll BOTTOM to succeed and update lastScrollTop', async () => {
     const wrapper = mount(HeaderComponent, {
@@ -47,27 +46,27 @@ describe('HeaderComponent.vue', () => {
       propsData: {
         logo: mockFileType
       }
-    });
+    })
 
     // Initial scroll setup
-    wrapper.vm.lastScrollTop = 0;
+    wrapper.vm.lastScrollTop = 0
 
     // Mocking the scroll position
     Object.defineProperty(document.documentElement, 'scrollTop', {
       value: 100,
-      writable: true,
-    });
+      writable: true
+    })
 
     // Directly call handleScroll (mimicking scroll event)
-    wrapper.vm.handleScroll();
+    wrapper.vm.handleScroll()
 
     // Wait for component to update
-    await wrapper.vm.$nextTick();
+    await wrapper.vm.$nextTick()
 
     // Asserting that the function succeeded
-    expect(wrapper.vm.lastScrollTop).toBe(100);
-    expect(wrapper.find('header').isVisible()).toBe(false);
-  });
+    expect(wrapper.vm.lastScrollTop).toBe(100)
+    expect(wrapper.find('header').isVisible()).toBe(false)
+  })
 
   test('handleScroll TOP to succeed and update lastScrollTop', async () => {
     const wrapper = mount(HeaderComponent, {
@@ -75,42 +74,41 @@ describe('HeaderComponent.vue', () => {
       propsData: {
         logo: mockFileType
       }
-    });
+    })
 
     // Initial scroll setup
-    wrapper.vm.lastScrollTop = 100;
+    wrapper.vm.lastScrollTop = 100
 
     // Mocking the scroll position
     Object.defineProperty(document.documentElement, 'scrollTop', {
       value: 0,
-      writable: true,
-    });
+      writable: true
+    })
 
     // Directly call handleScroll (mimicking scroll event)
-    wrapper.vm.handleScroll();
+    wrapper.vm.handleScroll()
 
     // Wait for component to update
-    await wrapper.vm.$nextTick();
+    await wrapper.vm.$nextTick()
 
     // Asserting that the function succeeded
-    expect(wrapper.vm.lastScrollTop).toBe(0);
-    expect(wrapper.find('header').isVisible()).toBe(true);
-  });
+    expect(wrapper.vm.lastScrollTop).toBe(0)
+    expect(wrapper.find('header').isVisible()).toBe(true)
+  })
 
   test('toggles responsive menu on button click', async () => {
     const wrapper = mount(HeaderComponent, {
       propsData: {
         logo: mockFileType
       }
-    });
-    const menuButton = wrapper.find('.responsive-menu-btn');
+    })
+    const menuButton = wrapper.find('.responsive-menu-btn')
 
     // Initially : desktop version => responsive-menu should not be toggled
-    expect(wrapper.vm.showResponsiveMenu).toBe(false);
+    expect(wrapper.vm.showResponsiveMenu).toBe(false)
 
     // Click menu button to activate the responsive-menu
-    await menuButton.trigger('click');
-    expect(wrapper.vm.showResponsiveMenu).toBe(true);
-  });
-
-});
+    await menuButton.trigger('click')
+    expect(wrapper.vm.showResponsiveMenu).toBe(true)
+  })
+})

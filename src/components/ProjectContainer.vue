@@ -10,14 +10,14 @@ const props = defineProps<{
 }>()
 
 /**
-  * This computed property returns a sorted copy of the 'projects' prop.
-  * Sorts the projects based on their 'index' property in ascending order.
-  *
-  * @returns {Project[]} A sorted copy of the projects.
-*/
+ * This computed property returns a sorted copy of the 'projects' prop.
+ * Sorts the projects based on their 'index' property in ascending order.
+ *
+ * @returns {Project[]} A sorted copy of the projects.
+ */
 const sortedProjects = computed(() => {
-  return props.projects.slice().sort((a: Project, b: Project) => a.index - b.index);
-});
+  return props.projects.slice().sort((a: Project, b: Project) => a.index - b.index)
+})
 
 /**
  * This computed property splits the sorted projects into even and odd groups.
@@ -28,9 +28,9 @@ const sortedProjects = computed(() => {
 const splitProjects = computed(() => {
   return {
     even: sortedProjects.value.filter((_: Project, index: any) => index % 2 === 0),
-    odd: sortedProjects.value.filter((_: Project, index: any) => index % 2 !== 0),
-  };
-});
+    odd: sortedProjects.value.filter((_: Project, index: any) => index % 2 !== 0)
+  }
+})
 </script>
 
 <template>
@@ -39,24 +39,27 @@ const splitProjects = computed(() => {
     <div class="section-content grid">
       <ul class="projects-list responsive">
         <ProjectCard
-            v-for="(project, index) in sortedProjects.filter(i => !i.hidden)"
-            :key="index"
-            :project="project"
-            :section="title" />
+          v-for="(project, index) in sortedProjects.filter((i) => !i.hidden)"
+          :key="index"
+          :project="project"
+          :section="title"
+        />
       </ul>
       <ul class="projects-list">
         <ProjectCard
-            v-for="(project, index) in splitProjects.even.filter(i => !i.hidden)"
-            :key="index"
-            :project="project"
-            :section="title" />
+          v-for="(project, index) in splitProjects.even.filter((i) => !i.hidden)"
+          :key="index"
+          :project="project"
+          :section="title"
+        />
       </ul>
       <ul class="projects-list">
         <ProjectCard
-            v-for="(project, index) in splitProjects.odd.filter(i => !i.hidden)"
-            :key="index"
-            :project="project"
-            :section="title" />
+          v-for="(project, index) in splitProjects.odd.filter((i) => !i.hidden)"
+          :key="index"
+          :project="project"
+          :section="title"
+        />
       </ul>
     </div>
   </section>
@@ -66,7 +69,7 @@ const splitProjects = computed(() => {
 .grid {
   grid-template-columns: repeat(2, 1fr);
 }
-.projects-list{
+.projects-list {
   display: flex;
   flex-direction: column;
   gap: 2rem;

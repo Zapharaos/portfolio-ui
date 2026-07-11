@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type {Technology} from '@/types/models'
+import type { Technology } from '@/types/models'
 
 // Define the props for the component
 const props = defineProps<{
@@ -9,11 +9,7 @@ const props = defineProps<{
 
 <template>
   <ul class="technologies">
-    <li
-        v-for="(technology, index) in props.technologies"
-        :key="index"
-        class="technologies-tag"
-    >
+    <li v-for="(technology, index) in props.technologies" :key="index" class="technologies-tag">
       {{ technology.name }}
     </li>
   </ul>
@@ -33,7 +29,7 @@ const props = defineProps<{
   border-radius: 9999px;
   color: var(--color-primary);
   background-color: var(--color-item-asset);
-  font-size: .75rem;
+  font-size: 0.75rem;
   font-weight: 500;
   padding: 0.25rem 0.75rem;
 }

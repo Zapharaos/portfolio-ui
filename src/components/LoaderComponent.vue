@@ -6,8 +6,10 @@ import logoUrl from '@/assets/logo.png'
 
 <template>
   <div class="loader-container">
-    <div class="loader-spinner"/>
-    <img :src="logoUrl" alt="logo loader" class="logo-loader"/>
+    <div class="loader-spinner" />
+    <span class="tinted logo-loader" :style="{ '--icon': `url('${logoUrl}')` }">
+      <img :src="logoUrl" alt="logo loader" aria-hidden="true" />
+    </span>
   </div>
 </template>
 
@@ -23,23 +25,35 @@ import logoUrl from '@/assets/logo.png'
   aspect-ratio: 1;
   border-radius: 50%;
   background:
-      radial-gradient(farthest-side,var(--color-primary) 95%, var(--color-background)) top/8px 8px no-repeat,
-      conic-gradient(var(--color-background) 30%, var(--color-primary));
-  mask: radial-gradient(farthest-side,rgb(from var(--color-background) r g b / 0%) calc(100% - 8px), var(--color-background) 0);
+    radial-gradient(farthest-side, var(--color-primary) 95%, var(--color-background)) top/8px 8px
+      no-repeat,
+    conic-gradient(var(--color-background) 30%, var(--color-primary));
+  mask: radial-gradient(
+    farthest-side,
+    rgb(from var(--color-background) r g b / 0%) calc(100% - 8px),
+    var(--color-background) 0
+  );
   animation: loader-spinner 1s infinite linear;
 }
-@keyframes loader-spinner{
-  100%{transform: rotate(1turn)}
+@keyframes loader-spinner {
+  100% {
+    transform: rotate(1turn);
+  }
 }
 
 .logo-loader {
-  max-width: calc(var(--loader-spinner-width)/2);
   position: absolute;
   animation: logo-loader 1s infinite alternate ease-in-out;
-  filter: var(--filter-img-color);
+}
+.logo-loader > img {
+  max-width: calc(var(--loader-spinner-width) / 2);
 }
 @keyframes logo-loader {
-  from { transform: scale(1); }  /* Start at original size */
-  to { transform: scale(1.1); }  /* Scale up to 110% */
+  from {
+    transform: scale(1);
+  } /* Start at original size */
+  to {
+    transform: scale(1.1);
+  } /* Scale up to 110% */
 }
 </style>

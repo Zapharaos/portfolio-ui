@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import {computed, ref} from 'vue'
+import { computed, ref } from 'vue'
 import type { Experience } from '@/types/models'
 import ExperienceCard from '@/components/ExperienceCard.vue'
 import { track } from '@/composables/useAnalytics'
 
 // Define the props for the component
 const props = defineProps<{
-  title: string,
+  title: string
   experiences: Experience[]
 }>()
 
 // Reactive state variable to store the currently active experience index
-let activeIndex = ref(0);
+let activeIndex = ref(0)
 
 /**
  * This computed property returns a sorted copy of the 'experiences' prop.
@@ -20,8 +20,8 @@ let activeIndex = ref(0);
  * @returns {Experience[]} A sorted copy of the experiences.
  */
 const sortedExperiences = computed(() => {
-  return props.experiences.slice().sort((a: Experience, b: Experience) => a.index - b.index);
-});
+  return props.experiences.slice().sort((a: Experience, b: Experience) => a.index - b.index)
+})
 
 /**
  * Checks if the provided experience item is currently active based on the 'activeIndex' state.
@@ -31,7 +31,7 @@ const sortedExperiences = computed(() => {
  */
 const isActive = (experience: Experience): boolean => {
   return activeIndex.value === experience.index
-};
+}
 
 /**
  * Updates the 'activeIndex' state to the provided item order, effectively making it the active experience item.
@@ -59,7 +59,7 @@ const collapse = () => {
     <h2 class="section-title">{{ title }}</h2>
     <ul class="section-content grid">
       <ExperienceCard
-        v-for="(experience, index) in sortedExperiences.filter(i => !i.hidden)"
+        v-for="(experience, index) in sortedExperiences.filter((i) => !i.hidden)"
         :key="index"
         :experience="experience"
         :section="title"

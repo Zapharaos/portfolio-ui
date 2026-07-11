@@ -58,7 +58,7 @@ export const analyticsConfig: AnalyticsConfig = {
   host: '',
   websiteId: '',
   scriptName: 'script.js',
-  hostUrl: '',
+  hostUrl: ''
 }
 
 export default analyticsConfig

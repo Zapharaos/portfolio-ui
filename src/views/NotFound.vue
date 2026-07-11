@@ -1,26 +1,26 @@
 <script setup lang="ts">
-import {ref, reactive, onMounted, computed} from 'vue';
-import { useRouter } from 'vue-router';
-import { useHead } from '@unhead/vue';
+import { ref, reactive, onMounted, computed } from 'vue'
+import { useRouter } from 'vue-router'
+import { useHead } from '@unhead/vue'
 // Import the asset through Vite so it is bundled/hashed and resolves in production
 // (a raw "/src/assets/…" path only works with the dev server).
-import puzzleImage from '@/assets/404.svg';
+import puzzleImage from '@/assets/404.svg'
 
 // 404 pages must not be indexed by search engines.
 useHead({
   title: '404 — Page not found',
-  meta: [{ name: 'robots', content: 'noindex, follow' }],
-});
+  meta: [{ name: 'robots', content: 'noindex, follow' }]
+})
 
 interface PuzzlePiece {
-  style: Record<string, string>; // Style properties for the puzzle piece
-  correctIndex: number; // The correct index of the piece in the puzzle
+  style: Record<string, string> // Style properties for the puzzle piece
+  correctIndex: number // The correct index of the piece in the puzzle
 }
 
-const gridWidth = 5; // Number of puzzle pieces per row
-const gridHeight = 3; // Number of puzzle rows
+const gridWidth = 5 // Number of puzzle pieces per row
+const gridHeight = 3 // Number of puzzle rows
 
-const router = useRouter();
+const router = useRouter()
 
 /**
  * Calculates the size of each puzzle piece based on the window size.
@@ -28,20 +28,23 @@ const router = useRouter();
  * @returns The size of each puzzle piece in pixels.
  */
 const calculatePieceSize = () => {
-  let units = 4;
+  let units = 4
   if (window.innerWidth <= 576) {
-    units = 1;
+    units = 1
   } else if (window.innerWidth <= 992) {
-    units = 2;
+    units = 2
   }
-  return Math.min(window.innerWidth / (gridWidth + units), window.innerHeight / (gridHeight + units));
+  return Math.min(
+    window.innerWidth / (gridWidth + units),
+    window.innerHeight / (gridHeight + units)
+  )
 }
 
-const pieceSize = ref(calculatePieceSize());
-const puzzlePieces = reactive<PuzzlePiece[]>([]);
-const dragIndex = ref(null as number | null);
-const correctlyPlacedCount = ref(0);
-const totalPieces = ref(gridWidth * gridHeight);
+const pieceSize = ref(calculatePieceSize())
+const puzzlePieces = reactive<PuzzlePiece[]>([])
+const dragIndex = ref(null as number | null)
+const correctlyPlacedCount = ref(0)
+const totalPieces = ref(gridWidth * gridHeight)
 
 /**
  * Computes the style for the puzzle container grid.
@@ -51,9 +54,9 @@ const totalPieces = ref(gridWidth * gridHeight);
 const puzzleContainerStyle = computed(() => {
   return {
     gridTemplateColumns: `repeat(${gridWidth}, ${pieceSize.value}px)`,
-    gridTemplateRows: `repeat(${gridHeight}, ${pieceSize.value}px)`,
-  };
-});
+    gridTemplateRows: `repeat(${gridHeight}, ${pieceSize.value}px)`
+  }
+})
 
 /**
  * Prepares the puzzle pieces with their correct styles and indices.
@@ -61,24 +64,24 @@ const puzzleContainerStyle = computed(() => {
  * @returns An array of puzzle pieces.
  */
 const preparePuzzlePieces = () => {
-  let pieces: PuzzlePiece[] = [];
+  let pieces: PuzzlePiece[] = []
 
   for (let row = 0; row < gridHeight; row++) {
     for (let col = 0; col < gridWidth; col++) {
-      const index = row * gridWidth + col;
+      const index = row * gridWidth + col
       pieces.push({
         style: {
           backgroundImage: `url(${puzzleImage})`,
           backgroundSize: `${gridWidth * pieceSize.value}px ${gridHeight * pieceSize.value}px`,
           backgroundPosition: `-${col * pieceSize.value}px -${row * pieceSize.value}px`,
           width: `${pieceSize.value}px`,
-          height: `${pieceSize.value}px`,
+          height: `${pieceSize.value}px`
         },
-        correctIndex: index,
-      });
+        correctIndex: index
+      })
     }
   }
-  return pieces;
+  return pieces
 }
 
 /**
@@ -89,9 +92,9 @@ const preparePuzzlePieces = () => {
  */
 const shuffleArray = (array: PuzzlePiece[]) => {
   do {
-    array.sort(() => Math.random() - 0.5);
-  } while (array.every((piece, index) => piece.correctIndex === index));
-  return array;
+    array.sort(() => Math.random() - 0.5)
+  } while (array.every((piece, index) => piece.correctIndex === index))
+  return array
 }
 
 /**
@@ -100,7 +103,7 @@ const shuffleArray = (array: PuzzlePiece[]) => {
  * @param index The index of the puzzle piece being dragged.
  */
 const dragStart = (index: number) => {
-  dragIndex.value = index;
+  dragIndex.value = index
 }
 
 /**
@@ -110,19 +113,19 @@ const dragStart = (index: number) => {
  */
 const drop = (index: number) => {
   if (dragIndex.value !== null) {
-    const draggedPiece = puzzlePieces[dragIndex.value];
-    const droppedPiece = puzzlePieces[index];
+    const draggedPiece = puzzlePieces[dragIndex.value]
+    const droppedPiece = puzzlePieces[index]
 
     // Swap the pieces
-    puzzlePieces.splice(index, 1, draggedPiece);
-    puzzlePieces.splice(dragIndex.value, 1, droppedPiece);
+    puzzlePieces.splice(index, 1, draggedPiece)
+    puzzlePieces.splice(dragIndex.value, 1, droppedPiece)
 
     // Update counter after drop
-    correctlyPlacedCount.value = puzzlePieces.filter((piece, i) => piece.correctIndex === i).length;
+    correctlyPlacedCount.value = puzzlePieces.filter((piece, i) => piece.correctIndex === i).length
 
     // Check for completion and redirect if completed
     if (correctlyPlacedCount.value === totalPieces.value) {
-      setTimeout(() => router.push({ name: 'PortfolioView' }), 750); // Timeout of 750ms before redirect
+      setTimeout(() => router.push({ name: 'PortfolioView' }), 750) // Timeout of 750ms before redirect
     }
   }
 }
@@ -132,35 +135,36 @@ const drop = (index: number) => {
  * Recalculates the piece size and updates the puzzle pieces.
  */
 const onResize = () => {
-  pieceSize.value = calculatePieceSize();
-  const pieces = preparePuzzlePieces();
-  pieces.forEach(piece => {
-    const puzzlePieceIndex = puzzlePieces.findIndex(puzzlePiece => puzzlePiece.correctIndex === piece.correctIndex);
-    puzzlePieces[puzzlePieceIndex].style = piece.style;
-  });
+  pieceSize.value = calculatePieceSize()
+  const pieces = preparePuzzlePieces()
+  pieces.forEach((piece) => {
+    const puzzlePieceIndex = puzzlePieces.findIndex(
+      (puzzlePiece) => puzzlePiece.correctIndex === piece.correctIndex
+    )
+    puzzlePieces[puzzlePieceIndex].style = piece.style
+  })
 }
 
 onMounted(() => {
   // Build puzzle
-  const pieces = preparePuzzlePieces();
-  totalPieces.value = pieces.length;
-  puzzlePieces.push(...shuffleArray(pieces));
-  console.log(totalPieces, puzzlePieces);
+  const pieces = preparePuzzlePieces()
+  totalPieces.value = pieces.length
+  puzzlePieces.push(...shuffleArray(pieces))
+  console.log(totalPieces, puzzlePieces)
 
   // Events
-  window.addEventListener('resize', onResize);
-});
+  window.addEventListener('resize', onResize)
+})
 
-defineExpose( {
+defineExpose({
   puzzlePieces,
   dragIndex,
   totalPieces,
   correctlyPlacedCount,
   shuffleArray,
   dragStart,
-  drop,
-  }
-)
+  drop
+})
 </script>
 
 <template>
@@ -168,19 +172,16 @@ defineExpose( {
     <div class="container">
       <h1 class="h3">The page you are looking for does not exist.</h1>
       <div class="puzzle-container">
-        <div
-            class="puzzle"
-            :style="puzzleContainerStyle"
-        >
+        <div class="puzzle" :style="puzzleContainerStyle">
           <div
-              v-for="(piece, index) in puzzlePieces"
-              :key="index"
-              :style="piece.style"
-              class="puzzle-piece"
-              draggable="true"
-              @dragstart="dragStart(index)"
-              @dragover.prevent
-              @drop="drop(index)"
+            v-for="(piece, index) in puzzlePieces"
+            :key="index"
+            :style="piece.style"
+            class="puzzle-piece"
+            draggable="true"
+            @dragstart="dragStart(index)"
+            @dragover.prevent
+            @drop="drop(index)"
           />
         </div>
         <p class="text-alternative">
@@ -236,5 +237,3 @@ svg {
   }
 }
 </style>
-
-

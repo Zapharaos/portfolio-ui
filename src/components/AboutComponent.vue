@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // Define the props for the component
-import type {About} from "@/types/models";
+import type { About } from '@/types/models'
 
 const props = defineProps<{
   about: About
@@ -13,41 +13,34 @@ const props = defineProps<{
       <h2 class="section-title">About</h2>
       <div class="section-content grid">
         <div class="image-container">
-          <span
-              v-if="about.image.creditsUrl"
-              class="caption credits"
-          >
+          <span v-if="about.image.creditsUrl" class="caption credits">
             Credits :
             <a :href="about.image.creditsUrl" type="_blank">
-              {{ about.image.creditsShortUrl ? about.image.creditsShortUrl : about.image.creditsUrl }}
+              {{
+                about.image.creditsShortUrl ? about.image.creditsShortUrl : about.image.creditsUrl
+              }}
             </a>
           </span>
-          <img
-              :src="about.image.file"
-              :alt="about.image.name"
-              class="about-image"
-          />
+          <img :src="about.image.file" :alt="about.image.name" class="about-image" />
         </div>
-        <div
-            v-if="about.imageResponsive"
-            class="responsive-image-container"
-        >
+        <div v-if="about.imageResponsive" class="responsive-image-container">
           <img
-              :src="about.imageResponsive.file"
-              :alt="about.image.name"
-              class="about-image-responsive"
+            :src="about.imageResponsive.file"
+            :alt="about.image.name"
+            class="about-image-responsive"
           />
-          <span
-              v-if="about.imageResponsive.creditsUrl"
-              class="caption credits"
-          >
+          <span v-if="about.imageResponsive.creditsUrl" class="caption credits">
             Credits :
             <a :href="about.imageResponsive.creditsUrl" type="_blank">
-              {{ about.imageResponsive.creditsShortUrl ? about.imageResponsive.creditsShortUrl : about.imageResponsive.creditsUrl }}
+              {{
+                about.imageResponsive.creditsShortUrl
+                  ? about.imageResponsive.creditsShortUrl
+                  : about.imageResponsive.creditsUrl
+              }}
             </a>
           </span>
         </div>
-        <p class="text about" v-html="about.description"/>
+        <p class="text about" v-html="about.description" />
       </div>
     </div>
   </section>
@@ -60,7 +53,8 @@ const props = defineProps<{
 }
 
 /* Image containers */
-.image-container, .responsive-image-container {
+.image-container,
+.responsive-image-container {
   max-width: clamp(250px, 20vw, 300px);
 }
 .image-container {

@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type {Social, User} from "@/types/models";
-import {computed, onMounted, ref} from "vue";
-import {track, trackOutbound} from "@/composables/useAnalytics";
-import svgMessage from "@/assets/message.svg"
-import svgDocument from "@/assets/document.svg"
+import type { Social, User } from '@/types/models'
+import { computed, onMounted, ref } from 'vue'
+import { track, trackOutbound } from '@/composables/useAnalytics'
+import svgMessage from '@/assets/message.svg'
+import svgDocument from '@/assets/document.svg'
 
 // Define the props for the component
 const props = defineProps<{
@@ -11,48 +11,54 @@ const props = defineProps<{
 }>()
 
 // Developer information for the footer.
-const developerName = 'Matthieu Freitag';
-const developerLink = 'https://matthieu-freitag.com/';
+const developerName = 'Matthieu Freitag'
+const developerLink = 'https://matthieu-freitag.com/'
 
 // Reactive state object to store the current time.
 const currentTime = ref({
   hours: '00',
   minutes: '00',
-  seconds: '00',
-});
+  seconds: '00'
+})
 
 // Reactive state flag to indicate if the user's email has been copied.
-const hasCopiedEmail = ref(false);
+const hasCopiedEmail = ref(false)
 
 // The current year retrieved on component mount.
-const year = ref(new Date().getFullYear());
+const year = ref(new Date().getFullYear())
 
 onMounted(() => {
   if (props.user.locale) {
     // Starts an interval to update the current time every second.
     setInterval(() => {
-      const now = new Date().toLocaleTimeString(props.user.locale, { hour: '2-digit', minute: '2-digit', second: '2-digit' }).split(':');
+      const now = new Date()
+        .toLocaleTimeString(props.user.locale, {
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit'
+        })
+        .split(':')
       // Update time with leading zeros for formatting
       currentTime.value = {
         hours: now[0],
         minutes: now[1],
-        seconds: now[2].split(' ')[0], // Split to remove AM/PM if present
-      };
-    }, 1000); // Update every second
+        seconds: now[2].split(' ')[0] // Split to remove AM/PM if present
+      }
+    }, 1000) // Update every second
   }
-});
+})
 
 /**
  * Copy the owner's email to the user's clipboard.
  */
 async function copyEmail() {
   try {
-    await navigator.clipboard.writeText(props.user.email);
-    hasCopiedEmail.value = true;
-    track('email-copy'); // custom umami event (no-op if analytics disabled)
-    setTimeout(() => (hasCopiedEmail.value = false), 1000); // Reset after 1s
+    await navigator.clipboard.writeText(props.user.email)
+    hasCopiedEmail.value = true
+    track('email-copy') // custom umami event (no-op if analytics disabled)
+    setTimeout(() => (hasCopiedEmail.value = false), 1000) // Reset after 1s
   } catch (error) {
-    console.error('Failed to copy email:', error);
+    console.error('Failed to copy email:', error)
   }
 }
 
@@ -64,10 +70,11 @@ async function copyEmail() {
  * @returns {Social[]} A sorted copy of the socials.
  */
 const prepareSocials = computed(() => {
-  return props.user.socials.slice()
-      .filter(i => !i.hidden)
-      .sort((a: Social, b: Social) => a.index - b.index);
-});
+  return props.user.socials
+    .slice()
+    .filter((i) => !i.hidden)
+    .sort((a: Social, b: Social) => a.index - b.index)
+})
 
 defineExpose({
   currentTime,
@@ -103,33 +110,43 @@ defineExpose({
       </div>
       <ul v-if="user.footer.showSocials" class="links">
         <li v-if="user.footer.showEmail">
-          <a :href="'mailto:'+user.email" @click="track('email-click')">
+          <a :href="'mailto:' + user.email" @click="track('email-click')">
             <p>Email me</p>
-            <img :src="svgMessage" alt="Email icon" class="social-icon">
+            <span class="tinted social-icon" :style="{ '--icon': `url('${svgMessage}')` }">
+              <img :src="svgMessage" alt="Email icon" aria-hidden="true" />
+            </span>
           </a>
         </li>
         <li v-if="user.footer.showResume && user.resume">
-          <a :href="user.resume.file" target="_blank" @click="trackOutbound(user.resume.file, 'resume')">
+          <a
+            :href="user.resume.file"
+            target="_blank"
+            @click="trackOutbound(user.resume.file, 'resume')"
+          >
             <p>My resume</p>
-            <img :src="svgDocument" alt="Resume icon" class="social-icon">
+            <span class="tinted social-icon" :style="{ '--icon': `url('${svgDocument}')` }">
+              <img :src="svgDocument" alt="Resume icon" aria-hidden="true" />
+            </span>
           </a>
         </li>
-        <li
-            v-for="(social, index) in prepareSocials"
-            :key="index"
-        >
+        <li v-for="(social, index) in prepareSocials" :key="index">
           <a :href="social.url" target="_blank" @click="trackOutbound(social.url, 'social')">
             <div>
               <p>{{ social.name }}</p>
               <span v-if="social.pseudo" class="text-alternative">@{{ social.pseudo }}</span>
             </div>
-            <img :src="social.image.file" :alt="social.image.name" class="social-icon"/>
+            <span class="tinted social-icon" :style="{ '--icon': `url('${social.image.file}')` }">
+              <img :src="social.image.file" :alt="social.image.name" aria-hidden="true" />
+            </span>
           </a>
         </li>
       </ul>
       <div class="copyright caption">
         <p>Copyright © {{ year }} {{ user.name }}. All rights reserved.</p>
-        <p class="text-alternative">Design &amp; Development by <a :href="developerLink">{{ developerName }}</a>.</p>
+        <p class="text-alternative">
+          Design &amp; Development by <a :href="developerLink">{{ developerName }}</a
+          >.
+        </p>
       </div>
     </div>
   </footer>
@@ -143,7 +160,11 @@ footer {
   display: flex;
   justify-content: center;
   background: var(--color-background);
-  background: linear-gradient(180deg, var(--color-background) 0%, color-mix(in srgb, var(--color-background), var(--color-primary) 15%) 100%);
+  background: linear-gradient(
+    180deg,
+    var(--color-background) 0%,
+    color-mix(in srgb, var(--color-background), var(--color-primary) 15%) 100%
+  );
 }
 .container {
   display: flex;
@@ -170,7 +191,8 @@ h2 {
   height: 2px;
   background-color: var(--color-alternative);
 }
-.email-container .email, .email-container .email-underline {
+.email-container .email,
+.email-container .email-underline {
   transition: all 0.3s ease-in-out;
 }
 .email-container:hover .email {
@@ -229,11 +251,9 @@ h2 {
   border-color: var(--color-item-asset);
   border-radius: 0.5rem;
 }
-.links .social-icon {
-  display: flex;
+.links .social-icon > img {
   width: 2rem;
   height: 2rem;
-  filter: var(--filter-img-color);
 }
 
 .copyright {
@@ -244,7 +264,8 @@ h2 {
 .copyright p {
   margin-right: 10px;
 }
-.copyright a, .copyright a:-webkit-any-link {
+.copyright a,
+.copyright a:-webkit-any-link {
   color: inherit;
 }
 
@@ -262,7 +283,7 @@ h2 {
   h1 {
     line-height: 100%;
   }
-  h1+h2 {
+  h1 + h2 {
     margin-top: 1.5rem;
   }
   .location div {

@@ -1,4 +1,4 @@
-import {vi, beforeEach} from 'vitest';
+import { vi, beforeEach } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
 import { config } from '@vue/test-utils'
 import { createHead } from '@unhead/vue'
@@ -6,14 +6,14 @@ import { createHead } from '@unhead/vue'
 // Mock navigator.clipboard
 Object.assign(navigator, {
   clipboard: {
-    writeText: vi.fn(),
-  },
-});
+    writeText: vi.fn()
+  }
+})
 
 // Mock window.matchMedia
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
-  value: vi.fn().mockImplementation(query => ({
+  value: vi.fn().mockImplementation((query) => ({
     matches: false,
     media: query,
     onchange: null,
@@ -21,8 +21,8 @@ Object.defineProperty(window, 'matchMedia', {
     removeListener: vi.fn(), // deprecated
     addEventListener: vi.fn(),
     removeEventListener: vi.fn(),
-    dispatchEvent: vi.fn(),
-  })),
+    dispatchEvent: vi.fn()
+  }))
 })
 
 beforeEach(() => {

@@ -97,37 +97,37 @@ export const seoConfig: SeoConfig = {
   author: {
     name: 'Matthieu Freitag',
     jobTitle: 'Software Engineer',
-    url: 'https://www.matthieu-freitag.com',
+    url: 'https://www.matthieu-freitag.com'
   },
   og: {
     image: '/og-image.png',
     imageAlt: 'Matthieu Freitag — Portfolio',
-    type: 'website',
+    type: 'website'
   },
   twitter: {
     card: 'summary_large_image',
-    handle: '',
+    handle: ''
   },
   themeColor: '#181818',
   icons: {
     favicon: '/logo.ico',
     appleTouchIcon: '/apple-touch-icon.png',
     icon192: '/icon-192.png',
-    icon512: '/icon-512.png',
+    icon512: '/icon-512.png'
   },
   manifest: {
     name: 'Matthieu Freitag',
     shortName: 'Freitag',
     backgroundColor: '#181818',
-    display: 'standalone',
+    display: 'standalone'
   },
   robots: {
     index: true,
-    follow: true,
+    follow: true
   },
   person: {
-    enabled: true,
-  },
+    enabled: true
+  }
 }
 
 export default seoConfig
