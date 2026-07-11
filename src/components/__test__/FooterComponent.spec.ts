@@ -4,6 +4,42 @@ import FooterComponent from '@/components/FooterComponent.vue'
 import { mockUser, mockSocials } from '@/__test__/mocks'
 
 describe('FooterComponent.vue', () => {
+  test('renders the clock in the user timezone when set', () => {
+    vi.useFakeTimers()
+    const spy = vi.spyOn(Date.prototype, 'toLocaleTimeString')
+    try {
+      mount(FooterComponent, {
+        propsData: { user: { ...mockUser, timezone: 'Asia/Tokyo' } }
+      })
+      vi.advanceTimersByTime(1000)
+
+      expect(spy).toHaveBeenCalledWith(
+        mockUser.locale,
+        expect.objectContaining({ timeZone: 'Asia/Tokyo' })
+      )
+    } finally {
+      spy.mockRestore()
+      vi.useRealTimers()
+    }
+  })
+
+  test('omits the timeZone option when the user has no timezone', () => {
+    vi.useFakeTimers()
+    const spy = vi.spyOn(Date.prototype, 'toLocaleTimeString')
+    try {
+      mount(FooterComponent, {
+        propsData: { user: { ...mockUser, timezone: '' } }
+      })
+      vi.advanceTimersByTime(1000)
+
+      const options = spy.mock.calls[0][1] as Intl.DateTimeFormatOptions
+      expect(options.timeZone).toBeUndefined()
+    } finally {
+      spy.mockRestore()
+      vi.useRealTimers()
+    }
+  })
+
   test('applies the colored class and --social-hue only to socials with a color', () => {
     const user = {
       ...mockUser,
