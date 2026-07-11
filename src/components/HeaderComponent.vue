@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import type { FileType } from '@/types/models'
 import { track } from '@/composables/useAnalytics'
 
 // Define the props for the component
-const props = defineProps<{
+defineProps<{
   logo: FileType
 }>()
+
+const route = useRoute()
+const router = useRouter()
 
 const lastScrollTop = ref(0) // Tracks the last scroll position for header visibility
 const showResponsiveMenu = ref(false) // Flag to indicate if responsive menu is open
@@ -31,8 +35,36 @@ const scrollToSection = (id: string) => {
     toggleResponsiveMenu()
   }
 
-  // Scroll to the target section smoothly
-  document.getElementById(id as string)?.scrollIntoView({ behavior: 'smooth' })
+  // Prefer the section on the *current* page (e.g. the footer exists on every
+  // page, so Contact scrolls to the current footer). Only fall back to the home
+  // page when the target isn't present here (e.g. Work/About from /projects).
+  const target = document.getElementById(id)
+  if (target) {
+    target.scrollIntoView({ behavior: 'smooth' })
+    return
+  }
+  router.push({ path: '/', hash: `#${id}` })
+}
+
+/** Navigate to the dedicated projects page. */
+const goToProjects = () => {
+  track('nav', { to: 'projects' })
+  if (showResponsiveMenu.value) {
+    toggleResponsiveMenu()
+  }
+  router.push({ name: 'ProjectsView' })
+}
+
+/** Home link on the logo — navigates home (or scrolls to top if already there). */
+const goHome = () => {
+  if (showResponsiveMenu.value) {
+    toggleResponsiveMenu()
+  }
+  if (route.name !== 'PortfolioView') {
+    router.push({ path: '/' })
+  } else {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
 }
 
 /**
@@ -88,6 +120,8 @@ defineExpose({
   lastScrollTop,
   showResponsiveMenu,
   scrollToSection,
+  goToProjects,
+  goHome,
   handleScroll,
   toggleResponsiveMenu
 })
@@ -97,7 +131,7 @@ defineExpose({
   <header>
     <div class="section-container">
       <nav class="container">
-        <a class="logo">
+        <a class="logo" @click="goHome">
           <span class="tinted logo-img" :style="{ '--icon': `url('${logo.file}')` }">
             <img :src="logo.file" :alt="logo.name" aria-hidden="true" />
           </span>
@@ -128,10 +162,10 @@ defineExpose({
         </button>
         <ul>
           <li>
-            <a class="nav-item-link" @click="scrollToSection('work')"> Work </a>
+            <a class="nav-item-link" @click="goHome"> Home </a>
           </li>
           <li>
-            <a class="nav-item-link" @click="scrollToSection('about')"> About </a>
+            <a class="nav-item-link" @click="goToProjects"> Projects </a>
           </li>
           <li>
             <a class="nav-item-link" @click="scrollToSection('footer')"> Contact </a>

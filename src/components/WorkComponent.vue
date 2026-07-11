@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { Work, WorkItem } from '@/types/models'
-import ProjectContainer from '@/components/ProjectContainer.vue'
 import ExperienceContainer from '@/components/ExperienceContainer.vue'
 import { computed } from 'vue'
 
@@ -27,13 +26,10 @@ const prepareItems = computed(() => {
 <template>
   <section id="work" class="section-container">
     <template v-for="(item, index) in prepareItems" :key="index">
-      <ProjectContainer
-        v-if="item.showProjects && item.projects && item.projects.length > 0"
-        :projects="item.projects"
-        :title="item.title"
-      />
+      <!-- Projects now live on the dedicated /projects page; the home "Work"
+           section only lists experiences. -->
       <ExperienceContainer
-        v-else-if="item.showExperiences && item.experiences && item.experiences.length > 0"
+        v-if="item.showExperiences && item.experiences && item.experiences.length > 0"
         :experiences="item.experiences"
         :title="item.title"
       />

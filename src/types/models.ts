@@ -61,14 +61,27 @@ export interface ProjectLink {
 }
 
 export interface Project {
+  id?: number
   index: number
   hidden: boolean
   url?: string
   title: string
   description: string
+  category?: string
+  metric?: string
+  isNew?: boolean
+  // Populated client-side by merging the dedicated /projects/health/ endpoint.
+  healthUp?: boolean | null
+  healthCheckedAt?: string | null
   image?: FileType
   technologies?: Technology[]
   links?: ProjectLink[]
+}
+
+export interface ProjectHealth {
+  id: number
+  healthUp?: boolean | null
+  healthCheckedAt?: string | null
 }
 
 export interface Experience {
