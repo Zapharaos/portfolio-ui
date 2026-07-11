@@ -1,19 +1,20 @@
 <script setup lang="ts">
 // Define the props for the component
 import type { Hero } from '@/types/models'
+import { useRouter } from 'vue-router'
+import { track } from '@/composables/useAnalytics'
 
-const props = defineProps<{
+defineProps<{
   hero: Hero
 }>()
 
-/**
- * Prevents default link behavior and scrolls to the target section smoothly.
- *
- * @param id The element's id to head to.
- */
-const scrollToSection = (id: string) => {
-  // Scroll to the target section smoothly
-  document.getElementById(id as string)?.scrollIntoView({ behavior: 'smooth' })
+const router = useRouter()
+
+/** The hero CTA drives visitors to the projects showcase (its label is editorial,
+ *  set via `hero.callToActionContent` in the admin). */
+const goToProjects = () => {
+  track('nav', { to: 'projects', from: 'hero' })
+  router.push({ name: 'ProjectsView' })
 }
 </script>
 
@@ -25,7 +26,7 @@ const scrollToSection = (id: string) => {
         <div class="tagline">
           <p class="h4 text" v-html="hero.tagline" />
         </div>
-        <a @click="scrollToSection('work')" class="btn text-button">
+        <a @click="goToProjects" class="btn text-button">
           <p>{{ hero.callToActionContent }}</p>
           <svg
             xmlns="http://www.w3.org/2000/svg"

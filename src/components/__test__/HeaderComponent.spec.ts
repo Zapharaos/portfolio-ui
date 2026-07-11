@@ -4,12 +4,57 @@ import { setActivePinia, createPinia } from 'pinia'
 import HeaderComponent from '@/components/HeaderComponent.vue'
 import { mockFileType } from '@/__test__/mocks'
 
+// Route-aware navigation: mock vue-router so we can assert router.push calls.
+const push = vi.fn()
+let currentRouteName = 'ProjectsView'
+vi.mock('vue-router', () => ({
+  useRouter: () => ({ push }),
+  useRoute: () => ({ get name() { return currentRouteName } })
+}))
+
 describe('HeaderComponent.vue', () => {
   afterEach(() => {
     document.documentElement.scrollTop = 0
+    push.mockClear()
+    currentRouteName = 'ProjectsView'
   })
 
   enableAutoUnmount(afterEach)
+
+  test('navigates to the projects route from the Projects menu item', async () => {
+    const wrapper = mount(HeaderComponent, { propsData: { logo: mockFileType } })
+    wrapper.vm.goToProjects()
+    expect(push).toHaveBeenCalledWith({ name: 'ProjectsView' })
+  })
+
+  test('Contact scrolls to the footer when it exists on the current page', () => {
+    const footer = document.createElement('div')
+    footer.id = 'footer'
+    footer.scrollIntoView = vi.fn() // jsdom doesn't implement scrollIntoView
+    document.body.appendChild(footer)
+    try {
+      const wrapper = mount(HeaderComponent, { propsData: { logo: mockFileType } })
+      wrapper.vm.scrollToSection('footer')
+      // Footer present on the current page → scroll, no navigation.
+      expect(footer.scrollIntoView).toHaveBeenCalled()
+      expect(push).not.toHaveBeenCalled()
+    } finally {
+      footer.remove()
+    }
+  })
+
+  test('falls back to the home page when the section is absent here', () => {
+    // No #work element in this isolated mount → navigate home with the hash.
+    const wrapper = mount(HeaderComponent, { propsData: { logo: mockFileType } })
+    wrapper.vm.scrollToSection('work')
+    expect(push).toHaveBeenCalledWith({ path: '/', hash: '#work' })
+  })
+
+  test('Home navigates to the home route when off it', () => {
+    const wrapper = mount(HeaderComponent, { propsData: { logo: mockFileType } })
+    wrapper.vm.goHome()
+    expect(push).toHaveBeenCalledWith({ path: '/' })
+  })
 
   test('handleScroll to quit if the menu is shown', async () => {
     const wrapper = mount(HeaderComponent, {

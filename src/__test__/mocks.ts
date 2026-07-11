@@ -5,6 +5,7 @@ import type {
   Footer,
   Hero,
   Project,
+  ProjectHealth,
   ProjectLink,
   Social,
   Technology,
@@ -103,6 +104,7 @@ export const mockProjectLinks: ProjectLink[] = [
   { kind: 'github', url: 'https://github.com/example', label: '', index: 20 }
 ]
 export const mockProject: Project = {
+  id: 1,
   index: 0,
   hidden: false,
   url: 'https://url.com',
@@ -112,6 +114,15 @@ export const mockProject: Project = {
   technologies: mockTechnologies,
   links: mockProjectLinks
 }
+export const mockProjects: Project[] = [
+  { ...mockProject, id: 3, index: 2, title: 'Gamma' },
+  { ...mockProject, id: 1, index: 0, title: 'Alpha' },
+  { ...mockProject, id: 2, index: 1, title: 'Beta' }
+]
+export const mockProjectsHealth: ProjectHealth[] = [
+  { id: 1, healthUp: true, healthCheckedAt: '2026-01-01T00:00:00Z' },
+  { id: 2, healthUp: false, healthCheckedAt: null }
+]
 export const mockExperience: Experience = {
   index: 0,
   hidden: false,

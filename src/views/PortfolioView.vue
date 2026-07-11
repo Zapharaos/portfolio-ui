@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { nextTick, onMounted, ref } from 'vue'
 import { getUserData } from '@/services/user'
 import { useSeo } from '@/composables/useSeo'
 import { applyTheme } from '@/composables/useTheme'
@@ -27,6 +27,12 @@ async function fetchData() {
     // Sync the theme with the API: corrects the cache if it changed in the
     // admin, or clears it if the theme was unlinked.
     applyTheme(user.value.theme)
+    // If we arrived with a section hash (e.g. from /projects → /#work), scroll
+    // to it once the sections are actually in the DOM.
+    if (window.location.hash) {
+      await nextTick()
+      document.getElementById(window.location.hash.slice(1))?.scrollIntoView({ behavior: 'smooth' })
+    }
   } catch (err) {
     error.value = (err as Error).message
   } finally {
