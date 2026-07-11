@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type {Work, WorkItem} from "@/types/models";
-import ProjectContainer from "@/components/ProjectContainer.vue";
-import ExperienceContainer from "@/components/ExperienceContainer.vue";
-import {computed} from "vue";
+import type { Work, WorkItem } from '@/types/models'
+import ProjectContainer from '@/components/ProjectContainer.vue'
+import ExperienceContainer from '@/components/ExperienceContainer.vue'
+import { computed } from 'vue'
 
 // Define the props for the component
 const props = defineProps<{
@@ -17,27 +17,25 @@ const props = defineProps<{
  * @returns {WorkItem[]} A sorted copy of the items.
  */
 const prepareItems = computed(() => {
-  return props.work.items.slice()
-      .filter(i => !i.hidden)
-      .sort((a: WorkItem, b: WorkItem) => a.index - b.index);
-});
+  return props.work.items
+    .slice()
+    .filter((i) => !i.hidden)
+    .sort((a: WorkItem, b: WorkItem) => a.index - b.index)
+})
 </script>
 
 <template>
   <section id="work" class="section-container">
-    <template
-        v-for="(item, index) in prepareItems"
-        :key="index"
-    >
+    <template v-for="(item, index) in prepareItems" :key="index">
       <ProjectContainer
-          v-if="item.showProjects && item.projects && item.projects.length > 0"
-          :projects="item.projects"
-          :title="item.title"
+        v-if="item.showProjects && item.projects && item.projects.length > 0"
+        :projects="item.projects"
+        :title="item.title"
       />
       <ExperienceContainer
-          v-else-if="item.showExperiences && item.experiences && item.experiences.length > 0"
-          :experiences="item.experiences"
-          :title="item.title"
+        v-else-if="item.showExperiences && item.experiences && item.experiences.length > 0"
+        :experiences="item.experiences"
+        :title="item.title"
       />
     </template>
   </section>
@@ -47,6 +45,6 @@ const prepareItems = computed(() => {
 #work {
   display: flex;
   flex-direction: column;
-  gap: 5rem
+  gap: 5rem;
 }
 </style>

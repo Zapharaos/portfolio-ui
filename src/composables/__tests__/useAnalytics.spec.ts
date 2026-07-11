@@ -4,7 +4,7 @@ import {
   resolveAnalyticsConfig,
   track,
   trackOutbound,
-  useAnalytics,
+  useAnalytics
 } from '@/composables/useAnalytics'
 
 /** Fully control the umami env so tests don't depend on the repo's `.env`. */
@@ -14,7 +14,7 @@ function stubEnv(overrides: Record<string, string>): void {
     'VITE_UMAMI_HOST',
     'VITE_UMAMI_WEBSITE_ID',
     'VITE_UMAMI_SCRIPT_NAME',
-    'VITE_UMAMI_HOST_URL',
+    'VITE_UMAMI_HOST_URL'
   ]
   for (const key of keys) vi.stubEnv(key, overrides[key] ?? '')
 }
@@ -48,7 +48,7 @@ describe('useAnalytics', () => {
         VITE_UMAMI_ENABLED: 'false',
         VITE_UMAMI_HOST: 'https://analytics.example.com',
         VITE_UMAMI_WEBSITE_ID: 'uuid-123',
-        VITE_UMAMI_SCRIPT_NAME: 'stats.js',
+        VITE_UMAMI_SCRIPT_NAME: 'stats.js'
       })
       const config = resolveAnalyticsConfig()
       expect(config.enabled).toBe(false)
@@ -63,7 +63,7 @@ describe('useAnalytics', () => {
         VITE_UMAMI_ENABLED: 'true',
         VITE_UMAMI_HOST: 'https://analytics.example.com',
         VITE_UMAMI_WEBSITE_ID: 'uuid-123',
-        VITE_UMAMI_SCRIPT_NAME: 'script.js',
+        VITE_UMAMI_SCRIPT_NAME: 'script.js'
       })
 
       initAnalytics()
@@ -81,7 +81,7 @@ describe('useAnalytics', () => {
         VITE_UMAMI_HOST: 'https://mysite.com/',
         VITE_UMAMI_WEBSITE_ID: 'uuid-123',
         VITE_UMAMI_SCRIPT_NAME: 'stats.js',
-        VITE_UMAMI_HOST_URL: 'https://mysite.com/',
+        VITE_UMAMI_HOST_URL: 'https://mysite.com/'
       })
 
       initAnalytics()
@@ -104,7 +104,7 @@ describe('useAnalytics', () => {
       stubEnv({
         VITE_UMAMI_ENABLED: 'false',
         VITE_UMAMI_HOST: 'https://a.example.com',
-        VITE_UMAMI_WEBSITE_ID: 'x',
+        VITE_UMAMI_WEBSITE_ID: 'x'
       })
       initAnalytics()
       expect(injectedScripts()).toHaveLength(0)
@@ -147,7 +147,7 @@ describe('useAnalytics', () => {
       expect(umamiTrack).toHaveBeenCalledWith('outbound', {
         context: 'social',
         url: 'https://github.com/user',
-        host: 'github.com',
+        host: 'github.com'
       })
     })
 
@@ -162,7 +162,7 @@ describe('useAnalytics', () => {
         url: 'https://acme.com/app',
         host: 'acme.com',
         label: 'Acme',
-        section: 'Projects',
+        section: 'Projects'
       })
     })
 
@@ -185,7 +185,7 @@ describe('useAnalytics', () => {
       expect(umamiTrack).toHaveBeenCalledWith('outbound', {
         context: 'email',
         url: 'mailto:me@example.com',
-        host: '',
+        host: ''
       })
     })
   })

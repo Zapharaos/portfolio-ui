@@ -86,7 +86,6 @@ projects and experiences):
 | event | when | data | source |
 |-------|------|------|--------|
 | `nav` | a header link is clicked | `{ to: 'work' \| 'about' \| 'contact' }` | [`HeaderComponent.vue`](../src/components/HeaderComponent.vue) |
-| `theme-toggle` | the theme is switched | `{ to: 'dark' \| 'light' }` | [`ThemeToggler.vue`](../src/components/ThemeToggler.vue) |
 | `experience-open` | an experience card is expanded (opens only, not collapses) | `{ label, section }` | [`ExperienceContainer.vue`](../src/components/ExperienceContainer.vue) |
 | `email-copy` | the visitor copies your email (click-to-copy) | — | [`FooterComponent.vue`](../src/components/FooterComponent.vue) |
 | `email-click` | the "Email me" link is clicked | — | `FooterComponent.vue` |

@@ -42,9 +42,7 @@ export function deriveUserSeo(user: User, canonicalUrl: string = siteUrl): UserS
   return {
     title: user.name || seoConfig.defaultTitle,
     description:
-      stripHtml(user.hero?.tagline) ||
-      stripHtml(user.about?.description) ||
-      seoConfig.description,
+      stripHtml(user.hero?.tagline) || stripHtml(user.about?.description) || seoConfig.description,
     lang: user.locale || seoConfig.locale,
     person: buildPersonJsonLd(seoConfig, canonicalUrl, {
       email: user.email,
@@ -52,8 +50,8 @@ export function deriveUserSeo(user: User, canonicalUrl: string = siteUrl): UserS
       sameAs: (user.socials ?? [])
         .filter((social) => !social.hidden)
         .map((social) => social.url)
-        .filter(Boolean),
-    }),
+        .filter(Boolean)
+    })
   }
 }
 
@@ -65,7 +63,7 @@ export function useSeo() {
     // the logo is usually a small square and makes a poor social preview.
     ogImage: absoluteUrl(seoConfig.og.image, siteUrl),
     lang: seoConfig.locale,
-    person: buildPersonJsonLd(seoConfig, siteUrl) as Record<string, unknown>,
+    person: buildPersonJsonLd(seoConfig, siteUrl) as Record<string, unknown>
   })
 
   useHead({
@@ -82,17 +80,17 @@ export function useSeo() {
       { property: 'og:image', content: () => state.ogImage },
       { name: 'twitter:title', content: () => state.title },
       { name: 'twitter:description', content: () => state.description },
-      { name: 'twitter:image', content: () => state.ogImage },
+      { name: 'twitter:image', content: () => state.ogImage }
     ],
     script: seoConfig.person.enabled
       ? [
           {
             type: 'application/ld+json',
             key: 'schema-person',
-            innerHTML: () => JSON.stringify(state.person),
-          },
+            innerHTML: () => JSON.stringify(state.person)
+          }
         ]
-      : [],
+      : []
   })
 
   /** Enrich the head with the fetched user data. */

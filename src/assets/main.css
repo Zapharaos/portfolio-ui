@@ -11,7 +11,7 @@
 
 @keyframes blink {
   to {
-    visibility: hidden
+    visibility: hidden;
   }
 }
 .animate-1s-blink {
@@ -23,6 +23,25 @@
 }
 .text-alternative {
   color: var(--color-alternative);
+}
+
+/* Recolor a monochrome image to the theme text color, preserving the image's
+   intrinsic aspect ratio (works for any src, incl. dynamic/admin-set ones).
+   Usage:
+     <span class="tinted" :style="{ '--icon': `url('${src}')` }">
+       <img :src="src" alt="…" aria-hidden="true" />
+     </span>
+   The inner <img> is only used to establish the box size; it is not painted.
+   The tint follows --color-text, so it adapts automatically when the theme
+   changes (future: from the admin panel). */
+.tinted {
+  display: inline-flex;
+  background-color: var(--color-text);
+  -webkit-mask: var(--icon) center / contain no-repeat;
+  mask: var(--icon) center / contain no-repeat;
+}
+.tinted > img {
+  visibility: hidden;
 }
 
 body.responsive-menu {
@@ -58,47 +77,61 @@ body.responsive-menu {
   text-align: center;
 }
 
-h1, h2, h3, h4, h5, h6,
-.h1, .h2, .h3, .h4, .h5, .h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
 .nav-item-link {
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
 }
-h1, .h1 {
+h1,
+.h1 {
   font-size: clamp(36px, 5vw, 72px);
   letter-spacing: -0.5px;
   font-weight: 600;
 }
-h2, .h2 {
+h2,
+.h2 {
   font-size: clamp(30px, 4vw, 56px);
   letter-spacing: 0;
   font-weight: 600;
 }
-h3, .h3 {
+h3,
+.h3 {
   font-size: clamp(24px, 3vw, 36px);
   letter-spacing: 0.25px;
   font-weight: 500;
 }
-h4, .h4 {
+h4,
+.h4 {
   font-size: clamp(16px, 2vw, 24px);
   letter-spacing: 0;
 }
 .caption {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-weight: normal;
   font-size: clamp(11px, 1.5vw, 14px);
   letter-spacing: 0.4px;
 }
 .overline {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-weight: normal;
   font-size: clamp(8px, 1vw, 12px);
   letter-spacing: 1.5px;
   text-transform: uppercase;
 }
 .text-button {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-weight: normal;
   font-size: clamp(18px, 2.5vw, 22px);
 }
@@ -165,11 +198,13 @@ ul {
   padding: 2rem;
   color: var(--color-text);
 }
-.item, .item .link-open, .item img {
+.item,
+.item .link-open,
+.item img {
   transition: all 0.5s ease-in-out;
 }
 .item .subtitle {
-  color: color-mix(in srgb, var(--color-text), var(--color-item-asset) 18%);;
+  color: color-mix(in srgb, var(--color-text), var(--color-item-asset) 18%);
 }
 .item .link-open {
   visibility: hidden;
@@ -197,7 +232,7 @@ ul {
   visibility: initial;
   opacity: 1;
 }
-.item:hover img{
+.item:hover img {
   box-shadow: 0 0 25px 25px rgb(from var(--color-item-asset) r g b / 0.85);
 }
 .item.active {

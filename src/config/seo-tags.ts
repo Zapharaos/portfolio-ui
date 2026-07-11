@@ -45,7 +45,7 @@ export function robotsContent(robots: SeoConfig['robots']): string {
 export function buildPersonJsonLd(
   config: SeoConfig,
   siteUrl: string,
-  extra?: { email?: string; location?: string; sameAs?: string[] },
+  extra?: { email?: string; location?: string; sameAs?: string[] }
 ): Record<string, unknown> {
   const sameAs = [...(config.person.sameAs ?? []), ...(extra?.sameAs ?? [])].filter(Boolean)
   return {
@@ -57,7 +57,7 @@ export function buildPersonJsonLd(
     ...(config.og.image ? { image: absoluteUrl(config.og.image, siteUrl) } : {}),
     ...(extra?.email ? { email: extra.email } : {}),
     ...(extra?.location ? { address: extra.location } : {}),
-    ...(sameAs.length ? { sameAs } : {}),
+    ...(sameAs.length ? { sameAs } : {})
   }
 }
 
@@ -68,7 +68,7 @@ export function buildWebSiteJsonLd(config: SeoConfig, siteUrl: string): Record<s
     '@type': 'WebSite',
     name: config.siteName,
     url: siteUrl,
-    ...(config.description ? { description: config.description } : {}),
+    ...(config.description ? { description: config.description } : {})
   }
 }
 
@@ -97,7 +97,7 @@ export function buildBaseHead(config: SeoConfig, siteUrl: string = config.siteUr
     { name: 'twitter:card', content: config.twitter.card },
     { name: 'twitter:title', content: config.defaultTitle },
     { name: 'twitter:description', content: config.description },
-    { name: 'twitter:image', content: ogImage },
+    { name: 'twitter:image', content: ogImage }
   ]
 
   if (config.keywords.length) {
@@ -112,7 +112,7 @@ export function buildBaseHead(config: SeoConfig, siteUrl: string = config.siteUr
     { rel: 'canonical', href: siteUrl },
     { rel: 'icon', href: config.icons.favicon },
     { rel: 'apple-touch-icon', href: config.icons.appleTouchIcon },
-    { rel: 'manifest', href: '/site.webmanifest' },
+    { rel: 'manifest', href: '/site.webmanifest' }
   ]
 
   // Only the WebSite block is emitted statically. The Person block is added at
@@ -125,6 +125,6 @@ export function buildBaseHead(config: SeoConfig, siteUrl: string = config.siteUr
     lang: config.locale,
     meta,
     link,
-    jsonLd,
+    jsonLd
   }
 }

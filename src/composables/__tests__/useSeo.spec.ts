@@ -19,7 +19,7 @@ describe('deriveUserSeo', () => {
       ...mockUser,
       name: 'Ada Lovelace',
       locale: 'fr',
-      hero: { ...mockUser.hero, tagline: '<span>Building the analytical engine</span>' },
+      hero: { ...mockUser.hero, tagline: '<span>Building the analytical engine</span>' }
     }
 
     const seo = deriveUserSeo(user)
@@ -34,22 +34,34 @@ describe('deriveUserSeo', () => {
     const noTagline: User = {
       ...mockUser,
       hero: { ...mockUser.hero, tagline: '' },
-      about: { ...mockUser.about, description: 'About text' },
+      about: { ...mockUser.about, description: 'About text' }
     }
     expect(deriveUserSeo(noTagline).description).toBe('About text')
 
     const empty: User = {
       ...mockUser,
       hero: { ...mockUser.hero, tagline: '' },
-      about: { ...mockUser.about, description: '' },
+      about: { ...mockUser.about, description: '' }
     }
     expect(deriveUserSeo(empty).description).toBe(seoConfig.description)
   })
 
   test('exposes visible socials as JSON-LD sameAs and skips hidden ones', () => {
     const socials: Social[] = [
-      { index: 0, hidden: false, name: 'GitHub', url: 'https://github.com/ada', image: mockUser.logo },
-      { index: 1, hidden: true, name: 'Hidden', url: 'https://hidden.example', image: mockUser.logo },
+      {
+        index: 0,
+        hidden: false,
+        name: 'GitHub',
+        url: 'https://github.com/ada',
+        image: mockUser.logo
+      },
+      {
+        index: 1,
+        hidden: true,
+        name: 'Hidden',
+        url: 'https://hidden.example',
+        image: mockUser.logo
+      }
     ]
     const seo = deriveUserSeo({ ...mockUser, socials })
 
@@ -65,7 +77,7 @@ describe('useSeo', () => {
       setup() {
         api = useSeo()
         return () => h('div')
-      },
+      }
     })
 
     // The unhead plugin is provided globally in src/__test__/setup.ts

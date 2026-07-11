@@ -3,12 +3,12 @@ import { onMounted, ref } from 'vue'
 import { getUserData } from '@/services/user'
 import { useSeo } from '@/composables/useSeo'
 import type { User } from '@/types/models'
-import FooterComponent from "@/components/FooterComponent.vue";
-import WorkComponent from "@/components/WorkComponent.vue";
-import AboutComponent from "@/components/AboutComponent.vue";
-import HeroComponent from "@/components/HeroComponent.vue";
-import HeaderComponent from "@/components/HeaderComponent.vue";
-import LoaderComponent from "@/components/LoaderComponent.vue";
+import FooterComponent from '@/components/FooterComponent.vue'
+import WorkComponent from '@/components/WorkComponent.vue'
+import AboutComponent from '@/components/AboutComponent.vue'
+import HeroComponent from '@/components/HeroComponent.vue'
+import HeaderComponent from '@/components/HeaderComponent.vue'
+import LoaderComponent from '@/components/LoaderComponent.vue'
 
 // Define reactive variables for component state
 let user = ref<User | null>(null)
@@ -41,25 +41,15 @@ defineExpose({
 
 <template>
   <template v-if="user">
-    <HeaderComponent
-        :logo="user.logo"
-    />
+    <HeaderComponent :logo="user.logo" />
     <main>
-      <HeroComponent
-          :hero="user.hero"
-      />
-      <AboutComponent
-          :about="user.about"
-      />
-      <WorkComponent
-          :work="user.work"
-      />
+      <HeroComponent :hero="user.hero" />
+      <AboutComponent :about="user.about" />
+      <WorkComponent :work="user.work" />
     </main>
-    <FooterComponent
-        :user="user"
-    />
+    <FooterComponent :user="user" />
   </template>
-  <LoaderComponent v-else-if="loading"/>
+  <LoaderComponent v-else-if="loading" />
   <template v-else>
     <h1 class="center">Error while fetching data</h1>
   </template>

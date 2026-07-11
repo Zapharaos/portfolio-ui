@@ -39,18 +39,13 @@ export function resolveAnalyticsConfig(): AnalyticsConfig {
     host: pick(env.VITE_UMAMI_HOST, analyticsConfig.host),
     websiteId: pick(env.VITE_UMAMI_WEBSITE_ID, analyticsConfig.websiteId),
     scriptName: pick(env.VITE_UMAMI_SCRIPT_NAME, analyticsConfig.scriptName),
-    hostUrl: pick(env.VITE_UMAMI_HOST_URL, analyticsConfig.hostUrl),
+    hostUrl: pick(env.VITE_UMAMI_HOST_URL, analyticsConfig.hostUrl)
   }
 }
 
 /** True only when we're in a browser and analytics is fully configured. */
 function isActive(config: AnalyticsConfig): boolean {
-  return (
-    typeof document !== 'undefined' &&
-    config.enabled &&
-    !!config.host &&
-    !!config.websiteId
-  )
+  return typeof document !== 'undefined' && config.enabled && !!config.host && !!config.websiteId
 }
 
 /**
@@ -100,7 +95,7 @@ export function track(eventName: string, data?: Record<string, unknown>): void {
 export function trackOutbound(
   url: string | null | undefined,
   context: string,
-  extra: Record<string, unknown> = {},
+  extra: Record<string, unknown> = {}
 ): void {
   if (!url) return
   let host = ''
