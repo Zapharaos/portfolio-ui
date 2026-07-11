@@ -1,9 +1,23 @@
 import { expect, describe, test, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
 import FooterComponent from '@/components/FooterComponent.vue'
-import { mockUser } from '@/__test__/mocks'
+import { mockUser, mockSocials } from '@/__test__/mocks'
 
 describe('FooterComponent.vue', () => {
+  test('applies the colored class and --social-hue only to socials with a color', () => {
+    const user = {
+      ...mockUser,
+      socials: mockSocials,
+      footer: { ...mockUser.footer, showSocials: true }
+    }
+    const wrapper = mount(FooterComponent, { propsData: { user } })
+
+    const icons = wrapper.findAll('.social-icon.colored')
+    // Only the first mock social defines a color.
+    expect(icons.length).toBe(1)
+    expect(icons[0].attributes('style')).toContain('--social-hue: #6e5494')
+  })
+
   test('copyEmail updates hasCopiedEmail on success', async () => {
     // Mount the FooterComponent
     const wrapper = mount(FooterComponent, {

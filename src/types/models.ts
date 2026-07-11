@@ -26,10 +26,29 @@ export interface Social {
   pseudo?: string
   url: string
   image: FileType
+  color?: string
 }
 
 export interface Technology {
   name: string
+  color?: string
+}
+
+export type ProjectLinkKind =
+  | 'github'
+  | 'website'
+  | 'appstore'
+  | 'playstore'
+  | 'docs'
+  | 'other'
+
+export interface ProjectLink {
+  kind: ProjectLinkKind
+  url: string
+  label?: string
+  icon?: FileType
+  color?: string
+  index: number
 }
 
 export interface Project {
@@ -40,6 +59,7 @@ export interface Project {
   description: string
   image?: FileType
   technologies?: Technology[]
+  links?: ProjectLink[]
 }
 
 export interface Experience {

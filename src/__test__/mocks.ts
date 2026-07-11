@@ -5,6 +5,8 @@ import type {
   Footer,
   Hero,
   Project,
+  ProjectLink,
+  Social,
   Technology,
   User,
   Work,
@@ -47,6 +49,24 @@ export const mockFooter: Footer = {
   showEmail: false,
   showResume: false
 }
+export const mockSocials: Social[] = [
+  {
+    index: 0,
+    hidden: false,
+    name: 'GitHub',
+    pseudo: 'octocat',
+    url: 'https://github.com/octocat',
+    image: mockFileType,
+    color: '#6e5494'
+  },
+  {
+    index: 1,
+    hidden: false,
+    name: 'Website',
+    url: 'https://example.com',
+    image: mockFileType
+  }
+]
 export const mockUser: User = {
   name: 'Name',
   email: 'contact@example.com',
@@ -61,9 +81,13 @@ export const mockUser: User = {
   footer: mockFooter
 }
 export const mockTechnologies: Technology[] = [
-  { name: 'tech1' },
+  { name: 'tech1', color: '#ff8800' },
   { name: 'tech2' },
   { name: 'tech3' }
+]
+export const mockProjectLinks: ProjectLink[] = [
+  { kind: 'website', url: 'https://url.com', label: '', index: 10 },
+  { kind: 'github', url: 'https://github.com/example', label: '', index: 20 }
 ]
 export const mockProject: Project = {
   index: 0,
@@ -72,7 +96,8 @@ export const mockProject: Project = {
   title: 'title',
   description: 'description',
   image: mockFileType,
-  technologies: mockTechnologies
+  technologies: mockTechnologies,
+  links: mockProjectLinks
 }
 export const mockExperience: Experience = {
   index: 0,

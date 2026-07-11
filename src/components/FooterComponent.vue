@@ -135,7 +135,14 @@ defineExpose({
               <p>{{ social.name }}</p>
               <span v-if="social.pseudo" class="text-alternative">@{{ social.pseudo }}</span>
             </div>
-            <span class="tinted social-icon" :style="{ '--icon': `url('${social.image.file}')` }">
+            <span
+              class="tinted social-icon"
+              :class="{ colored: social.color }"
+              :style="{
+                '--icon': `url('${social.image.file}')`,
+                ...(social.color ? { '--social-hue': social.color } : {})
+              }"
+            >
               <img :src="social.image.file" :alt="social.image.name" aria-hidden="true" />
             </span>
           </a>
@@ -254,6 +261,10 @@ h2 {
 .links .social-icon > img {
   width: 2rem;
   height: 2rem;
+}
+/* Per-social color overrides the default --color-text tint from `.tinted`. */
+.social-icon.colored {
+  background-color: var(--social-hue);
 }
 
 .copyright {
