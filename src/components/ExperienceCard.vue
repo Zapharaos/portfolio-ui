@@ -183,6 +183,40 @@ function collapse(event: Event): void {
 .item-content .text {
   color: var(--color-alternative);
 }
+/* Rich-text (admin HTML) rendered via v-html: restore sensible spacing and list
+   markers (the global reset zeroes margins and sets `ul { list-style: none }`).
+   Markers are placed `inside` so the accordion's `overflow: hidden` never clips
+   them. `:deep` is required because v-html content isn't scoped. */
+.item-content .text :deep(p) {
+  margin: 0.5rem 0;
+}
+.item-content .text :deep(ul),
+.item-content .text :deep(ol) {
+  margin: 0.5rem 0;
+  padding-left: 1.25rem;
+  list-style-position: inside;
+}
+.item-content .text :deep(ul) {
+  list-style-type: disc;
+}
+.item-content .text :deep(ol) {
+  list-style-type: decimal;
+}
+.item-content .text :deep(li) {
+  margin: 0.2rem 0;
+}
+.item-content .text :deep(li)::marker {
+  color: var(--color-primary);
+}
+.item-content .text :deep(a) {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+.item-content .text :deep(strong),
+.item-content .text :deep(b) {
+  color: var(--color-text);
+  font-weight: 600;
+}
 .item-content {
   display: grid;
   grid-template-rows: 0fr;
