@@ -58,8 +58,7 @@ export const mockSocials: Social[] = [
     name: 'GitHub',
     pseudo: 'octocat',
     url: 'https://github.com/octocat',
-    image: mockFileType,
-    color: '#6e5494'
+    image: mockFileType
   },
   {
     index: 1,
@@ -107,7 +106,6 @@ export const mockProject: Project = {
   id: 1,
   index: 0,
   hidden: false,
-  url: 'https://url.com',
   title: 'title',
   description: 'description',
   image: mockFileType,

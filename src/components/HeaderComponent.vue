@@ -68,6 +68,17 @@ const goHome = () => {
 }
 
 /**
+ * Wraps a nav action so the links stay real anchors: modifier-clicks (ctrl/cmd/
+ * shift/alt) and middle-clicks fall through to the browser (open in a new tab),
+ * while a plain left-click runs the in-app action.
+ */
+const onNavClick = (event: MouseEvent, action: () => void) => {
+  if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+  event.preventDefault()
+  action()
+}
+
+/**
  * Handles scroll events to show/hide the header based on scroll direction.
  * Ignores scrolls while the responsive menu is active.
  */
@@ -122,6 +133,7 @@ defineExpose({
   scrollToSection,
   goToProjects,
   goHome,
+  onNavClick,
   handleScroll,
   toggleResponsiveMenu
 })
@@ -131,7 +143,7 @@ defineExpose({
   <header>
     <div class="section-container">
       <nav class="container">
-        <a class="logo" @click="goHome">
+        <a class="logo" href="/" @click="onNavClick($event, goHome)">
           <span class="tinted logo-img" :style="{ '--icon': `url('${logo.file}')` }">
             <img :src="logo.file" :alt="logo.name" aria-hidden="true" />
           </span>
@@ -162,13 +174,21 @@ defineExpose({
         </button>
         <ul>
           <li>
-            <a class="nav-item-link" @click="goHome"> Home </a>
+            <a class="nav-item-link" href="/" @click="onNavClick($event, goHome)"> Home </a>
           </li>
           <li>
-            <a class="nav-item-link" @click="goToProjects"> Projects </a>
+            <a class="nav-item-link" href="/projects" @click="onNavClick($event, goToProjects)">
+              Projects
+            </a>
           </li>
           <li>
-            <a class="nav-item-link" @click="scrollToSection('footer')"> Contact </a>
+            <a
+              class="nav-item-link"
+              href="#footer"
+              @click="onNavClick($event, () => scrollToSection('footer'))"
+            >
+              Contact
+            </a>
           </li>
         </ul>
       </nav>
@@ -208,6 +228,7 @@ nav {
   display: flex;
   align-items: center;
   z-index: 9999;
+  text-decoration: none;
 }
 .logo-img > img {
   height: 1.5rem;
@@ -228,6 +249,9 @@ li:last-child {
   justify-content: center;
 }
 li a {
+  /* Reset the browser's default link styling (real hrefs = new-tab support). */
+  color: var(--color-text);
+  text-decoration: none;
   transition: opacity 0.9s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 li a:hover {

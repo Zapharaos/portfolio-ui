@@ -2,8 +2,6 @@
 import type { Social, User } from '@/types/models'
 import { computed, onMounted, ref } from 'vue'
 import { track, trackOutbound } from '@/composables/useAnalytics'
-import svgMessage from '@/assets/message.svg'
-import svgDocument from '@/assets/document.svg'
 
 // Define the props for the component
 const props = defineProps<{
@@ -117,9 +115,22 @@ defineExpose({
         <li v-if="user.footer.showEmail">
           <a :href="'mailto:' + user.email" @click="track('email-click')">
             <p>Email me</p>
-            <span class="tinted social-icon" :style="{ '--icon': `url('${svgMessage}')` }">
-              <img :src="svgMessage" alt="Email icon" aria-hidden="true" />
-            </span>
+            <svg
+              class="social-icon"
+              width="100%"
+              height="100%"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M10.4995 13.5001L20.9995 3.00005M10.6271 13.8281L13.2552 20.5861C13.4867 21.1815 13.6025 21.4791 13.7693 21.566C13.9139 21.6414 14.0862 21.6415 14.2308 21.5663C14.3977 21.4796 14.5139 21.1821 14.7461 20.587L21.3364 3.69925C21.5461 3.16207 21.6509 2.89348 21.5935 2.72185C21.5437 2.5728 21.4268 2.45583 21.2777 2.40604C21.1061 2.34871 20.8375 2.45352 20.3003 2.66315L3.41258 9.25349C2.8175 9.48572 2.51997 9.60183 2.43326 9.76873C2.35809 9.91342 2.35819 10.0857 2.43353 10.2303C2.52043 10.3971 2.81811 10.5128 3.41345 10.7444L10.1715 13.3725C10.2923 13.4195 10.3527 13.443 10.4036 13.4793C10.4487 13.5114 10.4881 13.5509 10.5203 13.596C10.5566 13.6468 10.5801 13.7073 10.6271 13.8281Z"
+                stroke="black"
+                stroke-width="1"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
           </a>
         </li>
         <li v-if="user.footer.showResume && user.resume">
@@ -129,9 +140,22 @@ defineExpose({
             @click="trackOutbound(user.resume.file, 'resume')"
           >
             <p>My resume</p>
-            <span class="tinted social-icon" :style="{ '--icon': `url('${svgDocument}')` }">
-              <img :src="svgDocument" alt="Resume icon" aria-hidden="true" />
-            </span>
+            <svg
+              class="social-icon"
+              width="100%"
+              height="100%"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M14 2.26953V6.40007C14 6.96012 14 7.24015 14.109 7.45406C14.2049 7.64222 14.3578 7.7952 14.546 7.89108C14.7599 8.00007 15.0399 8.00007 15.6 8.00007H19.7305M16 13H8M16 17H8M10 9H8M14 2H8.8C7.11984 2 6.27976 2 5.63803 2.32698C5.07354 2.6146 4.6146 3.07354 4.32698 3.63803C4 4.27976 4 5.11984 4 6.8V17.2C4 18.8802 4 19.7202 4.32698 20.362C4.6146 20.9265 5.07354 21.3854 5.63803 21.673C6.27976 22 7.11984 22 8.8 22H15.2C16.8802 22 17.7202 22 18.362 21.673C18.9265 21.3854 19.3854 20.9265 19.673 20.362C20 19.7202 20 18.8802 20 17.2V8L14 2Z"
+                stroke="black"
+                stroke-width="1"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
           </a>
         </li>
         <li v-for="(social, index) in prepareSocials" :key="index">
@@ -140,16 +164,15 @@ defineExpose({
               <p>{{ social.name }}</p>
               <span v-if="social.pseudo" class="text-alternative">@{{ social.pseudo }}</span>
             </div>
+            <!-- CSS mask: recolors any monochrome icon to the theme text color,
+                 cross-origin safe (the media URL is absolute). Same technique as
+                 the project link icons. -->
             <span
-              class="tinted social-icon"
-              :class="{ colored: social.color }"
-              :style="{
-                '--icon': `url('${social.image.file}')`,
-                ...(social.color ? { '--social-hue': social.color } : {})
-              }"
-            >
-              <img :src="social.image.file" :alt="social.image.name" aria-hidden="true" />
-            </span>
+              class="social-icon social-icon-mask"
+              :style="{ '--icon-url': `url('${social.image.file}')` }"
+              role="img"
+              :aria-label="social.name"
+            />
           </a>
         </li>
       </ul>
@@ -263,13 +286,20 @@ h2 {
   border-color: var(--color-item-asset);
   border-radius: 0.5rem;
 }
-.links .social-icon > img {
+.links .social-icon {
   width: 2rem;
   height: 2rem;
+  flex-shrink: 0;
 }
-/* Per-social color overrides the default --color-text tint from `.tinted`. */
-.social-icon.colored {
-  background-color: var(--social-hue);
+/* Inline SVG icons (email / resume) follow the theme text color. */
+svg.social-icon {
+  fill: currentColor;
+}
+/* Uploaded social icons: tinted to the theme text color via CSS mask. */
+.social-icon-mask {
+  background-color: currentColor;
+  -webkit-mask: var(--icon-url) center / contain no-repeat;
+  mask: var(--icon-url) center / contain no-repeat;
 }
 
 .copyright {

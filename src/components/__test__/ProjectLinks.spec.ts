@@ -14,18 +14,17 @@ describe('ProjectLinks.vue', () => {
     expect(wrapper.findAll('.project-link').length).toBe(links.length)
   })
 
-  test('falls back to "Open" plus an arrow when neither label nor icon is set', () => {
+  test('falls back to "View" (no default icon) when neither label nor icon is set', () => {
     const wrapper = mount(ProjectLinks, { propsData: { links } })
     const anchors = wrapper.findAll('.project-link')
-    // First link has no label and no icon -> neutral fallback + open arrow.
-    expect(anchors[0].text()).toBe('Open')
-    expect(anchors[0].find('svg.project-link-icon-open').exists()).toBe(true)
-    // Second link has a custom label -> shown as-is, no fallback arrow.
+    // First link has no label and no icon -> neutral "View", no icon at all.
+    expect(anchors[0].text()).toBe('View')
+    expect(anchors[0].find('.project-link-icon').exists()).toBe(false)
+    // Second link has a custom label -> shown as-is.
     expect(anchors[1].text()).toBe('My custom label')
-    expect(anchors[1].find('svg.project-link-icon-open').exists()).toBe(false)
   })
 
-  test('shows no text (and no fallback arrow) when an icon is set but no label', () => {
+  test('shows no text and no icon element when an icon is set but no label', () => {
     const iconNoLabel: ProjectLink[] = [
       {
         kind: 'github',
@@ -38,8 +37,25 @@ describe('ProjectLinks.vue', () => {
     const wrapper = mount(ProjectLinks, { propsData: { links: iconNoLabel } })
     const anchor = wrapper.find('.project-link')
     expect(anchor.find('img.project-link-icon-img').exists()).toBe(true)
-    expect(anchor.find('svg.project-link-icon-open').exists()).toBe(false)
     expect(anchor.text()).toBe('')
+  })
+
+  test('places the icon after the label when iconPosition is "after"', () => {
+    const afterLinks: ProjectLink[] = [
+      {
+        kind: 'other',
+        url: 'https://x.com',
+        label: 'Open',
+        icon: { name: 'ext', file: 'https://cdn.example.com/ext.svg' },
+        iconPosition: 'after',
+        index: 10
+      }
+    ]
+    const wrapper = mount(ProjectLinks, { propsData: { links: afterLinks } })
+    const children = Array.from(wrapper.find('.project-link').element.children)
+    // Last child is the icon (span mask), first is the label span.
+    expect(children[0].tagName.toLowerCase()).toBe('span')
+    expect(children[children.length - 1].classList.contains('project-link-icon-mask')).toBe(true)
   })
 
   test('tints SVG icons via mask, renders raster icons as <img>', () => {

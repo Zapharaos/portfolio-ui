@@ -3,30 +3,21 @@ import type { Project, ProjectLink } from '@/types/models'
 import { computed } from 'vue'
 import TechnologiesList from '@/components/TechnologiesList.vue'
 import ProjectLinks from '@/components/ProjectLinks.vue'
+import ProjectLinkIcon from '@/components/ProjectLinkIcon.vue'
 import { trackOutbound } from '@/composables/useAnalytics'
 
 const props = defineProps<{
   project: Project
 }>()
 
-/**
- * Links to display. Prefers the new `links` array; falls back to the legacy
- * `project.url` (as a single `website` link) during the backend transition.
- */
-const resolvedLinks = computed<ProjectLink[]>(() => {
-  if (props.project.links && props.project.links.length > 0) {
-    return props.project.links
-  }
-  if (props.project.url) {
-    return [{ kind: 'website', url: props.project.url, index: 0 }]
-  }
-  return []
-})
+/** Links to display (the first one becomes the primary CTA). */
+const resolvedLinks = computed<ProjectLink[]>(() => props.project.links ?? [])
 
 /** First link → primary "Voir" CTA; the rest render as secondary link pills. */
 const primaryLink = computed<ProjectLink | undefined>(() => resolvedLinks.value[0])
 const secondaryLinks = computed<ProjectLink[]>(() => resolvedLinks.value.slice(1))
-const primaryLabel = computed(() => primaryLink.value?.label?.trim() || 'Voir')
+const primaryLabel = computed(() => primaryLink.value?.label?.trim() || 'View')
+const primaryIconBefore = computed(() => primaryLink.value?.iconPosition !== 'after')
 
 /** First letter, used as a placeholder icon when the project has no image. */
 const initial = computed(() => props.project.title.charAt(0).toUpperCase())
@@ -36,20 +27,30 @@ const initial = computed(() => props.project.title.charAt(0).toUpperCase())
   <li class="featured-card">
     <div class="card-head">
       <span class="app-icon-wrap">
-        <span class="app-icon">
-          <img v-if="project.image" :src="project.image.file" :alt="project.image.name" loading="lazy" />
+        <span
+          class="app-icon"
+          :class="{ framed: project.iconFramed !== false, 'fit-contain': project.imageFit === 'contain' }"
+        >
+          <img
+            v-if="project.image"
+            :src="project.image.file"
+            :alt="project.image.name"
+            loading="lazy"
+          />
           <span v-else class="app-icon-fallback">{{ initial }}</span>
         </span>
         <span
-          v-if="project.healthUp"
+          v-if="typeof project.healthUp === 'boolean'"
           class="live-dot"
+          :class="project.healthUp ? 'live-dot--up' : 'live-dot--down'"
           role="img"
-          aria-label="Service en ligne"
-          title="Service en ligne"
+          :aria-label="project.healthUp ? 'Service online' : 'Service offline'"
+          :title="project.healthUp ? 'Service online' : 'Service offline'"
         />
       </span>
-      <div v-if="project.isNew || project.category" class="head-tags">
-        <span v-if="project.isNew" class="new-pill">Nouveau</span>
+      <div v-if="project.isNew || project.inProgress || project.category" class="head-tags">
+        <span v-if="project.isNew" class="new-pill">New</span>
+        <span v-if="project.inProgress" class="wip-pill">Work in progress</span>
         <span v-if="project.category" class="badge">{{ project.category }}</span>
       </div>
     </div>
@@ -75,6 +76,8 @@ const initial = computed(() => props.project.title.charAt(0).toUpperCase())
         target="_blank"
         rel="noopener"
         class="btn cta"
+        :class="{ colored: primaryLink.color }"
+        :style="primaryLink.color ? { '--link-hue': primaryLink.color } : undefined"
         @click="
           trackOutbound(primaryLink.url, 'project', {
             label: project.title,
@@ -83,7 +86,9 @@ const initial = computed(() => props.project.title.charAt(0).toUpperCase())
           })
         "
       >
-        {{ primaryLabel }} →
+        <ProjectLinkIcon v-if="primaryLink.icon && primaryIconBefore" :link="primaryLink" />
+        <span>{{ primaryLabel }}</span>
+        <ProjectLinkIcon v-if="primaryLink.icon && !primaryIconBefore" :link="primaryLink" />
       </a>
       <ProjectLinks
         v-if="secondaryLinks.length"
@@ -148,10 +153,16 @@ const initial = computed(() => props.project.title.charAt(0).toUpperCase())
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background-color: var(--color-primary);
   /* Ring in the card surface to separate the dot from the icon. */
   border: 2px solid var(--card-surface);
+}
+/* Semantic status colors (not theme-tinted): green = up, red = down. */
+.live-dot--up {
+  background-color: #22c55e;
   animation: live-pulse 1.6s ease-in-out infinite;
+}
+.live-dot--down {
+  background-color: #ef4444;
 }
 @keyframes live-pulse {
   0%,
@@ -165,7 +176,7 @@ const initial = computed(() => props.project.title.charAt(0).toUpperCase())
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .live-dot {
+  .live-dot--up {
     animation: none;
   }
 }
@@ -182,24 +193,46 @@ const initial = computed(() => props.project.title.charAt(0).toUpperCase())
   border-radius: 9999px;
   white-space: nowrap;
 }
+/* "Work in progress" — amber, outlined + dashed to read as unfinished. */
+.wip-pill {
+  padding: 0.2rem 0.6rem;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--color-primary) 80%, var(--color-text));
+  border: 1px dashed color-mix(in srgb, var(--color-primary) 55%, transparent);
+  border-radius: 9999px;
+  white-space: nowrap;
+}
 .app-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 56px;
   height: 56px;
-  padding: 8px;
   border-radius: 14px;
   overflow: hidden;
-  /* Neutral tile so transparent PNG logos read cleanly on any theme. */
+  flex-shrink: 0;
+}
+/* Framed (default, backend `iconFramed`): neutral tile + border, so transparent
+   PNG logos read cleanly. Unframed: bare icon on the card surface. */
+.app-icon.framed {
   background-color: color-mix(in srgb, var(--color-text) 10%, var(--color-background));
   border: 1px solid color-mix(in srgb, var(--color-text) 12%, transparent);
-  flex-shrink: 0;
 }
 .app-icon img {
   width: 100%;
   height: 100%;
-  /* contain so logos are never cropped, whatever their aspect ratio. */
+  /* Default: fill the whole frame (cropping if needed). */
+  object-fit: cover;
+}
+/* Backend `imageFit = contain`: show the whole image, padded so it doesn't
+   touch the edges — works whether or not the frame is enabled. */
+.app-icon.fit-contain {
+  padding: 8px;
+}
+.app-icon.fit-contain img {
   object-fit: contain;
 }
 .app-icon-fallback {
@@ -262,8 +295,41 @@ const initial = computed(() => props.project.title.charAt(0).toUpperCase())
   margin-top: auto;
 }
 .cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   padding: 0.4rem 1.2rem;
   font-weight: 600;
   font-size: 0.85rem;
+}
+/* When the primary link defines a color, the CTA adopts it. Tinted (not raw
+   filled) so it stays readable for any hue — light text on a darkened tint. */
+.cta.colored {
+  color: color-mix(in srgb, var(--link-hue) 75%, var(--color-text));
+  background-color: color-mix(in srgb, var(--link-hue) 24%, var(--color-background));
+  border-color: color-mix(in srgb, var(--link-hue) 55%, transparent);
+}
+.cta.colored:hover {
+  color: color-mix(in srgb, var(--link-hue) 75%, var(--color-text));
+  background-color: color-mix(in srgb, var(--link-hue) 36%, var(--color-background));
+  border-color: color-mix(in srgb, var(--link-hue) 78%, transparent);
+}
+/* Secondary links share the CTA's family: same rounded-rect shape and height.
+   Shape/size for all; neutral colors only for links WITHOUT a configured color
+   (`:not(.colored)`) so a link's own color still wins when set. */
+.secondary-links :deep(.project-link) {
+  border-radius: 0.5rem;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.secondary-links :deep(.project-link:not(.colored)) {
+  color: var(--color-text);
+  background-color: transparent;
+  border: 1px solid color-mix(in srgb, var(--color-text) 22%, transparent);
+}
+.secondary-links :deep(.project-link:not(.colored):hover) {
+  background-color: color-mix(in srgb, var(--color-text) 8%, var(--color-background));
+  border-color: color-mix(in srgb, var(--color-text) 40%, transparent);
 }
 </style>
