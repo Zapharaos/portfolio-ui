@@ -35,7 +35,6 @@ export interface Social {
   pseudo?: string
   url: string
   image: FileType
-  color?: string
 }
 
 export interface Technology {
@@ -56,6 +55,7 @@ export interface ProjectLink {
   url: string
   label?: string
   icon?: FileType
+  iconPosition?: 'before' | 'after'
   color?: string
   index: number
 }
@@ -64,12 +64,14 @@ export interface Project {
   id?: number
   index: number
   hidden: boolean
-  url?: string
   title: string
   description: string
   category?: string
   metric?: string
   isNew?: boolean
+  inProgress?: boolean
+  iconFramed?: boolean
+  imageFit?: 'cover' | 'contain'
   // Populated client-side by merging the dedicated /projects/health/ endpoint.
   healthUp?: boolean | null
   healthCheckedAt?: string | null

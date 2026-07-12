@@ -71,7 +71,9 @@ defineExpose({
       <section class="container projects">
         <header class="projects-header">
           <h1 class="section-title">Projects</h1>
-          <p class="text-alternative">A selection of things I've built.</p>
+          <p class="projects-intro text-alternative">
+            Apps, products and tools I've worked on
+          </p>
         </header>
         <ul v-if="visibleProjects.length" class="projects-grid">
           <ProjectCardFeatured
@@ -99,14 +101,20 @@ main {
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
-  /* Clear the fixed header. */
-  padding-top: 6rem;
-  padding-bottom: 4rem;
+  /* Top clears the fixed header; sides give the grid breathing room (this uses
+     `.container` which has no padding, unlike `.section-container`). */
+  padding: 6rem 5rem 4rem;
 }
 .projects-header {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  align-items: center;
+  gap: 0.75rem;
+  text-align: center;
+}
+.projects-intro {
+  /* Keep the intro to a comfortable reading measure, centered under the title. */
+  max-width: 60ch;
 }
 .projects-grid {
   list-style: none;
@@ -118,12 +126,29 @@ main {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 2rem;
 }
-@media (max-width: 700px) {
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
-}
 .empty {
   padding: 2rem 0;
+  text-align: center;
+}
+
+@media (max-width: 992px) {
+  .projects {
+    padding: 6rem 3rem 3rem;
+  }
+}
+@media (max-width: 768px) {
+  .projects {
+    gap: 2rem;
+    padding: 5rem 1.5rem 2.5rem;
+  }
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+}
+@media (max-width: 600px) {
+  .projects {
+    padding: 5rem 1rem 2rem;
+  }
 }
 </style>

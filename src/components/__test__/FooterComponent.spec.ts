@@ -40,7 +40,7 @@ describe('FooterComponent.vue', () => {
     }
   })
 
-  test('applies the colored class and --social-hue only to socials with a color', () => {
+  test('renders each social icon as a masked (theme-tinted) span', () => {
     const user = {
       ...mockUser,
       socials: mockSocials,
@@ -48,10 +48,9 @@ describe('FooterComponent.vue', () => {
     }
     const wrapper = mount(FooterComponent, { propsData: { user } })
 
-    const icons = wrapper.findAll('.social-icon.colored')
-    // Only the first mock social defines a color.
-    expect(icons.length).toBe(1)
-    expect(icons[0].attributes('style')).toContain('--social-hue: #6e5494')
+    const icons = wrapper.findAll('.social-icon-mask')
+    expect(icons.length).toBe(mockSocials.length)
+    expect(icons[0].attributes('style')).toContain(mockSocials[0].image.file)
   })
 
   test('copyEmail updates hasCopiedEmail on success', async () => {

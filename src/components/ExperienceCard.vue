@@ -179,6 +179,10 @@ function collapse(event: Event): void {
 
 /* Content */
 
+/* Description uses the muted tone, matching the project card descriptions. */
+.item-content .text {
+  color: var(--color-alternative);
+}
 .item-content {
   display: grid;
   grid-template-rows: 0fr;

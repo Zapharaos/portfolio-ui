@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { ProjectLink } from '@/types/models'
 import { trackOutbound } from '@/composables/useAnalytics'
+import ProjectLinkIcon from '@/components/ProjectLinkIcon.vue'
 
 const props = defineProps<{
   links: ProjectLink[]
@@ -9,13 +10,13 @@ const props = defineProps<{
 }>()
 
 /** Neutral text shown only when a link has neither a label nor an icon. */
-const FALLBACK_LABEL = 'Open'
+const FALLBACK_LABEL = 'View'
 
 /**
  * Nothing is derived from `kind`: we show what was configured.
  *   - custom label set  → the label
- *   - no label + icon   → no text (the image speaks for itself)
- *   - no label, no icon → a neutral fallback so the link is never empty
+ *   - no label + icon   → no text (the icon speaks for itself)
+ *   - no label, no icon → a neutral "View" so the link is never empty
  */
 const textFor = (link: ProjectLink): string => {
   const label = link.label?.trim()
@@ -24,16 +25,8 @@ const textFor = (link: ProjectLink): string => {
   return FALLBACK_LABEL
 }
 
-/** True when neither a label nor an icon is configured → show the "open" hint. */
-const isFallback = (link: ProjectLink): boolean => !link.icon && !link.label?.trim()
-
-/**
- * SVG icon files are tinted with the link color (or theme text) via CSS `mask`,
- * so a monochrome glyph stays visible on any theme. Raster files (PNG, …) can't
- * be recolored, so they render as-is through a plain `<img>`.
- */
-const isSvgIcon = (link: ProjectLink): boolean =>
-  /\.svg(\?.*)?$/i.test(link.icon?.file ?? '')
+/** Icon before the label unless explicitly set to 'after'. */
+const iconBefore = (link: ProjectLink): boolean => link.iconPosition !== 'after'
 </script>
 
 <template>
@@ -48,36 +41,10 @@ const isSvgIcon = (link: ProjectLink): boolean =>
         :style="link.color ? { '--link-hue': link.color } : undefined"
         @click="trackOutbound(link.url, 'project', { label: projectTitle, kind: link.kind })"
       >
-        <!-- Uploaded SVG → tinted via mask (follows the link/theme color). -->
-        <span
-          v-if="link.icon && isSvgIcon(link)"
-          class="project-link-icon project-link-icon-mask"
-          :style="{ '--icon-url': `url('${link.icon.file}')` }"
-          role="img"
-          :aria-label="link.icon.name"
-        />
-        <!-- Uploaded raster icon → shown as-is. -->
-        <img
-          v-else-if="link.icon"
-          :src="link.icon.file"
-          :alt="link.icon.name"
-          class="project-link-icon project-link-icon-img"
-          width="18"
-          height="18"
-        />
-        <!-- No icon and no label → "open" arrow hint (same glyph as the card title). -->
-        <svg
-          v-else-if="isFallback(link)"
-          xmlns="http://www.w3.org/2000/svg"
-          class="project-link-icon project-link-icon-open"
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-        >
-          <path d="M7 7h8.586L5.293 17.293l1.414 1.414L17 8.414V17h2V5H7v2z" />
-        </svg>
+        <!-- Icon only when configured (no default). Placed before/after per link. -->
+        <ProjectLinkIcon v-if="link.icon && iconBefore(link)" :link="link" />
         <span v-if="textFor(link)">{{ textFor(link) }}</span>
+        <ProjectLinkIcon v-if="link.icon && !iconBefore(link)" :link="link" />
       </a>
     </li>
   </ul>
@@ -123,23 +90,5 @@ const isSvgIcon = (link: ProjectLink): boolean =>
 .project-link.colored:hover {
   background-color: color-mix(in srgb, var(--link-hue) 32%, var(--color-background));
   border-color: color-mix(in srgb, var(--link-hue) 70%, transparent);
-}
-.project-link-icon {
-  flex-shrink: 0;
-}
-/* Inline SVG (open hint) and masked file SVG follow the (possibly colored) text. */
-.project-link-icon-open {
-  fill: currentColor;
-}
-.project-link-icon-mask {
-  width: 18px;
-  height: 18px;
-  background-color: currentColor;
-  -webkit-mask: var(--icon-url) center / contain no-repeat;
-  mask: var(--icon-url) center / contain no-repeat;
-}
-.project-link-icon-img {
-  /* Raster icons render as-is — they can't inherit currentColor. */
-  object-fit: contain;
 }
 </style>

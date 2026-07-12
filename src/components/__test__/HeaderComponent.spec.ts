@@ -27,6 +27,36 @@ describe('HeaderComponent.vue', () => {
     expect(push).toHaveBeenCalledWith({ name: 'ProjectsView' })
   })
 
+  test('nav items are real anchors with hrefs (openable in a new tab)', () => {
+    const wrapper = mount(HeaderComponent, { propsData: { logo: mockFileType } })
+    const hrefs = wrapper.findAll('.nav-item-link').map((a) => a.attributes('href'))
+    expect(hrefs).toEqual(['/', '/projects', '#footer'])
+  })
+
+  test('a modifier-click lets the browser handle the link (no SPA navigation)', () => {
+    const wrapper = mount(HeaderComponent, { propsData: { logo: mockFileType } })
+    const preventDefault = vi.fn()
+    // ctrl/cmd-click should NOT run the in-app action nor preventDefault.
+    wrapper.vm.onNavClick(
+      { ctrlKey: true, preventDefault } as unknown as MouseEvent,
+      () => push({ name: 'ProjectsView' })
+    )
+    expect(preventDefault).not.toHaveBeenCalled()
+    expect(push).not.toHaveBeenCalled()
+  })
+
+  test('a plain click runs the action and prevents default', () => {
+    const wrapper = mount(HeaderComponent, { propsData: { logo: mockFileType } })
+    const preventDefault = vi.fn()
+    const action = vi.fn()
+    wrapper.vm.onNavClick(
+      { ctrlKey: false, metaKey: false, shiftKey: false, altKey: false, preventDefault } as unknown as MouseEvent,
+      action
+    )
+    expect(preventDefault).toHaveBeenCalled()
+    expect(action).toHaveBeenCalled()
+  })
+
   test('Contact scrolls to the footer when it exists on the current page', () => {
     const footer = document.createElement('div')
     footer.id = 'footer'
