@@ -332,4 +332,11 @@ const initial = computed(() => props.project.title.charAt(0).toUpperCase())
   background-color: color-mix(in srgb, var(--color-text) 8%, var(--color-background));
   border-color: color-mix(in srgb, var(--color-text) 40%, transparent);
 }
+
+@media (max-width: 768px) {
+  /* Smaller description text on mobile. */
+  .description {
+    font-size: 0.82rem;
+  }
+}
 </style>

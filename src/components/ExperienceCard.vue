@@ -312,5 +312,10 @@ function collapse(event: Event): void {
   .infos a {
     width: 100%;
   }
+  /* Smaller description text on mobile. */
+  .item-content .text,
+  .item-content .text :deep(*) {
+    font-size: 0.82rem;
+  }
 }
 </style>
